@@ -1,0 +1,46 @@
+% mainfile:main.tex
+
+\documentclass[a4paper,12pt,twoside]{book}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{fancyhdr} % for the headers
+\usepackage[Lenny]{fncychap}
+\usepackage{eurosym} % for the euro symbol
+
+\author{Ignacio Casal Quinteiro}
+\title{\textbf{\Huge{Road to gedit 3.0}}}
+
+\begin{document}
+
+\input{./title.tex}
+\newpage\thispagestyle{empty}
+\cleardoublepage
+
+%===============================================================
+%Index
+%===============================================================
+\frontmatter
+\pagestyle{plain}
+\tableofcontents
+\listoffigures
+\listoftables
+\newpage\thispagestyle{empty}
+\cleardoublepage
+
+%===============================================================
+% For the headers
+%===============================================================
+\pagestyle{fancy}
+
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{} \fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[LO]{\bfseries\rightmark}
+\fancyhead[RE]{\bfseries\leftmark}
+
+%===============================================================
+% Chapters
+%===============================================================
+\mainmatter
+\chapter{Blah}
+
+\end{document}
