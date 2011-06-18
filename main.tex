@@ -1,13 +1,14 @@
 % mainfile:main.tex
 \synctex=1
 
-\documentclass[a4paper,12pt,twoside]{book}
+\documentclass[a4paper,11pt,twoside]{book}
 
 \usepackage[pdftex]{graphicx}
 \usepackage{fancyhdr} % for the headers
 \usepackage[Lenny]{fncychap}
 \usepackage{eurosym} % for the euro symbol
 \usepackage[pagebackref=true]{hyperref} % for hyperlinks
+\usepackage{setspace} % margin configuration
 
 \hypersetup{
     unicode=false,
@@ -29,6 +30,16 @@
     urlcolor=blue
 }
 
+% override the title setting to make it bold
+\ChTitleVar{\bf\Huge}
+
+% margin configuration
+\doublespacing
+\setlength\textwidth{15cm}
+\setlength\textheight{22cm}
+\setlength\oddsidemargin{1cm}
+\setlength\evensidemargin{0cm}
+
 \author{Ignacio Casal Quinteiro}
 \title{\textbf{\Huge{Road to gedit 3.0}}}
 
@@ -42,10 +53,18 @@
 \cleardoublepage
 
 %===============================================================
+% For the headers
+%===============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhf[HR]{\thepage}
+\fancyhf[HL]{\nouppercase\rightmark}
+
+%===============================================================
 %Index
 %===============================================================
 \frontmatter
-\pagestyle{plain}
+
 \tableofcontents
 \listoffigures
 \listoftables
@@ -53,19 +72,10 @@
 \cleardoublepage
 
 %===============================================================
-% For the headers
-%===============================================================
-\pagestyle{fancy}
-
-\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
-\fancyhf{} \fancyhead[LE,RO]{\bfseries\thepage}
-\fancyhead[LO]{\bfseries\rightmark}
-\fancyhead[RE]{\bfseries\leftmark}
-
-%===============================================================
 % Chapters
 %===============================================================
 \mainmatter
+
 \chapter{Blah}
 
 \end{document}
