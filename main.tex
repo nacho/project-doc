@@ -10,6 +10,7 @@
 \usepackage[pagebackref=true]{hyperref} % for hyperlinks
 \usepackage{setspace} % margin configuration
 \usepackage{url}
+\usepackage{wrapfig}
 
 \hypersetup{
     unicode=false,
@@ -48,6 +49,22 @@
 \title{\textbf{\Huge{Road to gedit 3.0}}}
 
 \begin{document}
+
+%==============================================================
+% Custom commands
+%==============================================================
+
+% addwrapfigure
+\newcommand{\addwrapfigure}[4][\textwidth]{
+  \begin{wrapfigure}{#2}{#1}
+    \vspace{-20pt}
+    \begin{center}
+      \includegraphics[width=#1]{#3}
+    \end{center}
+    \vspace{-20pt}
+    \caption{#4}
+  \end{wrapfigure}
+}
 
 %===============================================================
 %Title
