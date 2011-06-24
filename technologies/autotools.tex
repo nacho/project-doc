@@ -1,0 +1,17 @@
+% mainfile:../main.tex
+
+\section[The Autotools]{The Autotools\footnote{\url{http://en.wikipedia.org/wiki/GNU_build_system}}}
+
+The GNU build system, also known as the Autotools, is a suite of programming tools designed to assist in making source-code packages portable to many Unix-like systems. The GNU build system comprises the GNU utility programs Autoconf, Automake, and Libtool.
+
+\subsection{GNU Autoconf}\label{Autoconf}
+
+Autoconf processes files to generate a configure script, this is the one that takes care of detecting the needed libraries and tools like the needed compiler to be able to build the application. To process files, autoconf uses a GNU implementation of the m4 macro system.
+
+\subsection{GNU Automake}\label{Automake}
+
+Automake helps to create portable Makefiles, which are in turn processed with the make utility. It takes its input as Makefile.am, and turns it into Makefile.in, which is used by the configure script to generate the file Makefile output.
+
+\subsection{GNU Libtool}\label{Libtool}
+
+Libtool helps manage the creation of static and dynamic libraries on various Unix-like operating systems.
