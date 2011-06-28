@@ -10,4 +10,62 @@ Some of the features and bug fixes made in this project has been part of the \em
 
 \addfigure[0.5\textwidth]{./images/gsoc}{GSoC 2010 Logo}{fig:GSoCLogo}
 
+\section{Proposing a good project}\label{sec:GoodProject}
 
+There are several ways to propose a project for the Google summer of code. The main ones are:
+\begin{itemize}
+  \item Looking for a free software application that you really likes, and propose something that you want to improve.
+  \item Talk with the application maintainers and ask them for interesting projects that they would like to mentor. This is probably the most used way and the best way if you want to get your project \emph{accepted}.
+\end{itemize}
+
+Usually the accepted organizations by Google, they provide a wiki where they put some proposals for students, as an example, the one from GNOME for 2010. See: \url{https://live.gnome.org/SummerOfCode2010}.
+
+\section{Creating the application form}\label{ApplicationForm}
+
+In the application form, it has to be described what you want to do, a schedule explaining what it will be done every week and something about you. Below it is shown the \emph{application form} I have used for my Google summer of code.
+
+\subsection*{gedit improvements}
+
+\subsubsection*{gedit split view}
+
+Right now gedit does not have the ability to provide several views for the same document. I would like to change the internal design of gedit to provide this. The idea is that a document can be splitted horizontally or vertically depending on what the user prefers. For doing this some menu items will be provided.
+Due to the current design of GtkTextView this is not an easy task as we need to load the document again every time we split it, and keep it sync.
+
+\paragraph{Why is this important?}
+
+It is important because it can allow you to see several parts of the same document at the same time, which is necessary when you are editing long files.
+
+\subsubsection*{gedit tab groups}
+
+Split view is a really good thing but does not provide a way to see different documents at the same time.
+
+By tab groups we refer to the ability of grouping gedit tabs in different groups that can be viewed at the same time in a gedit window.
+\begin{itemize}
+  \item By default a gedit window has a single tab group (current behavior)
+  \item The same document can NOT appear in different tab groups or different tabs
+\end{itemize}
+
+\paragraph{Why is this important?}
+
+It is important to compare different files side by side.
+
+\subsubsection{gedit multi-views}
+
+Apart from split view and tab groups, I'd like to add support (if time permits) for multi views. This means to add abstraction for the document and for the text viewer. In this way we could be able to open a binary file with its own viewer. Or watch a specific html file using webkit as the viewer.\footnote{\url{http://live.gnome.org/Gedit/Multiviews}}
+
+\subsubsection{Timeline}
+
+A proposed timeline (but highly flexible depending on the time needed):
+
+\begin{itemize}
+  \item Week 1 and 2: Provide a patch for being able to create tab groups.
+  \item Week 3 and 4: See if we need to refactor code to maintain easier the tab groups and start with the split view patch.
+  \item Week 5 and 6: Finish the split view patch and see if it need some refactor.
+  \item Week 7 and 8: Start the work on the gedit view interface.
+  \item Week 9 and 10: Finish the gedit view abstraction and see if worth start working the document abstraction or just bug fixing.
+  \item Week 10 and 11: Finish the document abstraction if possible or make stability work.
+\end{itemize}
+
+\subsubsection{About me}
+
+My name is Ignacio Casal Quinteiro, I'm 23 years old and I'm studying computer engineer at the Vigo University of Spain. I have been contributing to GNOME for several years, from tasks like coordinating the Galician translation team to applications like gedit or gtranslator. I love free software and I love GNOME, the community around it is just awesome, and I would really like to continue my contributions on making it better than it is right now. Even if already contributed to GNOME this project would be a major rewrite of the gedit internals, and the amount of work involved is proportional to a good GSoC. Also making this GSoC would give me the opportunity to spend the summer working on GNOME instead of another part time job.
