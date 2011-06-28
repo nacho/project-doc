@@ -68,6 +68,15 @@
   \end{wrapfigure}
 }
 
+\newcommand{\addfigure}[4][\textwidth]{
+  \begin{figure}[ht]
+    \begin{center}
+      \includegraphics[width=#1]{#2}
+      \caption[#3]{#3}\label{#4}
+    \end{center}
+  \end{figure}
+}
+
 %===============================================================
 %Title
 %===============================================================
