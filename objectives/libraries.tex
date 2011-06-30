@@ -1,0 +1,25 @@
+% mainfile:../main.tex
+
+\section{Port to new libraries}\label{sec:NewLibraries}
+
+\subsection{Gtk+ 3}\label{sec:Gtk3}
+
+Migrate from Gtk+ 2 to Gtk+ 3. This will mean to get rid of deprecated code that it is used from Gtk+ 2, update gedit to use the new APIs and the most important thing, follow the development of Gtk+ 3, meaning that if there is any error in Gtk+, it should be filed a bug against it and if possible provide a patch to fix it (See \ref{sec:Patches} for an explanation on how it is done correctly). This will also mean that to have the application building, it will be needed to have the application up to date, which will mean a lot of testing against the latest libraries and rebuilding them. For an explanation of what gtk+ is, see the section \ref{sec:Gtk}.
+
+\subsection[GSettings]{GSettings\footnote{\url{http://developer.gnome.org/gio/stable/GSettings.html\#GSettings.description}}}\label{sec:GSettings}
+
+Port to GSettings, to use it instead of GConf. GSettings is part of glib (see \ref{sec:GLib}) and provides a convenient API for storing and retrieving application settings. Some of the reasons for this switch are:
+\begin{itemize}
+  \item GConf has been deprecated
+  \item Provides better API to be used by GObject-based applications
+  \item It used used over DBus
+  \item The storage system is implemented by different backends in relation to the operative system or the choose of the user
+\end{itemize}
+
+\subsection{libpeas}\label{sec:libpeas}
+
+Remove custom plugin system and use libpeas instead. See the section \ref{sec:peas} for a better explanation of what libpeas is.
+
+\subsection{GObject-introspection}\label{sec:GObjectIntrospection}
+
+It will allow to remove the static bindings and generate dynamic ones by making annotations in the public API of \emph{gedit}. See \ref{sec:g-i} for a better explanation of what GObject-introspection is.

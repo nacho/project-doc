@@ -6,52 +6,5 @@
 
 The objective it is to increase the the functionality of \emph{gedit} by adding new features and by porting it to the new libraries needed to be part of \emph{GNOME 3}.
 
-\section{Port to new libraries}\label{sec:NewLibraries}
-
-\subsection{Gtk+ 3}\label{sec:Gtk3}
-
-Migrate from Gtk+ 2 to Gtk+ 3. This will mean to get rid of deprecated code that it is used from Gtk+ 2, update gedit to use the new APIs and the most important thing, follow the development of Gtk+ 3, meaning that if there is any error in Gtk+, it should be filed a bug against it and if possible provide a patch to fix it (See \ref{sec:Patches} for an explanation on how it is done correctly). This will also mean that to have the application building, it will be needed to have the application up to date, which will mean a lot of testing against the latest libraries and rebuilding them. For an explanation of what gtk+ is, see the section \ref{sec:Gtk}.
-
-\subsection[GSettings]{GSettings\footnote{\url{http://developer.gnome.org/gio/stable/GSettings.html\#GSettings.description}}}\label{sec:GSettings}
-
-Port to GSettings, to use it instead of GConf. GSettings is part of glib (see \ref{sec:GLib}) and provides a convenient API for storing and retrieving application settings. Some of the reasons for this switch are:
-\begin{itemize}
-  \item GConf has been deprecated
-  \item Provides better API to be used by GObject-based applications
-  \item It used used over DBus
-  \item The storage system is implemented by different backends in relation to the operative system or the choose of the user
-\end{itemize}
-
-\subsection{libpeas}\label{sec:libpeas}
-
-Remove custom plugin system and use libpeas instead. See the section \ref{sec:peas} for a better explanation of what libpeas is.
-
-\subsection{GObject-introspection}\label{sec:GObjectIntrospection}
-
-It will allow to remove the static bindings and generate dynamic ones by making annotations in the public API of \emph{gedit}. See \ref{sec:g-i} for a better explanation of what GObject-introspection is.
-
-\section{New features}\label{sec:NewFeatures}
-
-\subsection{Remove old API}\label{sec:RemoveOldAPI}
-
-\emph{gedit} has been trying to provide stable API for several years, this means that if some API is deprecated it will be marked as so, but kept in the source code so plugin writers do not have to update to the new APIs if they don't want. The fact that we are breaking the API/ABI for the new major release it will allow to remove the deprecated API and do not support the old plugins.
-
-\subsection{New highlighting language files}\label{sec:HighFiles}
-
-To fix, review and add new language files to highlight syntax in new programming languages. It is very usual that users request to get highlighting for new programming files, so if they provide the patches, they will be fixed and reviewed to be added.
-
-\subsection{Tab Groups}\label{sec:TabGroups}
-
-It allows gedit to have documents side by side. In this way the documents can be compared more easily and make edits between them faster.
-
-\subsection{Manage invalid character}\label{sec:InvalidChars}
-
-Gtk+ is UTF-8 oriented. There are several characters\footnote{\url{http://en.wikipedia.org/wiki/UTF-8\#Invalid_byte_sequences}} in UTF-8 that cannot be entered in Gtk+ widgets. In \emph{gedit} the documents that contain invalid characters are treated as binary files and not opened, this is sometimes not good when you have a wrongly encoded document and you want to fix. This feature will try to fix this problem.
-
-\subsection{Use new Drag and Drop system}\label{sec:DND}
-
-\emph{gedit} is currently using a custom implementation to make drag and drop of opened tabs. Now that Gtk+ supports all the functionalities needed by gedit, this can be dropped and use the Gtk+ API, which allows better integration with the desktop and a lot of internal code cleanup.
-
-\subsection{New search system}\label{sec:SearchSystem}
-
-Currently gedit uses a really old way to search on files. In the latest years the way of searching in files has changed, from the idea of embedding the search entry in the bottom of the window, like Firefox to the idea of Chrome for sliding out the search entry. gedit uses a dialog for searching, this has the problem of hiding the text while you are searching. It has been decided to use a system like in Chrome to avoid this problem.
+\input{objectives/libraries}
+\input{objectives/features}

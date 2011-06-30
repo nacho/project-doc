@@ -1,0 +1,27 @@
+% mainfile:../main.tex
+
+\section{New features}\label{sec:NewFeatures}
+
+\subsection{Remove old API}\label{sec:RemoveOldAPI}
+
+\emph{gedit} has been trying to provide stable API for several years, this means that if some API is deprecated it will be marked as so, but kept in the source code so plugin writers do not have to update to the new APIs if they don't want. The fact that we are breaking the API/ABI for the new major release it will allow to remove the deprecated API and do not support the old plugins.
+
+\subsection{New highlighting language files}\label{sec:HighFiles}
+
+To fix, review and add new language files to highlight syntax in new programming languages. It is very usual that users request to get highlighting for new programming files, so if they provide the patches, they will be fixed and reviewed to be added.
+
+\subsection{Tab Groups}\label{sec:TabGroups}
+
+It allows gedit to have documents side by side. In this way the documents can be compared more easily and make edits between them faster.
+
+\subsection{Manage invalid characters}\label{sec:InvalidChars}
+
+Gtk+ is UTF-8 oriented. There are several characters\footnote{\url{http://en.wikipedia.org/wiki/UTF-8\#Invalid_byte_sequences}} in UTF-8 that cannot be entered in Gtk+ widgets. In \emph{gedit} the documents that contain invalid characters are treated as binary files and not opened, this is sometimes not good when you have a wrongly encoded document and you want to fix. This feature will try to fix this problem.
+
+\subsection{Use new Drag and Drop system}\label{sec:DND}
+
+\emph{gedit} is currently using a custom implementation to make drag and drop of opened tabs. Now that Gtk+ supports all the functionalities needed by gedit, this can be dropped and use the Gtk+ API, which allows better integration with the desktop and a lot of internal code cleanup.
+
+\subsection{New search system}\label{sec:SearchSystem}
+
+Currently gedit uses a really old way to search on files. In the latest years the way of searching in files has changed, from the idea of embedding the search entry in the bottom of the window, like Firefox to the idea of Chrome for sliding out the search entry. gedit uses a dialog for searching, this has the problem of hiding the text while you are searching. It has been decided to use a system like in Chrome to avoid this problem.
