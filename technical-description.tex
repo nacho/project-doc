@@ -2,4 +2,14 @@
 
 \chapter{Technical description}
 
+% FIXME: draft
 
+\section{Analysis and Design}\label{sec:AnalysisDesign}
+
+When it is worked with free software and it is wanted to get accepted the work in the core of the project, the main thing that you have to do is to adapt yourself to the working style of the group. In the gedit's team it is mainly used \emph{brainstorming} by IRC (see \ref{sec:IRC}), mailing lists (see \ref{sec:Mailing}), wikis (see \ref{sec:Wiki}) and bugzilla (see \ref{sec:Bugs}) for the analysis of the use cases and for the discussion of the new features that will be accepted or not. Apart from this some features from \emph{UML} will be used for the analysis and design. Using inverse engineer, it will be get from the code the current class diagram and it will be modified to get and analysis and design from the new proposals.
+
+Apart from UML it will be used some features from \emph{Extreme Programming}, like the division of works in small iterations, the refactorization of code always it is possible and the continuous testing.
+
+\section{Codification}\label{sec:Codification}
+
+For the implementation it will be used the programming language \emph{C}. The GLib library (see \ref{sec:GLib}) provides object orientation for C, called GObject, so it will be used this object orientation for the development. gedit, apart from being written in C it also allows extensions (plugins) using \emph{python}, so it will be needed knowledge of this language to be able to modify them. Also \emph{autotools} (see \ref{sec:autotools}) is needed for the managing of the project building, meaning the need of knowledge of \emph{perl} and \emph{bash}.
