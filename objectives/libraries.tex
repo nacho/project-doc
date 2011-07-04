@@ -6,7 +6,7 @@
 
 Migrate from Gtk+ 2 to Gtk+ 3. This will mean to get rid of deprecated code that it is used from Gtk+ 2, update gedit to use the new APIs and the most important thing, follow the development of Gtk+ 3, meaning that if there is any error in Gtk+, it should be filed a bug against it and if possible provide a patch to fix it (See \ref{sec:Patches} for an explanation on how it is done correctly). This will also mean that to have the application building, it will be needed to have the application up to date, which will mean a lot of testing against the latest libraries and rebuilding them. For an explanation of what gtk+ is, see the section \ref{sec:Gtk}.
 
-\subsection[GSettings]{GSettings\cite{website:gsettings}}\label{sec:GSettings}
+\subsection[GSettings]{GSettings\cite{website:gio}}\label{sec:GSettings}
 
 Port to GSettings, to use it instead of GConf. GSettings is part of glib (see \ref{sec:GLib}) and provides a convenient API for storing and retrieving application settings. Some of the reasons for this switch are:
 \begin{itemize}
