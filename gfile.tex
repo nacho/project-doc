@@ -28,7 +28,37 @@ The codification has been splitted in two parts:
 \begin{itemize}
   \item \textbf{Core:} Change in the public and internal API to remove the use of uris and use GFiles instead. Below it is shown an example of one of the API changes:
 
-%FIXME: put code here
+    \begin{lstlisting}[style=C]
+
+/**
+ * gedit_commands_load_uri:
+ * @uri: the file to load
+ * @encoding: a #GeditEncoding
+ * @line_pos: the position where to place the cursor
+ *
+ * Do nothing if URI does not exist
+ */
+void
+gedit_commands_load_uri (GeditWindow         *window,
+                         const gchar         *uri,
+                         const GeditEncoding *encoding,
+                         gint                 line_pos)
+
+/**
+ * gedit_commands_load_location:
+ * @location: the GFile to load
+ * @encoding: a #GeditEncoding
+ * @line_pos: the position where to place the cursor
+ *
+ * Do nothing if location does not exist
+ */
+void
+gedit_commands_load_location (GeditWindow         *window,
+                              GFile               *location,
+                              const GeditEncoding *encoding,
+                              gint                 line_pos)
+
+    \end{lstlisting}
 
   \item \textbf{Plugins:} Adapt all the uses of the old methods to use the new ones.
 \end{itemize}
