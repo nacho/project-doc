@@ -26,9 +26,13 @@ In the next link it can be checked the patches provided and the revisions by the
 
 The codification has been splitted in two parts:
 \begin{itemize}
-  \item \textbf{Core:} Change in the public and internal API to remove the use of uris and use GFiles instead. Below it is shown an example of one of the API changes:
+  \item \textbf{Core:} Change in the public and internal API to remove the use of uris and use GFiles instead.
+  \item \textbf{Plugins:} Adapt all the uses of the old methods to use the new ones.
+\end{itemize}
 
-    \begin{lstlisting}[style=C]
+Below it is shown an example of one of the API changes:
+
+    \begin{lstlisting}[style=GObject]
 
 /**
  * gedit_commands_load_uri:
@@ -59,7 +63,4 @@ gedit_commands_load_location (GeditWindow         *window,
                               gint                 line_pos)
 
     \end{lstlisting}
-
-  \item \textbf{Plugins:} Adapt all the uses of the old methods to use the new ones.
-\end{itemize}
 

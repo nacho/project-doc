@@ -56,7 +56,7 @@
   showstringspaces = false,
   basicstyle=\small\ttfamily,
   commentstyle=\color{gray45},
-  keywordstyle=\color{blue},
+  keywordstyle=\bf,
   %
   numbers=left,
   numbersep=15pt,
@@ -70,7 +70,12 @@
   \lstset{#1}\pagebreak[0]}{\pagebreak[0]
 }
 
-\lstdefinestyle{C}{language=C}
+\lstdefinestyle{GObject}{
+  language=C,
+  emph={gboolean, gpointer, gconstpointer, gchar, guchar, gint, guint, gshort,
+        gushort, glong, gulong, gfloat, gdouble, gsize, gssize, goffset},
+  emphstyle=\color{blue}
+}
 
 % override the title setting to make it bold
 \ChTitleVar{\bf\Huge}
