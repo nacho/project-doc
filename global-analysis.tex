@@ -2,4 +2,34 @@
 
 \chapter{Global analysis}
 
-\addfigure[0.92\textwidth]{./images/class-diagram-2-30}{Class diagram gedit 2.30}{ClassDiagram230}
+% FIXME: draft, missing the explanation of each class of the class diagram
+
+When someone starts to contribute to a big project such as \emph{gedit}, it is very important to make an initial analysis of the current state of the project. Due to the lack of documentation in projects like gedit, to do this, is usually easier to ask for some tips to the current developers so they can give you some orientations about where you can start. The main tip a developer will tell you is: start reading code and if you have any problem understanding anything, please ask us about it.
+
+\section{Reverse engineering}\label{ReverseEngineering}
+
+Reverse engineering is the process of discovering the technological principles of a human (or non-human) made device, object or system through analysis of its structure, function and operation.\cite{website:reverse-engineer}
+
+Due to the lack of a global \emph{class diagram} showing the current structure of gedit, it was decided to use the reverse engineer, read the source code to get the class diagram with the main classes in order to have a better view of the project.
+
+In the picture \ref{fig:ClassDiagram230} it is shown the said class diagram. Of course it only shows the main classes, dropping all the dialogs and self containing widgets, that are not really necessary to get a sight of the whole project.
+
+\addfigure[0.92\textwidth]{./images/class-diagram-2-30}{Class diagram gedit 2.30}{fig:ClassDiagram230}
+
+\subsection{Explanation of the classes}
+
+Having the class diagram is a good idea, but without some explanation, it is a bit pointless.
+
+\subsubsection{Colors}
+
+The colors show the different libraries and classes where the gedit ones are inheriting from.
+\begin{itemize}
+  \item \textbf{Black}: gedit classes
+  \item \textbf{Blue}: GtkSourceView classes
+  \item \textbf{Red}: GTK+ classes
+\end{itemize}
+
+\subsubsection{Classes}
+
+
+
