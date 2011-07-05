@@ -12,7 +12,7 @@ Reverse engineering is the process of discovering the technological principles o
 
 Due to the lack of a global \emph{class diagram} showing the current structure of gedit, it was decided to use the reverse engineer, read the source code to get the class diagram with the main classes in order to have a better view of the project.
 
-In the picture \ref{fig:ClassDiagram230} it is shown the said class diagram. Of course it only shows the main classes, dropping all the dialogs and self containing widgets, that are not really necessary to get a sight of the whole project.
+In the picture \ref{fig:ClassDiagram230} it is shown the mentioned class diagram. Of course it only shows the main classes, dropping all the dialogs and self containing widgets, that are not really necessary to get a sight of the whole project.
 
 \addfigure[0.92\textwidth]{./images/class-diagram-2-30}{Class diagram gedit 2.30}{fig:ClassDiagram230}
 
@@ -33,5 +33,29 @@ The colors show the different libraries and classes where the gedit ones are inh
 
 \section{Coding Style}\label{sec:CodingStyle}
 
+\emph{gedit} is a very ambitious free software project, having a lot of code to maintain. In a project where several people are contributing patches, it is important to be rigorous with the coding style.
 
+The \GNOME project provides programming guidelines\footnote{\url{http://rtm-cs.sinp.msu.ru/~fedor/doc/gtk+gnome/programming-guidelines/good-code.html}}. gedit follows this conventions with one minor exception shown below:
+\begin{lstlisting}[style=GObject]
+
+if (...)
+{
+	...
+}
+
+if (...) {
+	...
+}
+
+\end{lstlisting}
+
+The first example is preferred over the second one. Apart from this there are a couple of conventions to take into account:
+\begin{itemize}
+  \item \textbf{Naming conventions:}
+    \begin{itemize}
+      \item \emph{Function names} should be lowercase and prefixed with the file name.
+      \item \emph{Variable names} should be lowercase and be self explanatory. If it is needed more than one word an underscore should be used, e.g:  my\_variable.
+    \end{itemize}
+  \item The methods should be sorted in the way no prototypes are needed.
+\end{itemize}
 
