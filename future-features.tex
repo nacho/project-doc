@@ -1,0 +1,27 @@
+% mainfile:main.tex
+
+\chapter{Future features}
+
+Even if gedit has a lot of features it can be improved more and add new features. The wiki (see \ref{sec:Wiki}) provide a section called RoadMap\footnote{\url{https://live.gnome.org/Gedit/RoadMap}} where are shown the main important features that want to be added for each future version. Some of them are enumerated below:
+
+\section{Port python plugin to Python 3}
+
+Python 3 is faster so it should be a good idea to try to use it in the future. The problem is that libpeas and pygobject needs to support it completely before switching to it.
+
+\section{GApplication}
+
+Right now gedit uses a custom single instance implementation, would be good to use GApplication to although the reason stopping gedit from using it is that GApplication does not support pipes over the bus, to be able to make things like cat blah.c | gedit.
+
+\section{GtkGrid}
+
+GtkGrid is a container which arranges its child widgets in rows and columns. This widget will deprecate other containers like GtkBox or GtkTable so it would be interesting to start the migration as soon as possible. The problem is that GtkBox is very deep in the implementation of Gedit and it would need a lot of time to be ported to GtkGrid.
+
+\section{Code Folding}
+
+Code folding is a feature of some text editors, source code editors and IDEs that allows the user to selectively hide and display sections of a currently edited file as a part of routine edit operations. This allows the user to manage large amounts of text while viewing only those subsections of the text that are specifically relevant at any given time.\cite{website:code-folding}
+
+This is one of the most requested features, the problem is that it is very tricky to implement correctly. Currently it is under development but it needs more testing and work.
+
+\section{Windows and Mac OSX support}
+
+With the port to Gtk+ 3, the binaries for win32 and OSX has become obsoletes. In order to get them back it is needed to fix bugs in the libraries like Gtk+ or pygobject and recreate the development environment for this systems.
