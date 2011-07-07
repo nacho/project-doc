@@ -1,3 +1,32 @@
 % mainfile:main.tex
 
 \chapter{Development process}
+
+% FIXME: draft
+
+For each feature, understanding by feature, a bug in the application or one new functionality to be added:
+
+\begin{itemize}
+  \item Analysis
+    \begin{itemize}
+      \item Study of the problem
+      \item Discussion with the rest of developers.
+      \item Create diagrams using reverse engineer if necessary.
+      \item Analysis of the use cases unless it is not needed for the specific task.
+    \end{itemize}
+  \item Design
+    \begin{itemize}
+      \item Study of the technologies to be used in the new feature.
+      \item Study of the current design.
+      \item Generate initial prototypes.
+      \item Brainstorming with the rest of developers to check which could be the best design.
+    \end{itemize}
+  \item Codification
+    \begin{itemize}
+      \item Implementation using C with GObject or python (see \ref{sec:Codification}), depending on the plugin of if it is a core feature.
+      \item Tests of the new functionality.
+      \item File a bug to review the patch.
+      \item Commit and push the patches to the \GNOME repository.
+      \item Release a new version if necessary for testing.
+    \end{itemize}
+\end{itemize}
