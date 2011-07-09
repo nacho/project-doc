@@ -5,4 +5,7 @@
 *.out
 *.lot
 *.lof
+*.bbl
+*.blg
+*.brf
 main.synctex.gz
