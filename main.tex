@@ -113,10 +113,10 @@
   \end{wrapfigure}
 }
 
-\newcommand{\addfigure}[4][\textwidth]{
+\newcommand{\addfigure}[4][width=\textwidth]{
   \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=#1]{#2}
+      \includegraphics[#1]{#2}
       \caption[#3]{#3}\label{#4}
     \end{center}
   \end{figure}
