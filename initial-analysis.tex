@@ -2,7 +2,7 @@
 
 \chapter{Initial analysis}
 
-% FIXME: draft, missing the explanation of each class of the class diagram
+% FIXME: draft, see FIXME
 
 When someone starts to contribute to a big project such as \emph{gedit}, it is very important to make an initial analysis of the current state of the project. Due to the lack of documentation in projects like gedit, to do this, is usually easier to ask for some tips to the current developers so they can give you some orientations about where you can start. The main tip a developer will tell you is: start reading code and if you have any problem understanding anything, please ask us about it.
 
@@ -30,8 +30,39 @@ The colors show the different libraries and classes where the gedit ones are inh
   \item \textbf{Red}: GTK+ classes
 \end{itemize}
 
+\newpage
 \subsubsection{Classes}
 
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{\textwidth}{|l|X|}
+      \firsthline
+      \textbf{Class name:} & \textbf{Explanation:} \\
+      \hline
+      \textit{GeditApp} & Takes care of the single instance managing. It creates the windows and manages the life-cycle of them, parses the command-line arguments and initializes per application variables. \\
+      \hline
+      \textit{GeditWindow} & Installs the actions, menus, creates the different views, proxies signals and methods from children widgets to not rely on implementation details and manages per window settings. \\
+      \hline
+      \textit{GeditStatusBar} & Widget inside GeditWindow, which takes care of showing flashing information to the user. \\
+      \hline
+      \textit{GeditPanel} & GeditWindow creates two widgets of this kind. One for the side panel and one for the bottom panel. In this panels other widgets are added by plugins, i.e to show a filebrowser or a terminal. \\
+      \hline
+      \textit{GeditNotebook} & It is an internal widget inheriting from GtkNotebook that takes care of adding and removing tabs, provide easier to use API for gedit and a custom implementation of the drag and drop system. \\
+      \hline
+      \textit{GeditTab} & It is the state machine widget for the document. Takes care of managing all the errors that come from loading and saving a document and show them to the user. \\
+      \hline
+      \textit{GeditView} & It is the widget that takes care of showing the loaded document. This widget inherits from \emph{GtkSourceView} which takes care of the main job, making it to deal with the loading and set of the specific application setting for gedit. Also this widget takes care of the interactive per view search. \\
+      \hline
+      \textit{GeditDocument} & Class that inherits from \emph{GtkSourceBuffer}. This class is the one that deals with GeditDocumentLoad and GeditDocumentSaver, proxying them so they are kept as implementation details and hidden from the public API. \\
+      \hline
+      \textit{Other classes} & The classes related with the plugin managing and the document saving and loading will be explained in further chapters. See chapters FIXME and FIXME. \\
+      \lasthline
+    \end{tabularx}
+    \caption{Initial analysis classes}
+  \end{center}
+\end{table}
+
+\newpage
 \section{Coding Style}\label{sec:CodingStyle}
 
 \emph{gedit} is a very ambitious free software project, having a lot of code to maintain. In a project where several people are contributing patches, it is important to be rigorous with the coding style.
