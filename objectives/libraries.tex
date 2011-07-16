@@ -10,10 +10,10 @@ Migrate from Gtk+ 2 to Gtk+ 3. This will mean to get rid of deprecated code that
 
 Port to GSettings, to use it instead of GConf. GSettings is part of glib (see \ref{sec:GLib}) and provides a convenient API for storing and retrieving application settings. Some of the reasons for this switch are:
 \begin{itemize}
-  \item GConf has been deprecated
-  \item Provides better API to be used by GObject-based applications
-  \item It used used over DBus
-  \item The storage system is implemented by different backends in relation to the operative system or the choose of the user
+  \item GConf has been deprecated.
+  \item Provides better API to be used by GObject-based applications.
+  \item It is used over DBus.
+  \item The storage system is implemented by different backends, in relation to the operative system or the choose of the user.
 \end{itemize}
 
 \subsection{libpeas}\label{sec:libpeas}
