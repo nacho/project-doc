@@ -12,17 +12,8 @@ One way to think of a GFile is as an \emph{abstraction of a pathname}. For norma
 
 The fact of breaking the public API\footnote{With breaking the public, it means that the deprecated API and the API that could be improved with the new technologies, will be removed or modified to provide better one for the user and for easier maintainership} allowed to use GFiles for everything, internally and publicly, giving the incentive that most of the API supported in gedit for managing uris was already supported in GFile, making possible to remove it.
 
-\subsection{File a bug}
-
-Once the analysis and design of the problem have been made, it is important to inform the rest of the developers about it, make the ticket for a better discussion and provide a patch for it.
-
-\subsubsection{Bug}
-
-In the next link it can be checked the patches provided and the revisions by the other developers:
-
-\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=616790}
-
-\section{Codification}
+\newpage
+\section{Implementation}
 
 The codification has been splitted in two parts:
 \begin{itemize}
@@ -32,7 +23,7 @@ The codification has been splitted in two parts:
 
 Below it is shown an example of one of the API changes:
 
-    \begin{lstlisting}[style=GObject]
+\begin{lstlisting}[style=GObject]
 
 /**
  * gedit_commands_load_uri:
@@ -62,5 +53,13 @@ gedit_commands_load_location (GeditWindow         *window,
                               const GeditEncoding *encoding,
                               gint                 line_pos)
 
-    \end{lstlisting}
+\end{lstlisting}
 
+\newpage
+\subsection{Bug}
+
+Once the analysis and design of the problem have been made, it is important to inform the rest of the developers about it, make the ticket for a better discussion and provide a patch for it.
+
+In the next link it can be checked the patches provided and the revisions by the other developers:
+
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=616790}
