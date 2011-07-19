@@ -1,3 +1,17 @@
 % mainfile:main.tex
 
 \chapter{Drag and Drop of Tabs}
+
+%FIXME first draft
+
+\section{Analysis and design}
+
+As said in the previous chapter, a \emph{modification} in the drag and drop system had to be made. gedit's custom drag and drop was implemented a few years ago, when GtkNotebook did not have a way to do it by itself. This was implemented in GTK+ since the version 2.12, but it had a problem holding the port of gedit, it did not allow to drag a tab out of the window to create a new window with this tab attached to it.
+
+\section{Implementation}
+
+\subsection{Bug}
+
+In the next link it can be checked the patches provided and the revisions by the other developers:
+
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=456959}\label{Bug456959}
