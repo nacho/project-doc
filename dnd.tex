@@ -69,8 +69,31 @@ else if (info == TARGET_TAB)
 
 \end{lstlisting}
 
+\subsection{Tests}
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|l|}
+      \firsthline
+      \textbf{Test:} & \textbf{Expected result:} & \textbf{Test passed?} \\
+      \hline
+      Reorganize tabs & The tab was kept in the desired position & Yes \\
+      \hline
+      Drop a tab out of the window & A new window was created, the tab was attached to it and detached from the source window & Yes \\
+      \hline
+      Drop a tab in other window view & The tab is detached from the source window and attached to the target window & Yes \\
+      \hline
+      Create one tab group and drop a tab on it & The tab is detached from the source tab group and attached to the target one & Yes \\
+      \hline
+      Create one tab group and drop the last tab on another tab group & The tab is detached from the source tab group, the source tab group is removed and the tab is attached in the target tab group & Yes \\
+      \lasthline
+    \end{tabularx}
+    \caption{Tests for new Drag and Drop system}
+  \end{center}
+\end{table}
+
 \subsection{Bug}
 
 In the next link it can be checked the patches provided and the revisions by the other developers:
 
-\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=456959}\label{Bug456959}
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=456959}
