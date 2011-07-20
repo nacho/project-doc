@@ -75,9 +75,12 @@ In the figure \ref{fig:TabGroupsProto1} it can be shown a prototype made with gl
 
 \subsection{User interface}
 
-% FIXME
-
-To create a new tab group a new menu item must be added in the \emph{Documents} menu. New tab group will create a new tab group in the right of the selected tab group and it will add a new empty document, so the user can start editing right after creating the tab group. Same behavior as when gedit is opened without explicitly opening a document.
+To interact with tab groups, it was decided to provide three new menu items in the \emph{Documents} menu.
+\begin{itemize}
+  \item \textbf{New Tab Group:} It creates a tab group in the right of the focused one, and it adds a new tab to it.
+  \item \textbf{Previous Tab Group:} Moves the focus to the previous (left) tab group.
+  \item \textbf{Next Tab Group:} Moves the focus to the next (right) tab group.
+\end{itemize}
 
 \newpage
 \subsection{Class diagram modification}
