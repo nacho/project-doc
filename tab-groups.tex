@@ -73,6 +73,12 @@ In the figure \ref{fig:TabGroupsProto1} it can be shown a prototype made with gl
   \end{minipage}
 \end{figure}
 
+\subsection{User interface}
+
+% FIXME
+
+To create a new tab group a new menu item must be added in the \emph{Documents} menu. New tab group will create a new tab group in the right of the selected tab group and it will add a new empty document, so the user can start editing right after creating the tab group. Same behavior as when gedit is opened without explicitly opening a document.
+
 \newpage
 \subsection{Class diagram modification}
 
@@ -120,28 +126,28 @@ This class works as a proxy to \emph{GeditNotebook}, most of the API and signals
       \firsthline
       \textbf{Method name:} & \textbf{Explanation:} \\
       \hline
-      \textit{get\_active\_notebook} & Gets the active notebook \\
+      \textit{get\_active\_notebook} & Gets the active notebook, in order to know which one is the active, a track on the focused widget has to be taken. For this can be listened to the signal \emph{set-focus-child}. \\
       \hline
-      \textit{get\_n\_notebooks} & Gets the number of notebooks, at least there will be one \\
+      \textit{get\_n\_notebooks} & Gets the number of notebooks, at least there will be one. \\
       \hline
-      \textit{get\_nth\_notebook} & Gets the n notebook of the list \\
+      \textit{get\_nth\_notebook} & Gets the n notebook of the list. \\
       \hline
-      \textit{get\_notebook\_num} & Given a notebook get the number in the list \\
+      \textit{get\_notebook\_num} & Given a notebook get the number in the list. \\
       \hline
-      \textit{get\_n\_tabs} & Returns the number of tabs in all the notebooks \\
+      \textit{get\_n\_tabs} & Returns the number of tabs in all the notebooks. \\
       \hline
-      \textit{get\_page\_num} & Finds the index of the page which contains the given tab \\
+      \textit{get\_page\_num} & Finds the index of the page which contains the given tab. \\
       \hline
-      \textit{get\_active\_tab} & Gets the active tab \\
+      \textit{get\_active\_tab} & Gets the active tab. \\
       \hline
-      \textit{set\_active\_tab} & Sets the active tab \\
-      \textit{set\_current\_page} & Sets the active tab in relation to the total pages \\
+      \textit{set\_active\_tab} & Sets the active tab. \\
+      \textit{set\_current\_page} & Sets the active tab in relation to the total pages. \\
       \hline
-      \textit{get\_all\_tabs} & Gets all the tabs \\
+      \textit{get\_all\_tabs} & Gets all the tabs. \\
       \hline
-      \textit{close\_tabs} & Closes a list of tabs \\
+      \textit{close\_tabs} & Closes a list of tabs. \\
       \hline
-      \textit{close\_all\_tabs} & Closes all tabs \\
+      \textit{close\_all\_tabs} & Closes all tabs. \\
       \lasthline
     \end{tabularx}
   \end{center}
@@ -152,28 +158,107 @@ This class works as a proxy to \emph{GeditNotebook}, most of the API and signals
   \begin{center}
     \begin{tabularx}{\textwidth}{|l|X|}
       \firsthline
-      \textit{add\_new\_notebook} & Adds a new notebook \\
+      \textit{add\_new\_notebook} & Adds a new notebook. \\
       \hline
-      \textit{remove\_active\_notebook} & Removes the active notebook \\
+      \textit{remove\_active\_notebook} & Removes the active notebook. \\
       \hline
-      \textit{previous\_notebook} & Focuses the previous notebook \\
+      \textit{previous\_notebook} & Focuses the previous notebook. \\
       \hline
-      \textit{next\_notebook} & Focuses the next notebook \\
+      \textit{next\_notebook} & Focuses the next notebook. \\
       \lasthline
     \end{tabularx}
     \caption{Tab groups methods explanation}
   \end{center}
 \end{table}
 
+GTK+ provides a widget called \emph{GtkHPaned}, which is a container with two children arranged horizontally. An intensive use of this widget is needed in order to arrange the tab groups side by side.
+
+The next pseudocode shows how it must be implemented:
+\begin{lstlisting}[style=GObject]
+
+void
+add_notebook(new_notebook, main_container)
+{
+	if (main_container)
+		main_container(new_notebook)
+	else {
+		paned = new_paned()
+		parent = active_notebook.get_parent()
+		parent.remove(active_notebook)
+		parent.add(paned)
+
+		paned.add1(active_notebook)
+		paned.add2(new_notebook)
+	}
+	/* keep track of it in a list */
+	notebooks.append(new_notebook)
+
+	emit(notebook-added)
+}
+
+void
+remove_notebook (notebook)
+{
+	if (notebooks.next() != NULL)
+	{
+		warning("Removing main notebook is not possible)
+		return
+	}
+
+	ref(notebook)
+	notebook.destroy()
+
+	next = notebooks.next()
+	parent = notebook.parent()
+	children = parent.get_children()
+	if (!children.next())
+	{
+		warning("parent must be a GtkPaned")
+		return
+	}
+
+	grandpa = parent.parent()
+	parent.remove(children[0])
+	parent.destroy()
+	grandpa.add(children[0])
+	emit (notebook-removed, notebook)
+	unref(notebook)
+	focus(next)
+}
+
+\end{lstlisting}
+
+\newpage
 \section{Implementation}
 
-When this was implemented there were two things depending directly on GeditNotebook. \emph{GeditDocumentsPanel} (see figure \ref{fig:GeditDocumentsPanel1}) which shows in the side panel the currently opened documents and allows to manage them, and the \emph{Documents menu} which showed the documents and set shortcuts\footnote{A shortcut is a set of keys which allows to invoke a specific action.} to them, to switch easily between the documents pressing Control+\#. These two features were disabled in order to be able to start the implementation.
+To implemented this, there was one thing depending directly on GeditNotebook. \emph{GeditDocumentsPanel} (see figure \ref{fig:GeditDocumentsPanel1}), which shows in the side panel the currently opened documents and allows to manage them. This feature was disabled in order to be able to start the implementation.
 
 \addfigure[scale=0.60]{./images/gedit-documents-panel1}{Documents panel}{fig:GeditDocumentsPanel1}
 
-In order to implement it, an intensive use of \emph{GtkHPaneds}\footnote{The HPaned widget is a container widget with two children arranged horizontally.} was needed.
+\subsection{Tests}
 
-%FIXME: missing more things here, bug #620502 for dnd
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|l|}
+      \firsthline
+      \textbf{Test:} & \textbf{Expected result:} & \textbf{Test passed?} \\
+      \hline
+      Click on new tab group & Adds a new tab group, and a new document on it & Yes \\
+      \hline
+      Close last tab & Closes the latest tab and removes the tab group & Yes \\
+      \hline
+      Click on previous tab group & Moves to the previous tab group & Yes \\
+      \hline
+      Click on next tab group & Moves to the previous tab group & Yes \\
+      \hline
+      Drag and drop between tabs & Allows to move a tab between tab groups & Yes \\
+      \hline
+      Change tab group & Reflects the active tab group in the documents menu, setting the shortcuts to the active one & Yes \\
+      \lasthline
+    \end{tabularx}
+    \caption{Tests tab groups}
+  \end{center}
+\end{table}
 
 \subsection{Bugs}
 
