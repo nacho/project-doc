@@ -24,12 +24,17 @@ For each feature, understanding by feature, a bug in the application or one new 
   \item Codification
     \begin{itemize}
       \item Implementation using C with GObject or python (see \ref{sec:ProgrammingLanguages}), depending on the plugin or if it is a core feature.
-      \item Tests of the new functionality.
       \item File a bug to review the patch.
+    \end{itemize}
+  \newpage
+  \item Tests
+    \begin{itemize}
+      \item Test all new functionalities.
+    \end{itemize}
+  \item Deployment
+    \begin{itemize}
       \item Commit and push the patches to the \GNOME repository.
-      \item Release a new version if necessary for testing.
     \end{itemize}
 \end{itemize}
 
-\newpage
 See that in some of the features the Analysis and the Design is quite attached, so it can be exposed in the documentation as a single explanation point. The reason for this is that there are some problems like refactoring code, or the use of new technologies that may produce a reanalysis and a redesign to ensure that the program will continue having the right use cases.
