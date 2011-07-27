@@ -10,7 +10,7 @@ GFile is a high level abstraction for manipulating files on a virtual file syste
 
 One way to think of a GFile is as an \emph{abstraction of a pathname}. For normal files the system pathname is what is stored internally, but as GFiles are extensible it could also be something else that corresponds to a pathname in a userspace implementation of a filesystem.\cite{website:gio} Until now, gedit was not using any abstraction for this. It was using simple strings representing uris\footnote{See: \url{http://en.wikipedia.org/wiki/Uniform_Resource_Identifier}} for public API and making an internal parsing and conversion to GFiles.
 
-The fact of breaking the public API\footnote{With breaking the public, it means that the deprecated API and the API that could be improved with the new technologies, will be removed or modified to provide better one for the user and for easier maintainership} allowed to use GFiles for everything, internally and publicly, giving the incentive that most of the API supported in gedit for managing uris was already supported in GFile, making possible to remove it.
+The fact of breaking the public API\footnote{With breaking the public, it means that the deprecated API and the API that could be improved with the new technologies, will be removed or modified to provide better one for the user and for easier maintainership.} allowed to use GFiles for everything, internally and publicly, giving the incentive that most of the API supported in gedit for managing uris was already supported in GFile, making possible to remove it.
 
 \newpage
 \section{Implementation}
