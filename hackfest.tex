@@ -1,0 +1,60 @@
+% mainfile:main.tex
+
+\chapter{Python hackfest 2011}
+
+%FIXME: ref to chapters
+One of the problems encountered in the road to \GNOME 3.0, was that we bet for dynamic bindings, as explained in previous chapters, instead of keeping the static ones. At the end of 2010, with just a few months before the stable release, we were still without an usable version of PyGObject working with introspection. This leaded to propose a hackfest\footnote{A hackfest is a meeting in some place around the world, where developers discuss and fix problems related with a specific topic, i.e an application or library.} where we could meet and focus on the main problems in order to get an stable release as soon as possible.
+
+\section{Location, date}
+
+Prague, CZ - Jan 17th-21st\\
+Hackerspace Prague (brmlab)
+
+\section{Goals}
+
+\begin{itemize}
+  \item Get a deeper understanding of what parts are important to GNOME Python and focus on getting those bits finished.
+  \item Identify API in Gtk+ that is unwrappable and get it fixed before the freeze.
+  \item Work with developers to port their applications.
+  \item Get PyGObject into a shippable, stable state.
+  \item Figure out our post-GNOME 3.0 goals.
+  \item Reduce invocation overhead.
+  \item Move overrides to one or more separate modules.
+  \item Figure out a way to have private overrides for applications (i.e gedit).
+  \item Bugs to look at: \#561264, \#638915.
+\end{itemize}
+
+\section{Getting sponsor}
+
+As explained in the web page \url{https://live.gnome.org/Travel}, the \GNOME Foundation supports the \GNOME project and one important way of doing that is sponsoring contributors to travel to \GNOME events like conferences and hackfests. The sponsored travel is meant to help those that would like to attend \GNOME related events but are unable to do so for financial reasons. All \GNOME contributors are always encouraged to apply.
+
+The way to get sponsored, is to be a hacker of the \GNOME project and fill a document, presenting for what it is needed the sponsoring and how much money is needed. In the case it is accepted it is possible to attend to the event sponsored. The sponsor provides money for the travel and for the accommodation.
+
+Apart from the \GNOME foundation, one important company in the free software world sponsored also this hackfest. Collabora\footnote{See: \url{http://www.collabora.com/}}, it sponsored the drinks and the main foods for the whole week.
+
+\section{Working}
+
+In my case my main focus was to keep porting the biggest python plugins of gedit to use the master branch of pygobject. The main reason for this was to discover new bugs, report them and if possible fix them or help the other developers to fix them.
+
+\newpage
+\section{Reporting the work to the community}
+
+One of the important things when someone gets sponsored in this kind of hackfest, is to report the work done at the end of the week. For this a blog post in the \GNOME feeder had to be made. It was also necessary to say in this blog post the sponsors by providing images with the specific logos.
+
+\begin{figure}[H]
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[scale=0.45]{./images/sponsored-badge-shadow}
+    \caption{\GNOME sponsorship logo}
+  \end{minipage}
+  \hspace{0.5cm}
+  \begin{minipage}[b]{0.5\linewidth}
+    \centering
+    \includegraphics[scale=0.45]{./images/collabora-logo-small}
+    \caption{Collabora logo}
+  \end{minipage}
+\end{figure}
+
+\section{Conclusions}
+
+It was a very good experience to meet with people that until that moment, they were just some names in the screen of the computer. Also it was a very good way to learn fast about the internals of PyGObject as we could ask directly the maintainers of it any question we had.
