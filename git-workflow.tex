@@ -1,3 +1,97 @@
 % mainfile:main.tex
 
-\chapter{Workflow using git}
+\chapter{Work flow using Git}
+
+\emph{Git} is a very powerful tool, used by many important projects like the \emph{Linux kernel} and is the chosen one for all the \GNOME projects. The fact that it is so powerful it does not mean that it is very easy to use. Here it will be explained the main steps in order to have an overview of the main work flow.
+
+Before explaining the main steps, it must be known that git manages everything with branches. The main branch, usually used for the development copy of the program is called: \emph{master}.
+
+\section*{Get a copy of the software}
+
+To make this it will be used the `clone' command:
+
+\noindent\graybox{git clone git://git.gnome.org/gedit}
+
+\section*{Committing a change}
+
+In git it is a bit different than svn, it is splitted in two steps:
+
+\noindent\graybox{git commit -a}
+
+This command will make the change in the local branch, creating the specific commit. See also that we specify the `-a' argument so all changes in the branch are committed. If we want to stage specific changes we can use the command:
+
+\noindent\graybox{git add file}
+
+\noindent\graybox{git push origin branch\_name}
+
+This other command will put the previous commit or commits in the remote branch.
+
+\section*{Update the working copy}
+
+\noindent\graybox{git pull --rebase}
+
+See that here it is important to pass `--rebase', as if you have any commit in this specific branch before updating, you will want that commit to be in the top of the updated branch.
+
+\section*{Wipe out previous changes}
+
+\noindent\graybox{git checkout -f}
+
+With this command we will remove all the changes made in the current branch.
+
+\noindent\graybox{git reset}
+
+The previous command removes the changes made in a branch, although git reset, allows the user to drop out the specific commits you don't want.
+
+\section*{Create a new branch}
+
+\noindent\graybox{git checkout -b branch\_name}
+
+It will create a new branch with the name `branch\_name'.
+
+\section*{Switch between branches}
+
+\noindent\graybox{git checkout branch\_name}
+
+See that to be able to change the branch, it will be needed to have no changes on it.
+
+\newpage
+\section*{Merge branches}
+
+\noindent\graybox{git merge branch\_name}
+
+With this command a direct merge will be made, placing the commits in the places where it were made, and if there is any conflict a new commit will be made on the top fixing this conflicts.
+
+\noindent\graybox{git rebase -i branch\_name}
+
+It puts all the commits to be merged on top of the branch we want to put them. If there are conflicts, each commit with a conflict should be edited and fixed.
+
+\section*{Remove a branch}
+
+\noindent\graybox{git branch -D branch\_name}
+
+This one will remove the local branch named with branch\_name.
+
+\noindent\graybox{git push origin :branch\_name}
+
+And this other will remove branch\_name in the remote branch.
+
+\section*{Creating a patch}
+
+\noindent\graybox{git diff \textgreater~patch\_name}
+
+It creates a file with patch\_name as name, with the local non committed changes.
+
+\noindent\graybox{git format-patch origin}
+
+It will create a patch for each new commit not pushed to the remote branch. The difference with the previous command is that this one conserve extra information, like the author of the commit.
+
+\newpage
+\section*{Apply a patch}
+
+\noindent\graybox{git apply patch\_name}
+
+It applies the patch on top of the local branch.
+
+\noindent\graybox{git am patch\_name}
+
+It also applies the patch but it also creates the local commit with the extra information.
