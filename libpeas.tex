@@ -2,8 +2,95 @@
 
 \chapter{libpeas}
 
+\section{Analysis}
+
+As explained in the chapter \ref{chap:GFile}, with the process to \GNOME 3.0, an opportunity to break the API and ABI stability was provided.
+
+There was the decision from a lot of time ago to try to convert the plugin system used in gedit into an standalone library. The main point for this is that several applications were copying the gedit system and then making small modifications on it to adapt it to their use cases.
+
 \addfigure{./images/libpeas1}{Old Plugin system diagram}{fig:OldPluginSystemDiagram}
+
+\newpage
+In the figure \ref{fig:OldPluginSystemDiagram}, it can be checked the class diagram of the plugin system used before any work was done in the libpeas library.
+
+
 
 \addfigure[scale=0.5]{./images/libpeas2}{First design using libpeas}{fig:FirstDesignUsingLibpeas}
 
 \addfigure{./images/libpeas3}{Design using extensions}{fig:DesignExtensions}
+
+\section{Old Plugin implementation}
+
+Here it is shown an snippet of how the previous plugin looked:
+
+\subsection{Minimalist plugin}
+
+\begin{lstlisting}[style=python]
+
+import gedit
+
+class ExamplePyPlugin(gedit.Plugin):
+    def activate(self, window):
+        pass
+
+    def deactivate(self, window):
+        pass
+
+    def update_ui(self, window):
+        pass
+
+\end{lstlisting}
+
+As we can see in this example each plugin must implement three methods:
+\begin{enumerate}
+  \item \textbf{activate:} called when the plugin is activated. This is usually used for the initialization of the plugin itself.
+  \item \textbf{deactivate:} called when the plugin is deactivated. Used to dispose the plugin.
+  \item \textbf{update\_ui:} called when a change in user interface of the window has been introduced. i.e when a tab in the window has been switched.
+\end{enumerate}
+
+\subsection{Window controller}
+
+As it was explained in the chapter \ref{chap:InitialAnalysis}, gedit is a \emph{single instance application}. This means that for each instance of the application we can have several windows. This is applied also to the plugins. One plugin instance will be created only once, and then the activate/deactivate/update\_ui methods will be called for each window.
+
+This fact has made us to introduce the \emph{window controller}, which is one class that takes care to control a specific window. The plugin instance will have a hash table that takes care of calling the right window controller instance method. This allows a simple way to implement plugins.
+
+The main problem of this, was that each plugin developer needed to know internal details of gedit in order to create a plugin correctly. In the example below, it can be shown how it was dealed with this before.
+
+\begin{lstlisting}[style=python]
+
+import gedit
+
+class ExamplePyWindowHelper:
+    def __init__(self, plugin, window):
+        print "Plugin created for", window
+        self._window = window
+        self._plugin = plugin
+
+    def deactivate(self):
+        print "Plugin stopped for", self._window
+        self._window = None
+        self._plugin = None
+
+    def update_ui(self):
+        # Called whenever the window has been updated (active tab
+        # changed, etc.)
+        print "Plugin update for", self._window
+
+class ExamplePyPlugin(gedit.Plugin):
+    def __init__(self):
+        gedit.Plugin.__init__(self)
+        self._instances = {}
+
+    def activate(self, window):
+        self._instances[window] = ExamplePyWindowHelper(self, window)
+
+    def deactivate(self, window):
+        self._instances[window].deactivate()
+        del self._instances[window]
+
+    def update_ui(self, window):
+        self._instances[window].update_ui()
+
+\end{lstlisting}
+
+
