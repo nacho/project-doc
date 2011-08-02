@@ -48,7 +48,7 @@ As we can see in this example each plugin must implement three methods:
   \item \textbf{update\_ui:} called when a change in user interface of the window has been introduced. i.e when a tab in the window has been switched.
 \end{enumerate}
 
-\subsection{Window controller}
+\subsection{Window controller}\label{sec:WindowController}
 
 As it was explained in the chapter \ref{chap:InitialAnalysis}, gedit is a \emph{single instance application}. This means that for each instance of the application we can have several windows. This is applied also to the plugins. One plugin instance will be created only once, and then the activate/deactivate/update\_ui methods will be called for each window.
 
@@ -93,6 +93,36 @@ class ExamplePyPlugin(gedit.Plugin):
 
 \end{lstlisting}
 
+\section{New plugin implementation}
+
+A plugin will be able to have one or more extensions. Each extension is derived from GObject.Object and must implement one of the interfaces that gedit provides for the extension points.
+
+\begin{lstlisting}[style=python]
+
+from gi.repository import GObject, Gedit
+
+class ExamplePyWindowActivatable:
+    __gtype_name__ = "ExamplePyWindowActivatable"
+
+    window = GObject.property(type=Gedit.Window)
+
+    def __init__(self):
+        GObject.Object.__init__(self)
+
+    def do_activate(self):
+        print "Plugin created for", self.window
+
+    def do_deactivate(self):
+        print "Plugin stopped for", self.window
+
+    def do_update_state(self):
+        # Called whenever the window has been updated (active tab
+        # changed, etc.)
+        print "Plugin update for", self.window
+
+\end{lstlisting}
+
+This example makes the same as the one provided in the section \ref{sec:WindowController}. As we can see it is a lot more easier to implement and it needs a smaller learning curve. For each window a new extension point is created so the class ExamplePyWindowActivatable will be instantiated for each of them.
 
 \addfigure[scale=0.5]{./images/gedit-plugins-dialog}{Gedit plugins dialog}{fig:GeditPluginsDialog}
 
