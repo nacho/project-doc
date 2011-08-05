@@ -6,7 +6,7 @@
 
 \section{Analysis and design}
 
-As said in the previous chapter, a \emph{modification} in the drag and drop system had to be made. gedit's custom drag and drop was implemented a few years ago, when GtkNotebook did not have a way to do it by itself. This was implemented in GTK+ since the version 2.12, but it had a problem holding the port of gedit, it did not allow to drag a tab out of the window to create a new window with this tab attached to it. This changed with the introduction of \emph{create-window} signal from GtkNotebook, which is emitted when a tab is dropped out of the main window.
+As said in the previous chapter, a \emph{modification} in the drag and drop system had to be made. gedit's custom drag and drop was implemented a few years ago, when GtkNotebook did not have a way to do it by itself. This was implemented in GTK+ since the version 2.12, but it had a problem holding the port of gedit, it did not allow to drag a tab out of the window to create a new window with this tab attached to it. This changed with the introduction of the \emph{create-window} signal from GtkNotebook, which is emitted when a tab is dropped out of the main window.
 
 To implement this the next things are needed:
 \begin{itemize}
@@ -20,7 +20,7 @@ See that with this implementation we will still have one regression, we will not
 
 \section{Implementation}
 
-Once the analysis and design has been done, the implementation was straightforward, it was a matter of:
+Once the analysis and design have been done, the implementation was straightforward, it was a matter of:
 \begin{itemize}
   \item \emph{setting a group name}: Notebooks with the same name will be able to exchange tabs via drag and drop. A notebook with a NULL group name will not be able to exchange tabs with any other notebook.
   \item \emph{proxy} the signal and \emph{listen} to it.
