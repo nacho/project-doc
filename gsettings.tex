@@ -1,3 +1,97 @@
 % mainfile:main.tex
 
 \chapter{GSettings port}
+
+In the section \ref{sec:GSettings}, it was explained that GSettings is part of glib and provides a convenient API for storing and retrieving application settings.
+
+Until now, gedit was using GConf for storing its settings. GConf has been \emph{deprecated} for this cycle of \GNOME, meaning that all \GNOME applications have to be ported to GSettings if they want to still be part of the core applications for the \GNOME OS.
+
+An early adoption of this library was decided to be done in order to push the development and have it ready for \GNOME 3.0. This meant a lot of API changes, having a development branch for the port, several design mistakes and a lot of extra work. The good thing is that it helped to have a good API, a good library design and to solve several problems in GSettings.
+
+\section{Analysis and Design}
+
+\subsection{Previous design}
+
+The way gedit had implemented the settings system, was probably one of the oldest parts of the gedit code base. It was implemented in pure C, without the Object Oriented paradigm. The reason it was not changed before was, that even if you are using an iterative design, the code was working perfectly, it was `easy' to maintain and it did not have bugs.
+
+\newpage
+\subsubsection*{gedit-prefs-manager-app}
+
+This file had two main methods: \textit{gedit\_prefs\_manager\_app\_init} and \textit{gedit\_prefs\_manager\_app \_shutdown}. This methods where called in the initialization of the program and in the finalization respectively.
+
+The \emph{init} method was taking care of initializing the system in order to listen to changes in the settings. This was possible to some signals provided by GConf. Once some change was done in some of the settings, the prefs-manager-app was getting the changed signal and changing the respective setting the UI of the application.
+
+The \emph{shudown} method was taking care of finalizing all the resources taken by the init method, to not leak memory at the end of the program.
+
+\subsubsection*{gedit-prefs-manager}
+
+This file was providing a set of methods, three per setting: get/set/can\_set. Also a default value was provided for each setting in case this setting was not set yet. (This was one of the deficiencies of GConf, it will be explained later).
+
+In order to achieve these methods, a set of macros working as templates were provided, in the way that calling a macro with a name was creating the respective implementation of the method, leading to only create apart from the macro call the semi-public prototype for this method. An example of this is shown below:
+
+\begin{lstlisting}[style=GObject]
+
+/* .c file */
+
+/* Macro for boolean settings */
+#define DEFINE_BOOL_PREF(name, key, def) gboolean 	\
+gedit_prefs_manager_get_ ## name (void)			\
+{							\
+	gedit_debug (DEBUG_PREFS);			\
+							\
+	return gedit_prefs_manager_get_bool (key,	\
+					     (def));	\
+}							\
+
+DEFINE_BOOL_PREF (insert_spaces,
+		  GPM_INSERT_SPACES,
+		  GPM_DEFAULT_INSERT_SPACES)
+
+/* .h file */
+
+#define GPM_DEFAULT_INSERT_SPACES	0 /* FALSE */
+
+/* Insert spaces */
+gboolean gedit_prefs_manager_get_insert_spaces (void);
+void	 gedit_prefs_manager_set_insert_spaces (gboolean ai);
+gboolean gedit_prefs_manager_insert_spaces_can_set (void);
+
+\end{lstlisting}
+
+\subsection{New design}
+
+First of all it must be understood how GSettings was suppose to work in order to make any decisions on the design. GSettings was based mainly on schemas. An schema is a document that specifies all the settings for an application, with the type of the setting, the default value and some description for it. An schema file would look like this:
+
+\begin{lstlisting}[style=GObject]
+schema org.gnome.gedit:
+  path /apps/gedit/
+
+  child preferences:
+    child editor:
+      key use-default-font = @b true
+      key editor-font = @s 'Monospace 12'
+      key scheme = @s 'classic'
+
+\end{lstlisting}
+
+As we can see an schema is defined with a specific namespace. For \GNOME application there was a convention to start it by \emph{org.gnome}. Apart from the namespace we had too:
+\begin{itemize}
+  \item \textbf{path}: The path the schema points to.
+  \item \textbf{child}: It was a way to sort and manage easily the settings.
+  \item \textbf{key}: The specific key for the setting. Only dashes were allowed for names to separate words.
+\end{itemize}
+
+In order to access the settings one had to access the main schema and then iterate over the children. For example if we wanted to get the value of use-default-font we needed to do something like this:
+
+\begin{lstlisting}[style=GObject]
+settings = g_settings_new ("org.gnome.gedit");
+prefs_settings = g_settings_get_child (settings, "preferences");
+editor_settings = g_settings_get_child (prefs_settings, "editor");
+
+g_settings_get (editor_settings, "use-default-font", "i",
+                &default_font);
+\end{lstlisting}
+
+\addfigure[scale=0.5]{./images/gsettings1}{GSettings first design}{fig:GSettingsFirst}
+
+\url{https://live.gnome.org/Hackfests/GSettings2010}
