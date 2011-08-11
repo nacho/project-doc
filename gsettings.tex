@@ -58,7 +58,7 @@ gboolean gedit_prefs_manager_insert_spaces_can_set (void);
 
 \end{lstlisting}
 
-\subsection{New design}
+\subsection{New design, Part 1}
 
 First of all it must be understood how GSettings was suppose to work in order to make any decisions on the design. GSettings was based mainly on schemas. An schema is a document that specifies all the settings for an application, with the type of the setting, the default value and some description for it. An schema file would look like this:
 
@@ -92,6 +92,49 @@ g_settings_get (editor_settings, "use-default-font", "i",
                 &default_font);
 \end{lstlisting}
 
-\addfigure[scale=0.5]{./images/gsettings1}{GSettings first design}{fig:GSettingsFirst}
+This leaded to the first design. As it can be visualized in the figure \ref{fig:GSettingsFirst}, a new object \emph{GeditSettings} will inherit from a GSettings object and the application will manage the life of this object.
+
+\addfigure[scale=0.75]{./images/gsettings1}{GSettings first design}{fig:GSettingsFirst}
+
+On construction GeditSettings will point to the root of the schema by setting the \emph{schema} property on construction time to `org.gnome.gedit'.
+In order to make it easier for the user, new API had to be added to manage GeditSettings as shown below. This API will take care of getting the specific child object.
+
+\begin{lstlisting}[style=GObject]
+GSettings *
+gedit_app_get_settings (GeditApp    *app,
+			const gchar *path_list,
+			...)
+{
+	GSettings   *settings;
+	va_list      args;
+	const gchar *path;
+
+	g_return_val_if_fail (GEDIT_IS_APP (app), NULL);
+
+	settings = app->priv->settings;
+	g_object_ref (settings);
+
+	va_start (args, path_list);
+	for (path = path_list; path; path = va_arg (args, const gchar *))
+	{
+		GSettings *aux;
+
+		aux = g_settings_get_child (settings, path);
+		g_object_unref (settings);
+		settings = aux;
+
+		if (settings == NULL)
+		{
+			va_end (args);
+			return NULL;
+		}
+	}
+	va_end (args);
+
+	return settings;
+}
+\end{lstlisting}
+
+In relation to the implementation of GeditSettings, this object will make something similar to what it was doing gedit\_prefs\_manager\_app, listen to the changes in the settings database and set the relative setting to the UI of the application. For this it will be listened the changed signal for the GSettings object. An advantage that provides GSettings over GConf is that it allows to listen to the changes for a specific setting instead of the whole directory of settings (child in terms of gsettings).
 
 \url{https://live.gnome.org/Hackfests/GSettings2010}
