@@ -137,4 +137,20 @@ gedit_app_get_settings (GeditApp    *app,
 
 In relation to the implementation of GeditSettings, this object will make something similar to what it was doing gedit\_prefs\_manager\_app, listen to the changes in the settings database and set the relative setting to the UI of the application. For this it will be listened the changed signal for the GSettings object. An advantage that provides GSettings over GConf is that it allows to listen to the changes for a specific setting instead of the whole directory of settings (child in terms of gsettings).
 
+% FIXME
 \url{https://live.gnome.org/Hackfests/GSettings2010}
+
+\section{Implementation}
+
+\subsection{Bugs}
+
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=618100}\\
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=618144}\\
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=618159}\\
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=618712}\\
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=620554}\\
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=618523}\\
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=623220}\\
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=619898}\\
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=625498}\\
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=649717}
