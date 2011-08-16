@@ -17,5 +17,9 @@ Default text editor of GNOME
 
 -- [fill] [background2.png]
 
+-- [fill] [background6.png]
+
+-- [fill] [background7.png]
+
 -- [black] [font=Sans 100px] [transition=spin-text]
 FIN
