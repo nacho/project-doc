@@ -11,7 +11,11 @@
   • New libraries
   • New features
 
---
+-- [../images/gedit.png] [transition=text-slide-up] [duration=1.214729]
+
+Default text editor of GNOME
+
+-- [fill] [background2.png]
 
 -- [black] [font=Sans 100px] [transition=spin-text]
 FIN
