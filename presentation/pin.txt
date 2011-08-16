@@ -1,14 +1,17 @@
 #!/usr/bin/env pinpoint
 
 [background.png]
-[font=Sans 50px]
+[font=Sans 45px]
 [duration=5.000000]
 -- [fill] [intro.png] [duration=4.448699]
 
--- [fill] [center] [background.png] [text-color=black] [shading-opacity=0.000000] [duration=4.448699]
-• Introduction
-• New libraries
-• New features
+-- [fill] [center] [background1.png] [text-color=black] [shading-opacity=0.000000] [duration=4.448699]
+✽ Introduction
+  • What is gedit?
+  • New libraries
+  • New features
+
+--
 
 -- [black] [font=Sans 100px] [transition=spin-text]
 FIN
