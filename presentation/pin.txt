@@ -3,17 +3,33 @@
 [background.png]
 [font=Sans 45px]
 [duration=5.000000]
+[text-color=black]
+[shading-opacity=0.000000]
+
 -- [fill] [intro.png] [duration=4.448699]
 
--- [fill] [center] [background1.png] [text-color=black] [shading-opacity=0.000000] [duration=4.448699]
+-- [fill] [center] [background1.png] [duration=4.448699]
+
 ✽ Introduction
   • What is gedit?
   • New libraries
   • New features
 
--- [../images/gedit.png] [transition=text-slide-up] [duration=1.214729]
+-- [../images/gedit.png] [text-color=white] [shading-opacity=0.500000] [transition=text-slide-up] [duration=1.214729]
 
-Default text editor of GNOME
+Official text editor of GNOME
+
+-- [../images/gedit.png] [text-color=white] [shading-opacity=0.500000] [transition=text-slide-up] [duration=1.214729]
+
+Aims the simplicity and ease of use
+
+-- [../images/gedit.png] [text-color=white] [shading-opacity=0.500000] [transition=text-slide-up] [duration=1.214729]
+
+Powerful general purpose text editor
+
+-- [../images/gedit.png] [text-color=white] [shading-opacity=0.500000] [transition=text-slide-up] [duration=1.214729]
+
+Extensible by plugins
 
 -- [fill] [background2.png]
 
@@ -21,5 +37,26 @@ Default text editor of GNOME
 
 -- [fill] [background7.png]
 
--- [black] [font=Sans 100px] [transition=spin-text]
-FIN
+-- [fill] [background5.png] [transition=page-curl-both]
+
+Community
+
+-- [fill] [time-machine.jpg]
+
+-- [fill] [time-machine.jpg] [text-color=white] [shading-opacity=0.800000]
+
+✽ Update to use new library features
+✽ Code folding
+✽ Smart indentation
+
+-- [fill] [background4.png] [transition=slide-left]
+
+✽ gedit text editor
+✽ Problems about being on the edge
+✽ The new tab groups feature
+✽ The new search system
+✽ Contributing
+
+-- [fill] [background.png] [font=Sans 100px] [transition=spin-text]
+
+Questions?
