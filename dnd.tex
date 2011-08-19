@@ -24,7 +24,7 @@ Once the analysis and design have been done, the implementation was straightforw
 \begin{itemize}
   \item \emph{setting a group name}: Notebooks with the same name will be able to exchange tabs via drag and drop. A notebook with a NULL group name will not be able to exchange tabs with any other notebook.
   \item \emph{proxy} the signal and \emph{listen} to it.
-  \item \emph{add "GTK\_NOTEBOOK\_TAB"} to the list of DnD targets of the view and implement the received for it. Code shown below.
+  \item \emph{add "GTK\_NOTEBOOK\_TAB"} to the list of DnD targets of the view and implement the receiving for it. Code shown below.
   \item extra careful had to be put when implementing this to have the signals emitted in the \emph{right order}.
 \end{itemize}
 
