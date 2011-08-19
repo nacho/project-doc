@@ -2,7 +2,7 @@
 
 \chapter{Work flow using Git}
 
-\emph{Git} is a very powerful tool, used by many important projects like the \emph{Linux kernel} and is the chosen one for all the \GNOME projects. The fact that it is so powerful it does not mean that it is very easy to use. Here it will be explained the main steps in order to have an overview of the main work flow.
+\emph{Git} is a very powerful tool, used by many important projects like the \emph{Linux kernel} and is the chosen one for the \GNOME desktop. The fact that it is so powerful it does not mean that it is very easy to use. Here it will be explained the main steps in order to have an overview of the main work flow.
 
 Before explaining the main steps, it must be known that git manages everything with branches. The main branch, usually used for the development copy of the program is called: \emph{master}.
 
@@ -36,7 +36,7 @@ See that here it is important to pass `--rebase', as if you have any commit in t
 
 \noindent\graybox{git checkout -f}
 
-With this command we will remove all the changes made in the current branch.
+With this command will remove all the changes made in the current branch.
 
 \noindent\graybox{git reset}
 
@@ -73,7 +73,7 @@ This one will remove the local branch named with branch\_name.
 
 \noindent\graybox{git push origin :branch\_name}
 
-And this other will remove branch\_name in the remote branch.
+And this other will remove branch\_name in the remote server.
 
 \section*{Creating a patch}
 
@@ -94,4 +94,4 @@ It applies the patch on top of the local branch.
 
 \noindent\graybox{git am patch\_name}
 
-It also applies the patch but it also creates the local commit with the extra information.
+It applies the patch but it also creates the local commit with the extra information.
