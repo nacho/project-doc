@@ -4,7 +4,7 @@
 
 \subsection{GTK+ 3}\label{sec:GTK3}
 
-Migrate from GTK+ 2 to GTK+ 3. This will mean to get rid of deprecated code that it is used from GTK+ 2, update gedit to use the new APIs and the most important thing, follow the development of GTK+ 3, meaning that if there is any error in GTK+, it should be filed a bug against it and if possible provide a patch to fix it (See \ref{sec:Patches} for an explanation on how it is done correctly). This will also mean that to have the application building, it will be needed to have the application up to date, which will mean a lot of testing against the latest libraries and rebuilding them. For an explanation of what GTK+ is, see the section \ref{sec:GTK}.
+Migrate from GTK+ 2 to GTK+ 3. This will mean to get rid of deprecated code that is used from GTK+ 2, update gedit to use the new APIs and the most important thing, evolve following the development of GTK+ 3, meaning that if there is any error in GTK+, it should be filed a bug against it and if possible provide a patch to fix it (See \ref{sec:Patches} for an explanation on how to do this correctly). This will also mean that to have the application building, it will be needed to have the application up to date, which will mean a lot of testing against the latest libraries and rebuilding them. For an explanation of what GTK+ is, see the section \ref{sec:GTK}.
 
 \subsection[GSettings]{GSettings\cite{website:gio}}\label{sec:GSettings}
 
@@ -12,7 +12,7 @@ Port to GSettings, to use it instead of GConf. GSettings is part of glib (see \r
 \begin{itemize}
   \item GConf has been deprecated.
   \item Provides better API to be used by GObject-based applications.
-  \item It is used over DBus.
+  \item It is used over D-Bus\footnote{D-Bus is a message bus system, a simple way for applications to talk to one another.}.
   \item The storage system is implemented by different backends, in relation to the operative system or the choose of the user.
 \end{itemize}
 
@@ -22,4 +22,4 @@ Remove custom plugin system and use libpeas instead. See the section \ref{sec:pe
 
 \subsection{GObject-introspection}\label{sec:GObjectIntrospection}
 
-It will allow to remove the static bindings and generate dynamic ones by making annotations in the public API of \emph{gedit}. See \ref{sec:g-i} for a better explanation of what GObject-introspection is.
+It will allow to remove the static bindings and generate dynamic ones by making annotations in the public API of \emph{gedit} or other GObject based applications and libraries. See \ref{sec:g-i} for a better explanation of what GObject-introspection is.

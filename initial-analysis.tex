@@ -4,13 +4,13 @@
 
 % FIXME: draft, see FIXME
 
-When someone starts to contribute to a big project such as \emph{gedit}, it is very important to make an initial analysis of the current state of the project. Due to the lack of documentation in projects like gedit, to do this, is usually easier to ask for some tips to the current developers so they can give you some orientations about where you can start. The main tip a developer will tell you is: start reading code and if you have any problem understanding anything, please ask us about it.
+When someone starts to contribute to a big project such as \emph{gedit}, it is very important to make an initial analysis of the current state of the project. Due to the lack of documentation in projects like gedit, to do this, is usually easier to ask for some tips to the current developers so they can give you some orientations about where you can start. The main tip a developer will tell you is: start reading code and if you have any problem understanding anything, please ask about it.
 
 \section{Reverse engineering}\label{ReverseEngineering}
 
 Reverse engineering is the process of discovering the technological principles of a human (or non-human) made device, object or system through analysis of its structure, function and operation.\cite{website:reverse-engineer}
 
-Due to the lack of a global \emph{class diagram} showing the current structure of gedit, it was decided to use the reverse engineer, read the source code to get the class diagram with the main classes in order to have a better view of the project.
+Due to the lack of a global \emph{class diagram} showing the current structure of gedit, it was decided to use the reverse engineer, read the source code to get the class diagram with the main classes in order to have a better overview of the project.
 
 In the picture \ref{fig:ClassDiagram230} it is shown the mentioned class diagram. Of course it only shows the main classes, dropping all the dialogs and self containing widgets, that are not really necessary to get a sight of the whole project.
 
@@ -47,11 +47,11 @@ The colors show the different libraries and classes where the gedit ones are inh
       \hline
       \textit{GeditPanel} & GeditWindow creates two widgets of this kind. One for the side panel and one for the bottom panel. In this panels other widgets are added by plugins, i.e to show a filebrowser or a terminal. \\
       \hline
-      \textit{GeditNotebook} & It is an internal widget inheriting from GtkNotebook that takes care of adding and removing tabs, provide easier to use API for gedit and a custom implementation of the drag and drop system. \\
+      \textit{GeditNotebook} & It is an internal widget inheriting from GtkNotebook that takes care of adding and removing tabs, provides easier to use API for gedit and a custom implementation of the drag and drop system. \\
       \hline
       \textit{GeditTab} & It is the state machine widget for the document. Takes care of managing all the errors that come from loading and saving a document and show them to the user. \\
       \hline
-      \textit{GeditView} & It is the widget that takes care of showing the loaded document. This widget inherits from \emph{GtkSourceView} which takes care of the main job, making it to deal with the loading and set of the specific application setting for gedit. Also this widget takes care of the interactive per view search. \\
+      \textit{GeditView} & It is the widget that takes care of showing the loaded document. This widget inherits from \emph{GtkSourceView} which takes care of the main job, making it to deal with the loading and set of the specific application setting for gedit. Also, this widget takes care of the interactive per view search. \\
       \hline
       \textit{GeditDocument} & Class that inherits from \emph{GtkSourceBuffer}. This class is the one that deals with GeditDocumentLoad and GeditDocumentSaver, proxying them so they are kept as implementation details and hidden from the public API. \\
       \hline

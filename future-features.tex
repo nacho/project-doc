@@ -2,19 +2,20 @@
 
 \chapter{Future features}
 
-Even if gedit has a lot of features it can be improved more and add new features. The wiki (see \ref{sec:Wiki}) provide a section called RoadMap\footnote{\url{https://live.gnome.org/Gedit/RoadMap}} where are shown the main important features that want to be added for each future version. Some of them are enumerated below:
+Even if gedit has a lot of features, it can be improved more and add new features. The wiki (see \ref{sec:Wiki}) provides a section called RoadMap\footnote{\url{https://live.gnome.org/Gedit/RoadMap}} where it can be found the main important features that want to be added for each future version. Some of them are enumerated below:
 
 \section{Port python plugin to Python 3}
 
-Python 3 is faster and more efficient, so it would be a good idea to try to use it in the future. The problem is that libpeas and pygobject need to support it completely before switching to it.
+Python 3 is the future, so it would be a good idea to try to use it in the future. The problem is that libpeas and pygobject need to support it completely before switching to it.
 
 \section{GApplication}
 
-gedit uses a custom single instance implementation, would be good to use GApplication, as it is the new single instance support added in glib lately. Although the reason stopping gedit from using it, is that GApplication does not support pipes over the bus, to be able to make things like cat blah.c | gedit.
+gedit uses a custom single instance implementation, would be good to use GApplication, as it is the recommended way for creating single instance applications in GObject based applications. Although the reason stopping gedit from using it, is that GApplication does not support pipes over the bus, to be able to make things like cat blah.c $|$ gedit.
 
+\newpage
 \section{GtkGrid}
 
-GtkGrid is a new container which arranges its child widgets in rows and columns. This widget will deprecate other containers like GtkBox or GtkTable so it would be interesting to start the migration as soon as possible. The problem is that GtkBox is very deep in the implementation of gedit and it would need a lot of time to be ported to GtkGrid.
+GtkGrid is a new container which arranges its child widgets in rows and columns. This widget will deprecate other containers like GtkBox or GtkTable so it would be interesting to start the migration as soon as possible. The problem is that GtkBox is very deep in the implementation of gedit and it would need a lot of time and work to be ported to GtkGrid.
 
 \section{Code Folding}
 
@@ -24,7 +25,7 @@ This is one of the most requested features, the problem is that it is very trick
 
 \section{Smart indentation}
 
-The smart indentation is a feature that indents source code automatically depending on the context. Right now gedit only mimics the indentation from the previous inserted line without any analysis for the current programming language.
+The smart indentation is a feature to indent source code automatically depending on the context. Right now gedit only mimics the indentation from the previous inserted line without any analysis for the current programming language.
 
 \section{Windows and Mac OSX support}
 
