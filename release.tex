@@ -1,0 +1,109 @@
+% mainfile:main.tex
+
+\chapter{Making a release}
+
+The first thing that you have to know when you are making a release, is whether the module is using pre-release version incrementing (i.e. bumping the version number just before release) or post-release version incrementing (which is preferred for libraries). gedit uses a pre-release version incrementing. This can be usually checked in the \emph{configure.in} or \emph{configure.ac} files. After this has been checked the next steps have to be followed:
+
+\section*{Make sure you are up to date}
+
+\noindent\graybox{git pull --rebase}
+
+\section*{Make sure there are not local changes}
+
+\noindent\graybox{git status}
+
+\section*{Increment the version}
+
+\noindent Modify configure.ac and modify the version.
+
+\section*{Update the README file}
+
+\noindent Usually you have to update the version number in all the occurrences in this document.
+
+\section*{New entry in the NEWS file}
+
+\noindent It should be read the ChangeLog and come up with a bullet point for each significant change and credit the person who did the work. Below it can be found an example and the command to show the ChangeLog:
+
+\noindent\graybox{git log}
+
+\begin{lstlisting}[style=plain]
+============
+gedit 2.91.6
+============
+
+New Features and Fixes
+======================
+- Fix encoding conversion (Ignacio Casal Quinteiro)
+- Add invalid char support (Ignacio Casal Quinteiro, Paolo Borelli)
+- More plugins ported to pygobject
+- Misc bugfixes
+
+New and updated translations
+============================
+- cs (Marek Cernocky)
+- eo (Kristjan SCHMIDT)
+- gl (Fran Dieguez)
+- pa (A S Alam)
+\end{lstlisting}
+
+\section*{Recompile everything}
+
+For this several commands have to executed:
+
+\noindent\graybox{./autogen.sh --enable-gtk-doc}
+
+\noindent\graybox{make}
+
+\noindent\graybox{make install}
+
+\newpage
+\section*{Create the tarball\footnote{A tar file or compressed tar file is commonly referred to as a tarball.}}
+
+The command below will create the tarball and automatically check that all files are added correctly to this compressed file, that everything compiles correctly and that all tests are passed.
+
+\noindent\graybox{make distcheck}
+
+Once distcheck finished, it should show something like this:
+
+\begin{lstlisting}[style=plain]
+==================================================
+gedit-2.90.6.tar.xz is ready for distribution
+==================================================
+\end{lstlisting}
+
+\section*{Commit}
+
+\noindent\graybox{git commit -a}
+
+\section*{Push the change}
+
+\noindent\graybox{git push origin master}
+
+If some change has been done in the repository before this step and the commit can not be pushed, it should go back to the first step and start over.
+
+\section*{Tag the release}
+
+\noindent\graybox{git tag -a 2.90.6}
+
+See that the name of the tag will be the version of the release.
+
+\section*{Push the tag}
+
+\noindent\graybox{git push origin 2.90.6}
+
+\newpage
+\section*{Upload the tarball}
+
+\GNOME provides a server where to upload the released tarball so other people can have access to them easily.
+
+\noindent\graybox{scp gedit-2.90.6.tar.xz (user)@master.gnome.org:}
+
+\section*{ssh into the server}
+
+\noindent\graybox{ssh (user)@master.gnome.org}
+
+\section*{Install the tarball in the server}
+
+\noindent\graybox{ftpadmin install gedit-2.90.6.tar.xz}
+
+Once it is installed you should get confirmation that it was correctly installed.
