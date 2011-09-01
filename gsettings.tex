@@ -88,7 +88,7 @@ settings = g_settings_new ("org.gnome.gedit");
 prefs_settings = g_settings_get_child (settings, "preferences");
 editor_settings = g_settings_get_child (prefs_settings, "editor");
 
-g_settings_get (editor_settings, "use-default-font", "i",
+g_settings_get (editor_settings, "use-default-font", "b",
                 &default_font);
 \end{lstlisting}
 
@@ -135,12 +135,70 @@ gedit_app_get_settings (GeditApp    *app,
 }
 \end{lstlisting}
 
-In relation to the implementation of GeditSettings, this object will make something similar to what it was doing gedit\_prefs\_manager\_app, listen to the changes in the settings database and set the relative settings to the UI of the application. For this, it will be listened the `changed' signal for the GSettings object. An advantage that provides GSettings over GConf is that it allows to listen to the changes for a specific setting instead of the whole directory of settings (child in terms of gsettings).
+In relation to the implementation of GeditSettings, this object will make something similar to what it was doing gedit\_prefs\_manager\_app, listen to the changes in the settings database and set the relative settings to the UI of the application. For this, it will be listened the `changed' signal for the GSettings object. An advantage that provides GSettings over GConf is that it allows to listen to the changes for a specific setting instead of the whole directory of settings (child in terms of gsettings), making it easier to implement and set the ui changes.
 
-% FIXME
-\url{https://live.gnome.org/Hackfests/GSettings2010}
+At this point of the development, gedit was the only big application ported to GSettings. GSettings was getting quite ready, so it was decided to make a hackfest taking gedit as an example to see where it could be improved API wise to make it easier for application developers. The information about this hackfest can be found in the next url: \url{https://live.gnome.org/Hackfests/GSettings2010}
+
+\newpage
+\subsection{New design, Part 2}
+
+After the hackfest, some changes were made in GSettings that allowed to simplify our current implementation. First of all the main important change was to not need anymore to iterate over children. In the figure \ref{fig:GSettingsSecond} it is shown how this affects our previous design.
+
+\addfigure[scale=0.75]{./images/gsettings2}{GSettings second design}{fig:GSettingsSecond}
+
+We can see that we are not inheriting anymore from GSettings but from GObject. The fact that we can make direct access to the settings, provided us the fact to just have a listener object that listens the settings changes and do not need to be accessed by any other object. This means also, that the API exposed in GeditApp \emph{gedit\_app\_get\_settings} could be removed. Below we can see how the way to access any settings has changed:
+
+\begin{lstlisting}[style=GObject]
+/* BEFORE */
+settings = g_settings_new ("org.gnome.gedit");
+prefs_settings = g_settings_get_child (settings, "preferences");
+editor_settings = g_settings_get_child (prefs_settings, "editor");
+
+/* AFTER */
+settings = g_settings_new ("org.gnome.gedit.preferences.editor");
+\end{lstlisting}
+
+Apart from the change in the design, the fact that to access any setting, it was needed to use g\_settings\_get, it was not very handy for application users. In this hackfest, it was decided to be added easier to use API for getters and setters of the most important settings types. Below it is shown an example for this:
+
+\begin{lstlisting}[style=GObject]
+/* BEFORE */
+g_settings_get (editor_settings, "use-default-font", "b",
+                &default_font);
+
+/* AFTER */
+default_font = g_settings_get_boolean (settings, "user-default-font");
+\end{lstlisting}
+
+The last important change made after this hackfest, was the change in the way an schema file is defined. The main reason for this, is that the previous format was not an standard. It was pointless to try to get a new format and a new standard for files when internally this format was converted to \emph{XML} and this language is already an standard and known by a lot of programmers already. So at the end it was decided to use XML directly. In the example below it is shown the same schema it was shown before but in XML:
+
+\begin{lstlisting}[style=xml]
+<schemalist>
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit" path="/org/gnome/gedit/">
+    <child name="preferences" schema="org.gnome.gedit.preferences"/>
+    <child name="state" schema="org.gnome.gedit.state"/>
+    <child name="plugins" schema="org.gnome.gedit.plugins"/>
+  </schema>
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences" path="/org/gnome/gedit/preferences/">
+    <child name="editor" schema="org.gnome.gedit.preferences.editor"/>
+    <child name="ui" schema="org.gnome.gedit.preferences.ui"/>
+    <child name="print" schema="org.gnome.gedit.preferences.print"/>
+    <child name="encodings" schema="org.gnome.gedit.preferences.encodings"/>
+  </schema>
+  <schema gettext-domain="@GETTEXT_PACKAGE@" id="org.gnome.gedit.preferences.editor" path="/org/gnome/gedit/preferences/editor/">
+    <key name="use-default-font" type="b">
+      <default>true</default>
+      <_summary>Use Default Font</_summary>
+      <_description>Whether to use the system's default fixed width font for editing text instead of a font specific to gedit. If this option is turned off, then the font named in the "Editor Font" option will be used instead of the system font.</_description>
+    </key>
+    ...
+    ...
+  </schema>
+</schemalist>
+\end{lstlisting}
 
 \section{Implementation}
+
+To implement this, it was followed directly the design and the patches can be found below in the bugs section.
 
 \subsection{Bugs}
 
@@ -154,3 +212,7 @@ In relation to the implementation of GeditSettings, this object will make someth
 \noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=619898}\\
 \noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=625498}\\
 \noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=649717}
+
+\section{Tests}
+
+To test this implementation, it had to be key by key, enabling and disabling and checking that all the setting were set correctly.
