@@ -1,0 +1,47 @@
+% mainfile:main.tex
+
+\chapter{New search system}
+
+\section{Analysis and Design}
+
+\addfigure[scale=0.75]{./images/gedit-old-find}{Old search dialog}{fig:OldFind}
+
+\addfigure[width=\textwidth]{./images/search-system-old}{Old class diagram}{fig:OldClassDiagram}
+
+\addfigure[width=\textwidth]{./images/search-system}{Search class diagram}{fig:SearchClassDiagram}
+
+\addfigure[scale=0.5]{./images/theatrics}{Theatrics}{fig:Theatrics}
+
+\section{Implementation}
+
+\subsection{Bug}
+
+\url{http://bugzilla.gnome.org/show_bug.cgi?id=419805}
+
+\section{Tests}
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|l|}
+      \firsthline
+      \textbf{Test:} & \textbf{Expected result:} & \textbf{Test passed?} \\
+      \hline
+      Press \emph{Control + F} or \emph{Search $\to$ Find} & The search pop up appears, sliding out with an animation & Yes \\
+      \hline
+      Write some text that appears in the document & The first occurrence is selected and the others are highlighted & Yes \\
+      \hline
+      Write some text that do NOT appear in the document & The search entry color changes to an error color and no text is selected or highlighted & Yes \\
+      \hline
+      With several occurrences highlighted, press the Up button, or the Up arrow key from the keyboard & The previous occurrence should be selected & Yes \\
+      \hline
+      With several occurrences highlighted, press the Down button, or the Down arrow key from the keyboard & The next occurrence should be selected & Yes \\
+      \hline
+      Pressing \emph{ESC} with the search pop up opened & The search dialog should slide out and go back to the position before it was opened & Yes \\
+      \hline
+      Pressing \emph{Enter} with the search pop up opened & The search dialog should slide out and keep the cursor in the selected occurrence & Yes \\
+      %FIXME: missing the dropdown
+      \lasthline
+    \end{tabularx}
+    \caption{Tests for new search system}
+  \end{center}
+\end{table}
