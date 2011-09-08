@@ -8,6 +8,7 @@
 
 As we can see in the figure \ref{fig:OldFind}, gedit's search dialog has not evolved over the past years. This way for presenting to the user a dialog for searching has a really big problem, it obscures the text you are searching for. In the past few years a few applications like Firefox or Chrome have come with with some ideas, which are the ones used right now by most software applications for searching in the documents.
 
+\newpage
 \subsection{Firefox vs Chrome}
 
 In the figure \ref{fig:FirefoxSearch}, it is shown the method Firefox uses for prompting the search to the user. This method has a few problems.
@@ -37,15 +38,88 @@ Below it is pointed out in the figure \ref{fig:OldClassDiagram}, how it looks th
 
 \subsection{New design}
 
+In the figure \ref{fig:SearchClassDiagram} is spotted the new design in order to implement the new search pop up. The main problem here is that we do not have a container which will allows us to place a widget in a fixed position having a main widget below it. The only widget that allows fixed positions in GTK+ is \emph{GtkFixed}, the problem of this widget is that it does not allow a main widget design. Here is where we need to get the requisites for this widget:
+
+\subsubsection{GeditOverlay}
+
+GeditOverlay is a container which inherits from GtkContainer as any other implemented in the GTK+ toolkit. This container will need:
+\begin{itemize}
+  \item A main widget, which will allocate the whole space that can count with.
+  \item A way to add widget overlaying the main widget in fixed positions. For this we can use the vertical and horizontal alignments provided by GtkWidget.
+\begin{lstlisting}[style=GObject]
+typedef enum
+{
+  GTK_ALIGN_FILL,
+  GTK_ALIGN_START,
+  GTK_ALIGN_END,
+  GTK_ALIGN_CENTER
+} GtkAlign;
+\end{lstlisting}
+  \item A way to set an offset in case we do not want the added widget in the edge of the main widget. I.e like in the figure \ref{fig:ChromeSearch} where there is an extra space in the right.
+  \item A way to animate a specific widget. See \ref{sec:Theatrics} for an explanation about this.
+\end{itemize}
+
+This widget does not add any specific API apart from gedit\_overlay\_add.
+
+\begin{lstlisting}[style=GObject]
+void	 gedit_overlay_add (GeditOverlay             *overlay,
+			    GtkWidget                *widget,
+			    GeditOverlayChildPosition position,
+			    guint                     offset);
+\end{lstlisting}
+
+\subsubsection{GeditOverlayChild}
+
+This is widget is needed by GeditOverlay to wrap widgets added to it. The reason for this is that all widgets added in GeditOverlay need to be windowed and widgets like GtkEntry or GtkLabel are not windowed. So the main target for GeditOverlayChild is to create a window and set the added widget to this window.
+
+\subsubsection{GeditFloatingSlider}
+
+Inherits from GeditOverlayChild. This widget will be wrapped as a GeditTheatricsActor and in each iteration set its window size to the percent of the animation. In this way we will have a slide in or out effect depending on the moment of the animation.
+
+\subsubsection{GeditRoundedFrame}
+
+GTK+ GtkFrame does not draw a rounded frame in bottom. This widget is more like a stylish way for making prettier the search widget and does not provides any specific capabilities except the stylistic one.
+
+\subsubsection{GeditViewFrame}
+
+GeditViewFrame is a delegate widget in order to remove complexity from GeditTab. This widget will take care of creating the Overlay, the View and the Document and add them correctly.
+
+Apart from that it will also take care of managing the search widget, setting when it must do a specific animation and provide API to invoke it from the GeditWindow's menu.
+
+The API provided by this widget is:
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+      \firsthline
+      \textbf{Method name:} & \textbf{Explanation:} \\
+      \hline
+      get\_document & Gets the GeditDocument. This is an utility method to not have to get the view and get the buffer from the view. \\
+      \hline
+      get\_view & Gets the GeditView. \\
+      \hline
+      popup\_search & Shows the search pop up. \\
+      \hline
+      clear\_search & Removes any highlighted occurrences in the text. \\
+      \lasthline
+    \end{tabularx}
+    \caption{GeditViewFrame methods explanation}
+  \end{center}
+\end{table}
+
+\subsubsection{GeditSearchWidget}
+
+This widget is a simple box container, it adds the entry and the buttons to go to the next occurrence or to the previous one. It will listen to the changes on the entry text and search in the document as appropriate. It will also launch a dropdown menu to configure the type of search that it wants to be set.
+
 \newpage
 \addfigure[scale=0.45]{./images/search-system}{Search class diagram}{fig:SearchClassDiagram}
 
 \newpage
-\subsection{Theatrics}
+\subsection{Theatrics}\label{sec:Theatrics}
 
-With the design in the figure \ref{fig:SearchClassDiagram}, we have almost everything ready. The main remaining problem here, is that we do not have a way to animate the pop up. GTK+ do not provide any way for doing such animations, the only way is to create it by using a timeout and make the animation in each iteration. In the figure \ref{fig:Theatrics}, we can see the design for a custom framework to help to achieve this it. This theatrics framework will be directly used by \emph{GeditOverlay} when a widget is added to it.
+With the design in the figure \ref{fig:SearchClassDiagram}, we have almost everything ready. The main remaining problem here, is that we do not have a way to animate the pop up. GTK+ do not provide any way for doing such animations, the only way is to create it by using a timeout and make the animation in each iteration. In the figure \ref{fig:Theatrics}, we can see the design for a custom framework to help to achieve this it.
 
-\addfigure[scale=0.45]{./images/theatrics}{Theatrics}{fig:Theatrics}
+\addfigure[scale=0.40]{./images/theatrics}{Theatrics}{fig:Theatrics}
 
 \subsubsection{GeditTheatricsActor}
 
@@ -55,6 +129,8 @@ Wraps a specific object to animate it. Below are shown the methods of this class
   \begin{center}
     \begin{tabularx}{\textwidth}{|X|X|}
       \firsthline
+      \textbf{Method name:} & \textbf{Explanation:} \\
+      \hline
       reset & Resets the actor and sets the new duration. \\
       \hline
       get\_target & Gets the specific object that it is animating. \\
@@ -89,6 +165,8 @@ It is the class that manages the actors. This class stores them, creates the tim
   \begin{center}
     \begin{tabularx}{\textwidth}{|X|X|}
       \firsthline
+      \textbf{Method name:} & \textbf{Explanation:} \\
+      \hline
       add & Adds an object to be animated and it wraps it into an actor. \\
       \hline
       add\_with\_duration & Utility method that makes the same as add but also establishing a specific duration for the actor. \\
@@ -105,6 +183,8 @@ It is the class that manages the actors. This class stores them, creates the tim
 \end{table}
 
 \section{Implementation}
+
+To implement this feature, a new branch was used to make it easy to develop it and test. When it was ready it was squashed into a single patch and attached to the bug report below.
 
 \subsection{Bug}
 
@@ -132,7 +212,8 @@ It is the class that manages the actors. This class stores them, creates the tim
       Pressing \emph{ESC} with the search pop up opened & The search dialog should slide out and go back to the position before it was opened & Yes \\
       \hline
       Pressing \emph{Enter} with the search pop up opened & The search dialog should slide out and keep the cursor in the selected occurrence & Yes \\
-      %FIXME: missing the dropdown
+      \hline
+      Configure the dropdown menu & The changes are set correctly and the text is searched in relation to those changes & Yes \\
       \lasthline
     \end{tabularx}
     \caption{Tests for new search system}
