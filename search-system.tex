@@ -8,6 +8,8 @@
 
 As we can see in the figure \ref{fig:OldFind}, gedit's search dialog has not evolved over the past years. This way for presenting to the user a dialog for searching has a really big problem, it obscures the text you are searching for. In the past few years a few applications like Firefox or Chrome have come with with some ideas, which are the ones used right now by most software applications for searching in the documents.
 
+\subsection{Firefox vs Chrome}
+
 In the figure \ref{fig:FirefoxSearch}, it is shown the method Firefox uses for prompting the search to the user. This method has a few problems.
 \begin{itemize}
   \item Some studies showed that presenting visual elements to the user in the bottom of a screen are less discoverable than elements in the top-left of the screen.
@@ -27,13 +29,80 @@ As shown in the figure \ref{fig:ChromeSearch}, Chrome comes with an idea based o
 
 In the analysis of the currently used search systems, we can see that there is no perfect system to manage a search by the user. In gedit, after some discussion, we decided that the best option for us would be a Chrome like search widget, as at the end it is not like people are writing that much in a text editor horizontally but doing it vertically. This means that poping out a widget on the top-right of the screen would not be that bad for the user. Apart from this problem, it was the less problematic search way for our understanding.
 
+\subsection{Current design}
 
+Below it is pointed out in the figure \ref{fig:OldClassDiagram}, how it looks the current design before introducing anything new, in order to see how things will evolve.
 
 \addfigure[width=\textwidth]{./images/search-system-old}{Old class diagram}{fig:OldClassDiagram}
 
+\subsection{New design}
+
+\newpage
 \addfigure[scale=0.45]{./images/search-system}{Search class diagram}{fig:SearchClassDiagram}
 
-\addfigure[scale=0.5]{./images/theatrics}{Theatrics}{fig:Theatrics}
+\newpage
+\subsection{Theatrics}
+
+With the design in the figure \ref{fig:SearchClassDiagram}, we have almost everything ready. The main remaining problem here, is that we do not have a way to animate the pop up. GTK+ do not provide any way for doing such animations, the only way is to create it by using a timeout and make the animation in each iteration. In the figure \ref{fig:Theatrics}, we can see the design for a custom framework to help to achieve this it. This theatrics framework will be directly used by \emph{GeditOverlay} when a widget is added to it.
+
+\addfigure[scale=0.45]{./images/theatrics}{Theatrics}{fig:Theatrics}
+
+\subsubsection{GeditTheatricsActor}
+
+Wraps a specific object to animate it. Below are shown the methods of this class.
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+      \firsthline
+      reset & Resets the actor and sets the new duration. \\
+      \hline
+      get\_target & Gets the specific object that it is animating. \\
+      \hline
+      get\_expired & Gets if the animation has expired. \\
+      \hline
+      get\_can\_expire & Gets if the animation can expire. \\
+      \hline
+      set\_can\_expire & Sets if the animation can expire, if it can not expire the animation behaves like a loop. \\
+      \hline
+      get\_duration & Gets the duration of the animation. \\
+      \hline
+      get\_start\_time & Gets the initial time of the animation. \\
+      \hline
+      get\_frames & Gets the number of frames. \\
+      \hline
+      get\_frames\_per\_second & Gets the number of frame in a second. \\
+      \hline
+      get\_percent & Gets the percent of the already done animation. \\
+      \lasthline
+    \end{tabularx}
+    \caption{Actor methods explanation}
+  \end{center}
+\end{table}
+
+\newpage
+\subsubsection{GeditTheatricsStage}
+
+It is the class that manages the actors. This class stores them, creates the timeouts for the animations and emits a signal \emph{actor-step} indicating the steps of the animation from each actor.
+
+\begin{table}[H]
+  \begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|}
+      \firsthline
+      add & Adds an object to be animated and it wraps it into an actor. \\
+      \hline
+      add\_with\_duration & Utility method that makes the same as add but also establishing a specific duration for the actor. \\
+      \hline
+      remove & Removes the object from the stage to not animate it anymore. \\
+      \hline
+      set\_playing & Sets whether the animation is running or not. \\
+      \hline
+      get\_playing & Gets whether the animation is running or not. \\
+      \lasthline
+    \end{tabularx}
+    \caption{Stage methods explanation}
+  \end{center}
+\end{table}
 
 \section{Implementation}
 
@@ -41,6 +110,7 @@ In the analysis of the currently used search systems, we can see that there is n
 
 \url{http://bugzilla.gnome.org/show_bug.cgi?id=419805}
 
+\newpage
 \section{Tests}
 
 \begin{table}[H]
