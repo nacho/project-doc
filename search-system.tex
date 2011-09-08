@@ -6,15 +6,32 @@
 
 \addfigure[scale=0.75]{./images/gedit-old-find}{Old search dialog}{fig:OldFind}
 
-As we can see in the figure \ref{fig:OldFind}, shows that the gedit's search dialog has not evolved over the past years. This way for presenting to the user a dialog for searching has a really big problem, it obscures the text you are searching for. In the past few years a few applications like Firefox or Chrome have come with with some ideas which are the ones used right now by most software applications for searching in the documents.
+As we can see in the figure \ref{fig:OldFind}, gedit's search dialog has not evolved over the past years. This way for presenting to the user a dialog for searching has a really big problem, it obscures the text you are searching for. In the past few years a few applications like Firefox or Chrome have come with with some ideas, which are the ones used right now by most software applications for searching in the documents.
+
+In the figure \ref{fig:FirefoxSearch}, it is shown the method Firefox uses for prompting the search to the user. This method has a few problems.
+\begin{itemize}
+  \item Some studies showed that presenting visual elements to the user in the bottom of a screen are less discoverable than elements in the top-left of the screen.
+  \item It resizes the web browser viewer to present the search widget. This also has an advantage, it will not obscure any part of the document.
+  \item It takes a big part of horizontal space.
+\end{itemize}
 
 \addfigure[scale=0.5]{./images/firefox-search}{Firefox search}{fig:FirefoxSearch}
 
+As shown in the figure \ref{fig:ChromeSearch}, Chrome comes with an idea based on the Firefox search, but trying to fix some of the problems introduced by the previous one. Although this ones is not perfect either.
+\begin{itemize}
+  \item It shows the pop up in the top-right, which is not the top-left as the studies demonstrated. Although, this is still better than in the bottom of the screen.
+  \item It obscures part of the document.
+\end{itemize}
+
 \addfigure[scale=0.5]{./images/chrome-search}{Chrome search}{fig:ChromeSearch}
+
+In the analysis of the currently used search systems, we can see that there is no perfect system to manage a search by the user. In gedit, after some discussion, we decided that the best option for us would be a Chrome like search widget, as at the end it is not like people are writing that much in a text editor horizontally but doing it vertically. This means that poping out a widget on the top-right of the screen would not be that bad for the user. Apart from this problem, it was the less problematic search way for our understanding.
+
+
 
 \addfigure[width=\textwidth]{./images/search-system-old}{Old class diagram}{fig:OldClassDiagram}
 
-\addfigure[width=\textwidth]{./images/search-system}{Search class diagram}{fig:SearchClassDiagram}
+\addfigure[scale=0.45]{./images/search-system}{Search class diagram}{fig:SearchClassDiagram}
 
 \addfigure[scale=0.5]{./images/theatrics}{Theatrics}{fig:Theatrics}
 
