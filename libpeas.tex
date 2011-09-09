@@ -12,7 +12,22 @@ See that one of the design decisions when libpeas was implemented was to make it
 
 \addfigure{./images/libpeas1}{Old Plugin system diagram}{fig:OldPluginSystemDiagram}
 
-In the figure \ref{fig:OldPluginSystemDiagram}, it can be checked the class diagram of the plugin system used before any work was done in the libpeas library.
+In the figure \ref{fig:OldPluginSystemDiagram}, it can be checked the class diagram of the plugin system used before any work was done in the libpeas library. In order to understand better the next parts of this chapter, an overview of the main classes in this diagram is needed.
+
+\subsection{GeditPluginsEngine}
+
+This is the main class of the plugin engine. It takes care of loading and unloading a specific plugin, activate and deactivate the plugins for a specific window and to get the information for a specific plugin.
+
+The GeditWindow has a direct link to this class by saying to it when it has to activate or deactivate a plugin. Also, it listens to the signals activate\_plugin and deactivate\_plugin (which should be called load\_plugin and unload\_plugin) to actually activate them.
+
+This class is a singleton so it can be accessed at any point by any class.
+
+\newpage
+\subsection{GeditPluginManager}
+
+\addfigure[scale=0.5]{./images/gedit-plugins-dialog}{Gedit plugins dialog}{fig:GeditPluginsDialog}
+
+As shown in the figure \ref{fig:GeditPluginsDialog} is the user interface exposed in the gedit preferences dialog to be able to load or unload plugins. This widget calls to load or unload methods from GeditPluginsEngine. This later will emit the related signal listened by the window as spotted before.
 
 \addfigure[scale=0.5]{./images/libpeas2}{First design using libpeas}{fig:FirstDesignUsingLibpeas}
 
@@ -122,6 +137,4 @@ class ExamplePyWindowActivatable:
 \end{lstlisting}
 
 This example makes the same as the one provided in the section \ref{sec:WindowController}. As we can see it is a lot easier to implement and it needs a smaller learning curve. For each window a new extension point is created so the class ExamplePyWindowActivatable will be instantiated for each of them.
-
-\addfigure[scale=0.5]{./images/gedit-plugins-dialog}{Gedit plugins dialog}{fig:GeditPluginsDialog}
 
