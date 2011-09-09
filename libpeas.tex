@@ -10,7 +10,7 @@ See that one of the design decisions when libpeas was implemented was to make it
 
 \section{Analysis}
 
-\subsection{Old Plugin system}
+\subsection{Old Plugin system}\label{sec:OldPluginSystem}
 
 \addfigure{./images/libpeas1}{Old Plugin system diagram}{fig:OldPluginSystemDiagram}
 
@@ -44,9 +44,15 @@ The rest of the classes are mainly an implementation detail which are the ones i
 
 \addfigure[scale=0.5]{./images/libpeas2}{First design using libpeas}{fig:FirstDesignUsingLibpeas}
 
+In this design visualized by the figure \ref{fig:FirstDesignUsingLibpeas}, things are almost the same as before. libpeas takes the classes from \ref{sec:OldPluginSystem} and exposes the public ones for the user. We can see that we still have a GeditPluginsEngine, the reason for this is explained below.
+
+\subsubsection{GeditPluginsEngine}
+
+This is a lightweight object inheriting from PeasEngine. PeasEngine is the same as the previous GeditPluginsEngine, although it is not initializing the paths where to search the plugins, the name of the plugins etc. Here is where it takes part the new GeditPluginsEngine, it initializes the super class by setting the name of the application and the plugin paths.
+
 \subsection{Second design with libpeas}
 
-\addfigure{./images/libpeas3}{Design using extensions}{fig:DesignExtensions}
+\addfigure[scale=0.45]{./images/libpeas3}{Design using extensions}{fig:DesignExtensions}
 
 \newpage
 \section{Old Plugin implementation}
