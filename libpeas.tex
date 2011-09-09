@@ -160,3 +160,7 @@ class ExamplePyWindowActivatable:
 
 This example makes the same as the one provided in the section \ref{sec:WindowController}. As we can see it is a lot easier to implement and it needs a smaller learning curve. For each window a new extension point is created so the class ExamplePyWindowActivatable will be instantiated for each of them.
 
+\section{Tests}
+
+To test this, unfortunately we had to check all the functionalities. The main problem here, was that we had to port also the python plugin to use gobject-introspection. This meant that the methods were not taking the same amount of arguments having to test all the code base and all the functionalities one by one.
+
