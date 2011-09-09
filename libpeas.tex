@@ -10,11 +10,13 @@ See that one of the design decisions when libpeas was implemented was to make it
 
 \section{Analysis}
 
+\subsection{Old Plugin system}
+
 \addfigure{./images/libpeas1}{Old Plugin system diagram}{fig:OldPluginSystemDiagram}
 
 In the figure \ref{fig:OldPluginSystemDiagram}, it can be checked the class diagram of the plugin system used before any work was done in the libpeas library. In order to understand better the next parts of this chapter, an overview of the main classes in this diagram is needed.
 
-\subsection{GeditPluginsEngine}
+\subsubsection{GeditPluginsEngine}
 
 This is the main class of the plugin engine. It takes care of loading and unloading a specific plugin, activate and deactivate the plugins for a specific window and to get the information for a specific plugin.
 
@@ -23,16 +25,30 @@ The GeditWindow has a direct link to this class by saying to it when it has to a
 This class is a singleton so it can be accessed at any point by any class.
 
 \newpage
-\subsection{GeditPluginManager}
+\subsubsection{GeditPluginManager}
 
 \addfigure[scale=0.5]{./images/gedit-plugins-dialog}{Gedit plugins dialog}{fig:GeditPluginsDialog}
 
 As shown in the figure \ref{fig:GeditPluginsDialog} is the user interface exposed in the gedit preferences dialog to be able to load or unload plugins. This widget calls to load or unload methods from GeditPluginsEngine. This later will emit the related signal listened by the window as spotted before.
 
+\subsubsection{GeditPlugin}
+
+This is the class implemented by each plugin. It has the methods that each plugin has to implement.
+
+\subsubsection{Other classes}
+
+The rest of the classes are mainly an implementation detail which are the ones in charge of loading a specific type of plugin, i.e Python vs C plugins.
+
+\newpage
+\subsection{First design with libpeas}
+
 \addfigure[scale=0.5]{./images/libpeas2}{First design using libpeas}{fig:FirstDesignUsingLibpeas}
+
+\subsection{Second design with libpeas}
 
 \addfigure{./images/libpeas3}{Design using extensions}{fig:DesignExtensions}
 
+\newpage
 \section{Old Plugin implementation}
 
 Here it is shown an snippet of how the previous plugin looked:
