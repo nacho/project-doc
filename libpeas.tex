@@ -54,6 +54,19 @@ This is a lightweight object inheriting from PeasEngine. PeasEngine is the same 
 
 \addfigure[scale=0.45]{./images/libpeas3}{Design using extensions}{fig:DesignExtensions}
 
+One of the most frustrating limitations of the gedit plugins engine was that it only allows extending a single class, called GeditPlugin. With libpeas, this limitation vanishes, and the application writer is now able to provide a set of interfaces the plugin writer will be able to implement as his plugin requires.
+
+In this design we make use of the extension points. As we can see there are three extension points:
+\begin{itemize}
+  \item \textbf{GeditAppActivatable}: They are extensions that need to be instantiated per application instance. They will be accessible by all the windows. This is interesting if we want to read some specific data and create a singleton for it.
+  \item \textbf{GeditWindowActivatable}: Extensions which interact directly with a window. For example the need to add a side pane or a bottom pane, menu items etc.
+  \item \textbf{GeditViewActivatable}: Extensions which need either add new things to the document view, or to manage the document buffer to add new edition features.
+\end{itemize}
+
+For this, libpeas exposes a new class PeasExtensionSet. A PeasExtensionSet is a class that helps to manage all the specific extensions. As one plugin can add one or more extensions, for example the window will have to deal with all the WindowActivatable extensions created by all the plugins. PeasExtensionSet ensures the life of each of them and allows the container class (GeditWindow) to send activations, deactivations or other calls needed to this extensions.
+
+Apart from this new feature, the design is kept the same. The only problem here is that it will produce a lot of work for porting the old plugins to this new design. In the next sections is shown an overview of how it had to be dealt with this in order to port the old plugins.
+
 \newpage
 \section{Old Plugin implementation}
 
