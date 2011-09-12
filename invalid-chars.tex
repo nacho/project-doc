@@ -4,11 +4,27 @@
 
 \section{Analysis and Design}
 
-In the version gedit 2.30 we introduced a new way for opening and saving files by using input and output streams. An input stream allows us to read an stream from a specific source and attach to it GFilterInputStreams to make operations on it while we are reading the specific stream. An output stream allows us to write data in one source and attach GFilterOutputStreams to make operations in the written data. In the figures \ref{fig:InputStreams} and \ref{fig:OutputStreams}, we can check the diagrams of how gedit deals with this two situations.
+In the version gedit 2.30 we introduced a new way for opening and saving files by using input and output streams. An input stream allows us to read an stream from a specific source and attach to it GFilterInputStreams to make operations on it while we are reading the specific stream. An output stream allows us to write data in one source and attach GFilterOutputStreams to make operations in the written data. In the figures \ref{fig:InputStreams} and \ref{fig:OutputStreams}, we can check the diagrams of how gedit deals right now with this two situations.
 
 \addfigure[scale=0.5]{./images/input-streams}{gedit input streams flow diagram}{fig:InputStreams}
 
 \addfigure[scale=0.5]{./images/output-streams}{gedit output streams flow diagram}{fig:OutputStreams}
+
+In this chapter we are going to focus on the input streams, as we want to escape the invalid characters and show them to the user. Here it will be explained what are the input streams used for.
+
+\subsection*{GFileInputStream}
+
+This is the stream that takes care of reading a buffer from a specific file asynchronously and pass the data to the next level in each iteration.
+
+\subsection*{GConverterInputStream}
+
+A GConverterInputStream is a GFilterInputStream which allows to set one type of GConverter object. In this case we have two different ones. The first one allows to open compressed files. For example a gzip file is opened with gedit, this data is read by GFileInputStream and passed to this FilterStream which deal with the decompression using the GZlibDecompress object.
+
+Once the file is decompressed, in case the file is a compressed file, it is passed to another GConverterInputStream. This FilterStream deals with the encodings. GTK+ only manages UTF-8 encoding text so need to make the conversion to it before adding anything to the text buffer.
+
+\subsection*{GeditDocumentOutputStream}
+
+This is not an input stream, but an output stream. The reason for this is that it takes care of writing the buffer that came from the upper levels to the GtkTextBuffer. This output stream also deals with detecting whether or not the text provided is an UTF-8 valid text or not and finally write it in the GeditDocument object.
 
 \section{Implementation}
 
