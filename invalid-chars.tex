@@ -4,6 +4,12 @@
 
 \section{Analysis and Design}
 
+In the version gedit 2.30 we introduced a new way for opening and saving files by using input and output streams. An input stream allows us to read an stream from a specific source and attach to it GFilterInputStreams to make operations on it while we are reading the specific stream. An output stream allows us to write data in one source and attach GFilterOutputStreams to make operations in the written data. In the figures \ref{fig:InputStreams} and \ref{fig:OutputStreams}, we can check the diagrams of how gedit deals with this two situations.
+
+\addfigure[scale=0.5]{./images/input-streams}{gedit input streams flow diagram}{fig:InputStreams}
+
+\addfigure[scale=0.5]{./images/output-streams}{gedit output streams flow diagram}{fig:OutputStreams}
+
 \section{Implementation}
 
 \subsection{Bug}
