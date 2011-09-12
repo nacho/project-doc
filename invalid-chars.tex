@@ -4,7 +4,7 @@
 
 \section{Analysis and Design}
 
-In the version gedit 2.30 we introduced a new way for opening and saving files by using input and output streams. An input stream allows us to read an stream from a specific source and attach to it GFilterInputStreams to make operations on it while we are reading the specific stream. An output stream allows us to write data in one source and attach GFilterOutputStreams to make operations in the written data. In the figures \ref{fig:InputStreams} and \ref{fig:OutputStreams}, we can check the diagrams of how gedit deals right now with this two situations.
+In the version gedit 2.30 it was introduced a new way for opening and saving files by using input and output streams. An input stream allows us to read an stream from a specific source and attach to it GFilterInputStreams to make operations on it while we are reading the specific stream. An output stream allows us to write data in one source and attach GFilterOutputStreams to make operations in the written data. In the figures \ref{fig:InputStreams} and \ref{fig:OutputStreams}, we can check the diagrams of how gedit deals right now with this two situations.
 
 \addfigure[scale=0.5]{./images/input-streams}{gedit input streams flow diagram}{fig:InputStreams}
 
@@ -26,7 +26,21 @@ Once the file is decompressed, in case the file is a compressed file, it is pass
 
 This is not an input stream, but an output stream. The reason for this is that it takes care of writing the buffer that came from the upper levels to the GtkTextBuffer. This output stream also deals with detecting whether or not the text provided is an UTF-8 valid text or not and finally write it in the GeditDocument object.
 
+\subsection{Redesigning}
+
+Until here it is pretty much understandable that the deal with invalid chars should go in the GeditDocumentOutputStream, although one big problem in this idealistic design is that a conversion to UTF-8 can produce invalid characters that need to be dealt in the GeditDocumentOutputStream, as it is the one that has the information about the insertions in the buffer and is the one that checks for invalid characters. The solution for this is to break this design and remove the GConverterInputStream using a GConverter object to converter the text to UTF-8 and reimplement this in GeditDocumentOutputStream directly. The resulting diagram is shown in the figure \ref{fig:InputStreams2}
+
+\addfigure[scale=0.5]{./images/input-streams2}{gedit input streams flow diagram redesign}{fig:InputStreams2}
+
+\newpage
 \section{Implementation}
+
+The implementation was made in several steps:
+\begin{itemize}
+  \item Remove the GConverterInputStream and reimplement the GConverter code into the GeditDocumentOutputStream class directly.
+  \item Deal with invalid characters by escaping them and mark them with a red color.
+  \item Deal with invalid characters coming from the UTF-8 conversion.
+\end{itemize}
 
 \subsection{Bug}
 
