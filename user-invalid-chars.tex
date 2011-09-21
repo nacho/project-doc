@@ -1,3 +1,12 @@
 % mainfile:main.tex
 
 \chapter{Invalid characters}
+
+\addfigure[width=\textwidth]{./images/gedit-encoding-error}{Encoding error}{fig:GeditEncodingError}
+
+As it can be seen in the figure \ref{fig:GeditEncodingError}, when an user loads a document, if this document contains any invalid character, the character will be escaped and shown with a red color. An error is shown allowing to do:
+\begin{itemize}
+  \item Reopen the document with a different encoding. For this the user has to select a different encoding in the drop down menu and press the \emph{Retry} button.
+  \item Edit the document. For this it has to be pressed the button \emph{Edit Anyway}. The problem of doing this is that the document can be corrupted if the user is not careful enough.
+  \item Read the document without editing it. For this the user can press the button \emph{Close}. This will close the error message and it will not allow to modify anything in the document.
+\end{itemize}
