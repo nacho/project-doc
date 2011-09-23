@@ -6,8 +6,62 @@
 
 \section{API changes}
 
-\section{GSEAL}
+As explained in other previous chapters, one of the main problems of this release, is that in order to get a good GTK+ version, there were a lot of API changes and removals.
 
-\section{GtkStyleContext}
+\subsection{GSEAL}
+
+GSEAL is a macro that allows to seal public structure fields. The reason for this is that, public structure fields are really bad in order to improve internal things. A field should only be accessed with getters and setters so in case the internal implementation is wrong this fields can be modified. The reason for GSEAL is to give a compilation warning if any application is using any of those public fields.
+
+gedit was using several of this public fields, as there was no way to access those data from a getter of a setter method. The gedit team was providing several patches to GTK+ in order to get methods to access those fields for GtkTextView main classes to be able to get this work done as fast as possible.
+
+\subsection{Removal of GSEALs}
+
+The GSEAL work was done as a provisional work for gtk+ 2.24, in this way applications were having warnings saying that this field would be removed for the 3.0 version.
+
+What it was done here, was to move this sealed field to a private struct only accessible by the widget itself. This was a work that needed a lot of time. In the case of gedit, we helped also with the GtkTextView classes.
+
+\subsection{Direct use of cairo}
+
+Cairo has been the main drawing library in GTK+ for a few ages already. Although, there was another drawing system that made GTK+ to have an abstraction layer and a mix between cairo and the previous drawing system in the widget. For GTK+ 3 it was decided that it would be easier to maintain and to deal with, if this abstraction was removed and the use of cairo was done directly. Apart from making an easier to use and to learn API, it would make the drawing system a little bit faster as it could be made direct call to the cairo system.
+
+\section{CSS}
+
+One of the new main features for GTK+ apart from all the cleanup made in order to get the 3.0 version ready, was the addition of CSS like themes.
+
+The main problem here, was that GTK+ was using a theme system really difficult to maintain, and to create new themes. CSS is probably nowadays the standard for doing this kind of things. It is used everywhere on the web and it is a fact that has to be known by the designers.
+
+In relation to gedit, the main problem with this change was, that several custom widgets had custom style modifications to be able to look better. For example, the button in the tab to be smaller.
+
+gedit was following this development quite close and it was changing the pertinent widgets with the added API to control the CSS style with the widgets. The main problem here was the lack of documentation. The main development was made with trial and error and for some time parts of the gedit's widgets were looking very ugly as there was no way to make the same things as with the previous theme system. This dealt to file several bugs and get them fixed.
+
+Apart from gedit, we had to port GtkSourceView to the new theme system. GtkSourceView provides a way to select a specific theme for the viewer, to have different colors for highlighting the text. The problematic point here was to set the colors for the gutter and to set the view color.
+
+After some discussion with the GTK+ maintainers, it was decided to provide a new CSS class called `view'. This class was then used in GtkTextView to set the main view color.
+
+\begin{lstlisting}[style=plain]
+GtkTextView {
+  color : red;
+  background-color : blue;
+}
+
+GtkTextView.view {
+  color: black;
+  background-color : white;
+}
+\end{lstlisting}
+
+This CSS snippet would make the gutter of the Text view with blue background and red text color, and the background color of the main view white with the text color black.
+
+This allowed our GtkSourceView requisite to be able to have custom user themes.
 
 \section{Case insensitive search}
+
+With the fact that for 3.0 we can break the API, it was decided to move the case insensitive search from GtkSourceView to GtkTextView directly. This was just an extensible of the GtkTextView search implementation so it was very easy to move it to GtkTextView.
+
+The main problem of this, was that GtkTextView did not have any unit test for the its current implemented search. The main thing here was to create them and test it. With this, it was detected a bug in the search system where backward search was not working correctly. This bug was there for almost ten years without being detected, the reason for this was that almost everybody was using the GtkSourceView search instead of the GtkTextView one. This shows the importance of the unit tests.
+
+Once we had everything working correctly, it was added the extra code to be able to make case insensitive searches and with the specific unit tests.
+
+\subsection{Bug}
+
+\noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=61852}
