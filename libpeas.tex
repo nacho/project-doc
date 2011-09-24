@@ -2,7 +2,7 @@
 
 \chapter{libpeas}
 
-There was the decision from a lot of time ago to try to convert the plugin system used in gedit into an standalone library. The main reason for this, was that several applications were copying the gedit plugin system and then making small modifications on it to adapt it as they preferred. The main problem to not do it before was that we needed to break the API and ABI stability, which is not a good thing is you want to keep you user base stable. As explained in the chapter \ref{chap:GFile}, with the process to \GNOME 3.0, an opportunity to break it was provided.
+There was the decision from a lot of time ago to try to convert the plugin system used in gedit into an standalone library. The main reason for this, was that several applications were copying the gedit plugin system and then making small modifications on it to adapt it as they preferred. The main problem to not do it before was that we needed to break the API and ABI stability, which is not a good thing if you want to keep your user base stable. As explained in the chapter \ref{chap:GFile}, with the process to \GNOME 3.0, an opportunity to break it was provided.
 
 With the help of the rest of the \emph{gedit team}, Steve Fr\'ecinaux was the one that took care of creating this library. Even if I am not the one that created it, I was helping a lot to port gedit and other applications and with the design, pointing out problems and providing some patches. In this chapter it is provided an overview of the whole port, the changes in the design and how it changed the implementation of plugins, pointing out examples and the advantages of the new design.
 
@@ -20,7 +20,7 @@ In the figure \ref{fig:OldPluginSystemDiagram}, it can be checked the class diag
 
 This is the main class of the plugin engine. It takes care of loading and unloading a specific plugin, activate and deactivate the plugins for a specific window and to get the information for a specific plugin.
 
-The GeditWindow has a direct link to this class by saying to it when it has to activate or deactivate a plugin. Also, it listens to the signals activate\_plugin and deactivate\_plugin (which should be called load\_plugin and unload\_plugin) to actually activate them.
+The GeditWindow has a direct link to this class by telling to it when it has to activate or deactivate a plugin. Also, it listens to the signals `activate\_plugin' and `deactivate\_plugin' (which should be called `load\_plugin' and `unload\_plugin') to actually activate them.
 
 This class is a singleton so it can be accessed at any point by any class.
 
@@ -29,7 +29,7 @@ This class is a singleton so it can be accessed at any point by any class.
 
 \addfigure[scale=0.5]{./images/gedit-plugins-dialog}{Gedit plugins dialog}{fig:GeditPluginsDialog}
 
-As shown in the figure \ref{fig:GeditPluginsDialog} is the user interface exposed in the gedit preferences dialog to be able to load or unload plugins. This widget calls to load or unload methods from GeditPluginsEngine. This later will emit the related signal listened by the window as spotted before.
+In the figure \ref{fig:GeditPluginsDialog} is shown the user interface exposed in the gedit preferences dialog to be able to load or unload plugins. This widget calls to load or unload methods from GeditPluginsEngine. This later will emit the related signal listened by the window as spotted before.
 
 \subsubsection{GeditPlugin}
 
@@ -44,7 +44,7 @@ The rest of the classes are mainly an implementation detail which are the ones i
 
 \addfigure[scale=0.5]{./images/libpeas2}{First design using libpeas}{fig:FirstDesignUsingLibpeas}
 
-In this design visualized by the figure \ref{fig:FirstDesignUsingLibpeas}, things are almost the same as before. libpeas takes the classes from \ref{sec:OldPluginSystem} and exposes the public ones for the user. We can see that we still have a GeditPluginsEngine, the reason for this is explained below.
+In this design visualized in the figure \ref{fig:FirstDesignUsingLibpeas}, things are almost the same as before. Libpeas takes the classes from \ref{sec:OldPluginSystem} and exposes the public ones for the user. We can see that we still have a GeditPluginsEngine, the reason for this is explained below.
 
 \subsubsection{GeditPluginsEngine}
 
@@ -54,7 +54,7 @@ This is a lightweight object inheriting from PeasEngine. PeasEngine is the same 
 
 \addfigure[scale=0.45]{./images/libpeas3}{Design using extensions}{fig:DesignExtensions}
 
-One of the most frustrating limitations of the gedit plugins engine was that it only allows extending a single class, called GeditPlugin. With libpeas, this limitation vanishes, and the application writer is now able to provide a set of interfaces the plugin writer will be able to implement as his plugin requires.
+One of the most frustrating limitations of the gedit plugins engine was that it only allows extending a single class, called GeditPlugin. With libpeas, this limitation vanishes, and the application writer is now able to provide a set of interfaces the plugin writer will be able to implement as the plugin requires.
 
 In this design we make use of the extension points. As we can see there are three extension points:
 \begin{itemize}
@@ -175,5 +175,5 @@ This example makes the same as the one provided in the section \ref{sec:WindowCo
 
 \section{Tests}
 
-To test this, unfortunately we had to check all the functionalities. The main problem here, was that we had to port also the python plugin to use gobject-introspection. This meant that the methods were not taking the same amount of arguments having to test all the code base and all the functionalities one by one.
+To test this, unfortunately we had to check all the functionalities. The main problem here, was that we had to port also the python plugin to use gobject-introspection. This meant that the methods were not taking the same amount of arguments, having to test all the code base and all the functionalities one by one.
 

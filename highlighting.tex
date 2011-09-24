@@ -4,14 +4,14 @@
 
 One thing that the gedit team has to deal every development cycle, is the request for adding highlighting for programming or scripting languages. It is a fact that there are a lot of programming languages and gedit is an extensible text editor that can provide support for all of them.
 
-GtkSourceView provides a way to define programming language highlighting by defining regular expressions in an XML document. By placing this document in a specific folder, it takes care of loading it (if it is correctly formatted) and provide the highlighting to the users of this library.
+GtkSourceView provides a way to define programming language highlighting by defining regular expressions in an XML document. By placing this document in an specific folder, it takes care of loading it (if it is correctly formatted) and provide the highlighting to the users of this library.
 
-A big problem here is that we are a small team and nobody can be able to know all the programming languages syntax that exists. For this the gedit team does not provide highlighting support for requested languages. Instead, it encourages the users of this languages to provide an definition language and then they are reviewed and tested in order to pass some requisitions to be included mainstream:
+A big problem here is that we are a small team and nobody can be able to know all the programming languages syntax that exists. For this, the gedit team does not provide highlighting support for requested languages. Instead, it encourages the users of this languages to provide an definition language and then they are reviewed and tested in order to pass some requisitions to be included mainstream:
 \begin{itemize}
-  \item To be licensed under the LGPLv2+ as it is the license chosen by the GtkSourceView project.
-  \item Follow a specific coding format by using spaces instead of tabs and only two spaces for indentation.
-  \item To reuse regex definitions always that it is possible. For example it is very common that multi-line comments are defined as /* */
-  \item Follow an specific structure where the main context is at the end of the document and it includes all the specific contexts. The reason for this is to keep a consistency to make it easier to maintain and to review.
+  \item To be licensed under the LGPLv2+, as it is the license chosen by the GtkSourceView project.
+  \item Follow an specific coding format by using spaces instead of tabs and only two spaces for indentation.
+  \item To reuse regex definitions always that it is possible. For example it is very common that multi-line comments are defined as /* */.
+  \item Follow an specific structure where the main context is at the end of the document and it includes all the specific contexts. The reason for this, is to keep a consistency to make it easier to maintain and to review.
   \item To use standard keywords. This means, to not add library specific methods or keywords. If someone wants a definition like this it should be made like another language extending the previous one.
   \item Use the class definitions. Class definitions allows to mark specific contexts. This allows for example the spell checker to decide which parts should be highlighted or not.
 \end{itemize}

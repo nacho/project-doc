@@ -6,14 +6,14 @@
 
 \addfigure[scale=0.75]{./images/gedit-old-find}{Old search dialog}{fig:OldFind}
 
-As we can see in the figure \ref{fig:OldFind}, gedit's search dialog has not evolved over the past years. This way for presenting to the user a dialog for searching has a really big problem, it obscures the text you are searching for. In the past few years a few applications like Firefox or Chrome have come with with some ideas, which are the ones used right now by most software applications for searching in the documents.
+As we can see in the figure \ref{fig:OldFind}, gedit's search dialog has not evolved over the past years. This way for presenting to the user a dialog for searching has a really big problem, it obscures the text you are searching for. In the past few years a few applications like Firefox or Chrome have come with some ideas, which are the ones used right now by most software applications for searching in the documents.
 
 \newpage
 \subsection{Firefox vs Chrome}
 
 In the figure \ref{fig:FirefoxSearch}, it is shown the method Firefox uses for prompting the search to the user. This method has a few problems.
 \begin{itemize}
-  \item Some studies showed that presenting visual elements to the user in the bottom of a screen are less discoverable than elements in the top-left of the screen.
+  \item Some studies have demonstrated that presenting visual elements to the user in the bottom of a screen are less discoverable than elements in the top-left of the screen.
   \item It resizes the web browser viewer to present the search widget. This also has an advantage, it will not obscure any part of the document.
   \item It takes a big part of horizontal space.
 \end{itemize}
@@ -45,7 +45,7 @@ In the figure \ref{fig:SearchClassDiagram} is spotted the new design in order to
 GeditOverlay is a container which inherits from GtkContainer as any other implemented in the GTK+ toolkit. This container will need:
 \begin{itemize}
   \item A main widget, which will allocate the whole space that can count with.
-  \item A way to add widget overlaying the main widget in fixed positions. For this we can use the vertical and horizontal alignments provided by GtkWidget.
+  \item A way to add a widget overlaying the main widget in fixed positions. For this we can use the vertical and horizontal alignments provided by GtkWidget.
 \begin{lstlisting}[style=GObject]
 typedef enum
 {
@@ -70,7 +70,7 @@ void	 gedit_overlay_add (GeditOverlay             *overlay,
 
 \subsubsection{GeditOverlayChild}
 
-This is widget is needed by GeditOverlay to wrap widgets added to it. The reason for this is that all widgets added in GeditOverlay need to be windowed and widgets like GtkEntry or GtkLabel are not windowed. So the main target for GeditOverlayChild is to create a window and set the added widget to this window.
+This widget is needed by GeditOverlay to wrap widgets added to it. The reason for this is that all widgets added in GeditOverlay need to be windowed and widgets like GtkEntry or GtkLabel are not windowed. So the main target for GeditOverlayChild is to create a window and set the added widget to this window.
 
 \subsubsection{GeditFloatingSlider}
 
@@ -78,7 +78,7 @@ Inherits from GeditOverlayChild. This widget will be wrapped as a GeditTheatrics
 
 \subsubsection{GeditRoundedFrame}
 
-GTK+ GtkFrame does not draw a rounded frame in bottom. This widget is more like a stylish way for making prettier the search widget and does not provides any specific capabilities except the stylistic one.
+GTK+ GtkFrame does not provide any way to draw a rounded frame. This widget is more like a stylish way for making prettier the search widget and does not provides any specific capabilities except the stylistic one.
 
 \subsubsection{GeditViewFrame}
 
@@ -117,7 +117,7 @@ This widget is a simple box container, it adds the entry and the buttons to go t
 \newpage
 \subsection{Theatrics}\label{sec:Theatrics}
 
-With the design in the figure \ref{fig:SearchClassDiagram}, we have almost everything ready. The main remaining problem here, is that we do not have a way to animate the pop up. GTK+ do not provide any way for doing such animations, the only way is to create it by using a timeout and make the animation in each iteration. In the figure \ref{fig:Theatrics}, we can see the design for a custom framework to help to achieve this it.
+With the design in the figure \ref{fig:SearchClassDiagram}, we have almost everything ready. The main remaining problem here, is that we do not have a way to animate the pop up. GTK+ does not provide any way for doing such animations, the only way is to create it by using a timeout and make the animation in each iteration. In the figure \ref{fig:Theatrics}, we can see the design for a custom framework to help to achieve this.
 
 \addfigure[scale=0.40]{./images/theatrics}{Theatrics}{fig:Theatrics}
 
