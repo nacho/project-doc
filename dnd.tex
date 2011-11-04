@@ -1,4 +1,5 @@
 % mainfile:main.tex
+% revised by dnolivieri
 
 \chapter{Drag and Drop of Tabs}
 
@@ -6,26 +7,26 @@
 
 \section{Analysis and design}
 
-As said in the previous chapter, a \emph{modification} in the drag and drop system had to be made. gedit's custom drag and drop was implemented a few years ago, when GtkNotebook did not have a way to do it by itself. This was implemented in GTK+ since the version 2.12, but it had a problem holding the port of gedit, it did not allow to drag a tab out of the window to create a new window with this tab attached to it. This changed with the introduction of the \emph{create-window} signal from GtkNotebook, which is emitted when a tab is dropped out of the main window.
+As described in the previous chapter, a \emph{modification} in the drag and drop system had to be made. gedit's custom drag and drop was implemented a few years ago, when GtkNotebook did not have a way to do it by itself. This was implemented in GTK+ since the version 2.12, but it had a problem holding the port of gedit, it did not permit drag a tab out of the window to create a new window with this tab attached to it. This changed with the introduction of the \emph{create-window} signal from GtkNotebook, which is emitted when a tab is dropped out of the main window.
 
 To implement this the next things are needed:
 \begin{itemize}
   \item Remove all the legacy code from the custom implementation.
   \item Proxy the \emph{create-window} signal from GtkNotebook to GeditMultiNotebook.
   \item Listen to this signal in \emph{gedit-window}.
-  \item When the signal is emitted clone the window and return to the signal the new active notebook, so GTK+ can know to which GtkNotebook add the dragged tab.
+  \item When the signal is emitted,  clone the window and return to the signal the new active notebook, so GTK+ can know to which GtkNotebook add the dragged tab.
 \end{itemize}
 
-See that with this implementation we will still have one regression, we will not be able to drop a tab in the view. From the documentation: If you want a widget to interact with a notebook through DnD (i.e.: accept dragged tabs from it) it must be set as a drop destination and accept the target "GTK\_NOTEBOOK\_TAB". The notebook will fill the selection with a GtkWidget** pointing to the child widget that corresponds to the dropped tab.
+Note that with this implementation,  we will still have one regression: we will not be able to drop a tab in the view. From the documentation: If you want a widget to interact with a notebook through DnD (i.e.: accept dragged tabs from it),  it must be set as a drop destination and accept the target "GTK\_NOTEBOOK\_TAB". The notebook will fill the selection with a GtkWidget** pointing to the child widget that corresponds to the dropped tab.
 
 \section{Implementation}
 
-Once the analysis and design have been done, the implementation was straightforward, it was a matter of:
+Once the analysis and design had been done, the implementation was straightforward.   It was a matter of:
 \begin{itemize}
   \item \emph{setting a group name}: Notebooks with the same name will be able to exchange tabs via drag and drop. A notebook with a NULL group name will not be able to exchange tabs with any other notebook.
   \item \emph{proxy} the signal and \emph{listen} to it.
   \item \emph{add "GTK\_NOTEBOOK\_TAB"} to the list of DnD targets of the view and implement the receiving for it. Code shown below.
-  \item extra careful had to be put when implementing this to have the signals emitted in the \emph{right order}.
+  \item extra care had to be  given  when implementing this to have the signals emitted in the \emph{right order}.
 \end{itemize}
 
 \begin{lstlisting}[style=GObject]
@@ -71,7 +72,7 @@ else if (info == TARGET_TAB)
 
 \subsection{Bug}
 
-In the next link it can be checked the patches provided and the revisions by the other developers:
+In the next link, the patches provided and the revisions by the other developers  can be checked: 
 
 \noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=456959}
 

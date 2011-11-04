@@ -1,25 +1,36 @@
 % mainfile:main.tex
-
+%  revised by dnolivieri
 \chapter{Problems found}
 
-During the development of this project, some important problems were hitting the process iteratively. Here a sum up of the most important ones is pointed out:
+During the development of this project, several important technical and strategic problems were encountered. A summary of 
+the most important problmes are given here. 
 
 \section*{Memory leaks}
 
-One of the main problems of using C as the core programming language, is that it has to be dealt with memory leaks. A memory leak can lead to intrinsic problems and produce unexpected crashes and problems. For this, there is an utility called \emph{valgrind} that helps to deal with this problem.
+A principal problem resulting from using C as the core programming language, is that memory leaks must be explicitly handled. 
+A memory leak can lead to intrinsic problems and produce unexpected crashes and problems. For such isues, the 
+\emph{valgrind} utility helps to deal with this problem.
 
 \section*{Adapt to new libraries}
 
-This was the prize to pay for being such on the edge. It meant to update the libraries almost every day and adapt gedit to the API changes and some times have to fix the libraries itself.
+This was the price to pay for being such on the edge. It meant to update the libraries almost every day and adapt gedit to the API changes and some times have to fix the libraries itself.
+
+**** note:  ``being on the edge'' should be described... it is too much jargon...
+
+
 
 \section*{Not enough testing}
 
-Sometimes due to the lack of time, it had to be made a release without too much testing. This led to angry users reporting some problem and have to make another release just a couple of days after the previous release.
+Due to lack of time, releases had to be made without sufficient testing. This led to angry users, who reported problems thereby resulting 
+in immediate subsequent releases within just a few days after the previous release.
 
 \section*{Miss understanding}
 
-The fact that several people are working on the same project from different parts of the world and all of them working with a non native language, sometimes it produces communication problems that can lead to reimplement or rethink a problem.
+The fact that several people are working on the same project from different parts of the world, and all of them working with a non 
+native language, produced communication problems at times that led to reimplement or rethink a problem.
 
 \section*{Limitations}
 
-When you are using a toolkit or a specific library you have to take it into account. The reason for this, is that sometimes you design or redesign a specific feature thinking on the ideal way for doing it. The problem of doing this is that sometimes the specific library have some limitation for implementing in the `ideal' way it was thought the design.
+When using a toolkit or a specific library, great care and consideration must be taken when creating a new design 
+based upon the ideal behavior of this library or toolkit.    This can lead to problems, since in fact that library 
+may be far from ideal.

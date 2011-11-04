@@ -1,14 +1,15 @@
 % mainfile:main.tex
-
+% revised by dnolivieri
 \chapter{Tab Groups}
 
 \section{Analysis}
 
-gedit is currently using a multiple document interface, called \emph{MDI}. By the use of tabs it provides a way to visualize several documents in a single window. With the current interface gedit has the problem that it can not show different documents at the same time, the only way right now, it is to open two gedit windows and resize them to fit the screen. This is very tedious and uncomfortable for the user.
+gedit presently uses a multiple document interface, called \emph{MDI}. By the use of tabs, it provides a way to visualize several documents in a single window. With the current interface,  gedit has the problem that it can not show different documents at the same time.  Indeed,  the only way that this can be performed at present is to open two gedit windows and resize them to fit the screen, which is very tedious and uncomfortable for the end user.
 
 \subsection{Questions}
 
-Knowing this problem, when brainstorming in the different possibilities about implementing this, the next questions showed up:
+
+Given the problem described above, several more profound questions arise when brainstorming different implementation solutions: 
 \begin{enumerate}
   \item How do we show the extra document to the user? Different tab groups or inside a tab?
   \item How do we want to allow the split? Vertically, Horizontally or allow both?
@@ -17,19 +18,23 @@ Knowing this problem, when brainstorming in the different possibilities about im
 
 \subsection{Do not reinvent the wheel}
 
-When analyzing a problem, the gedit team has something very clear, check what are doing the other competitors, analyze their ideas and decide which one could fit better our requisites. Before answering the questions the programs below have been checked:
+In gereral, when analyzing a particular problem, the gedit development team passes through the following process: 
+check what the competitors are doing, analyze their ideas,  and decide which of these ideas could best fit our requirements. 
+Thus, before answering the specific questions posed above for multiple document tabs, the following programs were analyzed:
+
+
 
 \subsubsection{Netbeans}
 
-In the figure \ref{fig:NetbeansScreenshot} it is showed that this program allows to have several tab groups\footnote{By tab groups we refer to the ability of grouping tabs in different groups that can be viewed at the same time in a window} and group them either horizontally and vertically. This is due to the fact that netbeans uses a docking system which allows it to place the tabs whichever the user prefer. In GTK+ there is not any widget or way to provide this ability, there is another library called \emph{GDL} that provides this and it is used by programs like anjuta, but it has the problem that it is not very well maintained and it would produce problems in the future.
+Figure \ref{fig:NetbeansScreenshot} shows that this program allows several tab groups\footnote{By tab groups, we refer to the ability of grouping tabs in different groups that can be viewed at the same time in a window}, which can be grouped either horizontally and vertically. This is due to the fact that netbeans uses a docking system which allows it to place the tabs whichever the user prefer. In GTK+ there is not such widget or facility that provide this capability.  There is, however, another library called \emph{GDL},  that provides this and it is used by programs like anjuta.  However, the library has the problem that it is not very well maintained and it would produce problems in the future.
 
 \subsubsection{Kate}
 
-In relation to kate as shown in the figure \ref{fig:KateScreenshot}, we can see that it does not have proper tabs as in gedit, it has a side pane showing the documents and it allows to open the documents either vertically or horizontally. This solution escapes from the sense of gedit and in our opinion can make things not very discoverable for the end-up user.
+With respect to  kate,  as shown in Figure \ref{fig:KateScreenshot}, it does not have proper tabs as in gedit, but instead usses a side pane showing the documents and it allows the user to open the documents either vertically or horizontally. This solution is outside the document tabbing design philosophy of gedit and can complicate teh discoverability for the end user.
 
 \subsubsection{Notepad++}
 
-In the figure \ref{fig:NotepadScreenshot} we can see that it has a similar interface to the one in gedit. It allows to create only one more tab group and it only makes an horizontally split.
+In Figure \ref{fig:NotepadScreenshot}, we can see that Notepad++ it has a similar interface to that of gedit. It allows the user to create only one more tab group and it only makes an horizontally split.
 
 \newpage
 \addfigure[scale=0.29]{./images/netbeans}{Netbeans screenshot}{fig:NetbeansScreenshot}
@@ -42,9 +47,10 @@ In the figure \ref{fig:NotepadScreenshot} we can see that it has a similar inter
 \subsection{Answering to the questions}
 
 \begin{enumerate}
-  \item Tab groups fit better the current gedit design and it will make it easier to use for the user and it will be easier to implement.
-  \item Horizontal split makes sense for visualizing documents side by side. Vertical split makes more sense if you are editing the same document in different parts of it. I.e having splitted the document to edit and show several parts of it.
-  \item It was decided to allow n splits. It is up to the user to decide how many splits he wants. If at some point is needed to put some restriction, it would be easier to make it, than not having a design that do not allow to do it.
+  \item Tab groups fit better into the  current gedit design, it will make it easier to use for the end user, and it will be easier to implement.
+  \item Horizontal splits makes sense for visualizing documents side by side. Vertical split makes more sense if you are editing the same document in different parts of it. I.e having splitted the document to edit and show several parts of it.
+  \item It was decided to allow n splits. It is up to the user to decide how many splits he wants. If in the future, restrictions are required, 
+then it would be easier to impose them.
 \end{enumerate}
 
 \newpage
@@ -53,9 +59,11 @@ In the figure \ref{fig:NotepadScreenshot} we can see that it has a similar inter
 
 \subsection{Prototyping}
 
-In the figure \ref{fig:TabGroupsProto1} it can be shown a prototype made with glade in relation how it would look and what kind of widgets will be used. In the figure \ref{fig:TabGroupsProto2} it has been made a prototype also that helped to answer the questions above, showing the vertical split. Apart from the visual design some points must be taken into account:
+In Figure \ref{fig:TabGroupsProto1},   prototype made with glade is shown in relation how it would look and what kind of widgets will be used. 
+In Figure \ref{fig:TabGroupsProto2},  a prototype is shown that was made in order to answer the questions above, showing the vertical split. 
+Apart from the visual design, the following points must be taken into account:
 \begin{enumerate}
-  \item By default a gedit window has a single tab group (current behavior).
+  \item By default, a gedit window has a single tab group (current behavior).
   \item The same document can NOT appear in different tab groups or different tabs.
 \end{enumerate}
 
@@ -75,7 +83,7 @@ In the figure \ref{fig:TabGroupsProto1} it can be shown a prototype made with gl
 
 \subsection{User interface}
 
-To interact with tab groups, it was decided to provide three new menu items in the \emph{Documents} menu.
+In order to interact with tab groups, it was decided to provide three new menu items in the \emph{Documents} menu.
 \begin{itemize}
   \item \textbf{New Tab Group:} It creates a tab group in the right of the focused one, and it adds a new tab to it.
   \item \textbf{Previous Tab Group:} Moves the focus to the previous (left) tab group.
@@ -87,7 +95,7 @@ To interact with tab groups, it was decided to provide three new menu items in t
 
 \addfigure[scale=0.45]{./images/tab-groups-diagram}{Tab groups diagram}{fig:TabGroupDiagram}
 
-As it can be visualized in the figure \ref{fig:TabGroupDiagram} a new class has been introduced, \emph{GeditMultiNotebook}. This class will take care of create and remove GeditNotebooks, proxying the signals emittion for page-added, page-removed and switch-page and it will be kept as an implementation detail where the user will not have direct access to its API.
+As it can be seen in Figure \ref{fig:TabGroupDiagram}, a new class has been introduced, \emph{GeditMultiNotebook}. This class will take care of create and remove GeditNotebooks, proxying the signals emittion for page-added, page-removed and switch-page and it will be kept as an implementation detail where the user will not have direct access to its API.
 
 \newpage
 \subsection{GeditMultiNotebook}
@@ -176,7 +184,7 @@ This class works as a proxy to \emph{GeditNotebook}, most of the API and signals
 
 GTK+ provides a widget called \emph{GtkHPaned}, which is a container with two children arranged horizontally. An intensive use of this widget is needed in order to arrange the tab groups side by side.
 
-The next pseudocode shows how it must be implemented:
+The following pseudocode shows how it must be implemented:
 \begin{lstlisting}[style=GObject]
 
 void
@@ -240,7 +248,7 @@ To implemented this, there was one thing depending directly on GeditNotebook. \e
 
 \subsection{Bugs}
 
-In the next links it can be checked the patches provided and the revisions by the other developers:
+In the next links,  the patches provided and the revisions by the other developers can be studied.
 
 \noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=619608} \\
 \noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=620502}

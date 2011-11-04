@@ -1,14 +1,23 @@
 % mainfile:main.tex
+% revised by dnolivieri
 
 \chapter[GNOME 3.0 for application developers]{GNOME 3.0 for application developers\cite{website:gnome-3-0-for-application-developers}}\label{GNOME3AppDevs}
 
 This is specifically for \emph{gedit} but it applies to other \GNOME applications, as most of them had to pass the storm that is \GNOME 3.0.
 
-gedit is almost solely being developed by volunteers (it is shown little to none contributions from financed developers). This is of course true for many open source projects. gedit seems like a simple enough little application, but it is still quite extensive.
+gedit is almost solely being developed by volunteers (it has been shown that little to none of the contributions are from financed developers). This is of course true for many open source projects. gedit appears to be  simple application, however in reality it is quite extensive and complicated.
 
-The normal development cycles are relatively uneventful. It is introduced a small set of new features, fix some bugs, etc. Also it is always tried to ensure that current HEAD of development is ``stable''. gedit developers have always used current HEAD in a production environment, meaning getting a lot of testing, as it is an application that most of us use every day. gedit has not been usually an early adopter of new technologies, waiting for the testing of other applications which helped this level of stability.
+The normal development cycles are relatively uneventful. A small set of new features are introduced, some bug fixes are provided, etc. Also, 
+a stable current HEAD of development is always ensured to be ``stable''.
+gedit developers have always used current HEAD in a production environment, which refers to versions that receive a large amount of testing, 
+since it is an application that many users utilize every day. 
 
-This changed with GNOME 3.0. We decided we would try to adopt to the changes as early as possible, so that in the end we actually have gedit ready to be shipped. This meant however, among other things, the following:
+
+
+Traditionally, gedit has not been an early adopter of new technologies, opting 
+to wait for the testing of other applications which helped this level of stability.
+This situation changed with GNOME 3.0.  The developer community decided to try to adopt changes as early as possible in the development cycle, 
+so that gedit would be ready to be shipped with all changes incorporated. This meant however, among other things, the following:
 \begin{itemize}
   \item A lot of work to port from ``old'' technologies (gconf – gsettings, pygtk – pygi).
   \item A lot of time has been invested on trying to get the jhbuild environment ready for developing.
@@ -18,11 +27,13 @@ This changed with GNOME 3.0. We decided we would try to adopt to the changes as 
   \item No real change for end users!
 \end{itemize}
 
-Of course it is understandable also the advantages of trying to get this to work, but it has been largely demotivating for gedit's little team. To illustrate a bit the impact of this, here are some numbers on our development cycles.
+Of course, while the advantage of this new philosophy of adopting new technologies early in the development cycle is the advantages are clear, 
+it has been a stress on the small team of gedit developers.   In order to illustrate the impact of this, here are some statistics related to 
+our development cycles.
 
 \addfigure[width=0.70\textwidth]{./images/gedit-development}{gedit Development}{fig:geditDevelopment}
 
-On this plot it can be seen the sum of all added and removed lines (excluding translations) over all commits in a particular development cycle. As it can be appreciated, a significant increase of activity in this cycle it is noted. Of course, not all of this can be attributed to \GNOME 3.0, but there is an undeniable effect. Zooming in the last two development cycle it can be seen the work made by each developer on this team:
+On this plot can be seen the sum of all added and removed lines (excluding translations) over all commits in a particular development cycle. As can be appreciated, a significant increase of activity in this cycle it is noted. Of course, not all of this can be attributed to \GNOME 3.0, but there is an undeniable effect.   Zooming in the last two development cycle the work made by each developer on this team can be seen.
 
 \begin{figure}[H]
   \begin{minipage}[b]{0.5\linewidth}
@@ -38,4 +49,7 @@ On this plot it can be seen the sum of all added and removed lines (excluding tr
   \end{minipage}
 \end{figure}
 
-Just point out that this cycle has been particularly hard for application developers, especially those that try to adopt early, so that they are actually ready by the time GNOME 3.0 lands. And then to think, for the end user, there will be basically no change at all...
+It is important to note that this cycle has been particularly difficult for application developers, especially those that try to adopt early, 
+so that they are actually ready by the time GNOME 3.0 is ready for release.   And then to think, for the end user, there will be basically no 
+change at all.
+

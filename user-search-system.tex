@@ -1,47 +1,55 @@
 % mainfile:main.tex
-
+% revised by dnolivieri
 \chapter{Search system}
 
 \section{Show the search pop up}
 
-In the figure \ref{fig:SearchPopup} we can see how it looks the new search pop up. To launch the search search pop up we have two ways to do it: Pressing \emph{Control + F} or going to the menu \emph{Search $\to$ Find}.
+In Figure \ref{fig:SearchPopup}, the appearance of the new search pop up is shown. In order to launch the search search pop up, the user 
+can do it in two possible ways:  Pressing \emph{Control + F} or going to the menu \emph{Search $\to$ Find}.
 
 \addfigure[scale=1.0]{./images/search1}{Search popup}{fig:SearchPopup}
 
 \section{Configure the search pop up}
 
-As we can see in the figure \ref{fig:SearchPopupMenu}, when we search for some text we can select some options to restrict the search. By default the less restrictive search will be provided. To launch the drop down menu it has to be clicked in the lens icon, either with the left or right button of the mouse. Below there is an explanation of each item in the dropdown menu:
+As can be seen in Figure  \ref{fig:SearchPopupMenu}, when a search for some text is desired, the user can select 
+several options to restrict the search. By default,  the less restrictive search will be provided. In order to  launch the drop 
+down menu,  it should be clicked in the lens icon, either with the left or right button of the mouse. The 
+following is a description of each item in the dropdown menu:
 \begin{itemize}
   \item \textbf{Match Case:} It will make the search case sensitive.
   \item \textbf{Match Entire Word Only:} It will only match whole words.
-  \item \textbf{Wrap Around:} This option will make the search engine to start from the beginning once the end of the document is reached.
+  \item \textbf{Wrap Around:} This option will make the search engine restart from the beginning once the end of the document is reached.
 \end{itemize}
 
 \addfigure[scale=1.0]{./images/search2}{Search pop up menu}{fig:SearchPopupMenu}
 
 \section{Error reporting}
 
-With this new search, an interactive search it is done. When an occurrence is not found in the document the way to report it to the user is by turning the search entry into red as shown in the figure \ref{fig:SearchPopupError}.
+With this new search, an interactive search it is done. When an occurrence is not found in the document,  the way that it is reported 
+to the user is by turning the search entry into red as shown in the figure \ref{fig:SearchPopupError}.
 
 \addfigure[scale=1.0]{./images/search3}{Search pop up error}{fig:SearchPopupError}
 
 \newpage
 \section{Match visualizing}
 
-When doing the interactive search there are two visual reports. The active match and the matches around the document. The active match it is the selected text found where the cursor is placed. The matches found in the document are visualized in a different color depending on the theme and it shows all the occurrences for the searched text in the document.
+When doing an interactive search,  there are two visual reports. The active match and the matches around the document. 
+In the casse of the active match,  it is the selected text found where the cursor is placed. The matches found 
+in the document are visualized 
+in a different color depending on the theme and it shows all the occurrences for the searched text in the document.
 
 \addfigure[scale=1.0]{./images/search4}{Search pop up interactive search}{fig:SearchPopupInteractive}
 
 \section{Interaction}
 
-To interact with the search pop up, there are several ways as described below:
+To interact with the search pop up, there are several ways, as described below:
 \begin{itemize}
   \item \textbf{Search for text:} It is a matter of entering some specific text in the entry text.
   \item \textbf{Select the entry text:} Apart from the usual methods, it can be also selected by pressing again \emph{Control + F}.
-  \item \textbf{Move between occurrences:} To do this we can do it by clicking in the arrow buttons, by pressing the arrow keys of the keyboard or by pressing \emph{Control} and scrolling with the mouse.
+  \item \textbf{Move between occurrences:} To do this, we can do it by clicking in the arrow buttons, by pressing the arrow keys of the keyboard or by pressing \emph{Control} and scrolling with the mouse.
   \item \textbf{Close the pop up:} There are two ways to do it:
     \begin{itemize}
-      \item \textit{Pressing ESC:} By pressing this key the pop up is closed and the cursor is returned to the place before the search was done.
-      \item \textit{Pressing Enter:} By pressing this key the pop up is also closed but the cursor is kept on the selected occurrence.
+      \item \textit{Pressing ESC:} By pressing this key, the pop up is closed and the cursor is returned to the place before the search was done.
+      \item \textit{Pressing Enter:} By pressing this key, the pop up is also closed but the cursor is kept on the selected occurrence.
     \end{itemize}
 \end{itemize}

@@ -1,16 +1,18 @@
 % mainfile:main.tex
-
+% revised by dnolivieri
 \chapter{Invalid characters}
 
 \section{Analysis and Design}
 
-In the version 2.30 of gedit, it was introduced a new way for opening and saving files by using input and output streams. An input stream allows to read an stream from a specific source and attach to it GFilterInputStreams, to make operations on it while we are reading the specific stream. An output stream allows to write data in one source and attach GFilterOutputStreams to make operations in the written data. In the figures \ref{fig:InputStreams} and \ref{fig:OutputStreams}, we can check the diagrams of how gedit deals right now with this two situations.
+In the version 2.30 of gedit, a new way for opening and saving files was introduced by using input and output streams. An input stream provides a means to read a stream from a specific source and attach to it GFilterInputStreams, to make operations on it while we are reading the specific stream. An output stream allows to write data in one source and attach GFilterOutputStreams to make operations in the written data. In the figures \ref{fig:InputStreams} and \ref{fig:OutputStreams}, we can check the diagrams of how gedit deals right now with this two situations.
 
 \addfigure[scale=0.5]{./images/input-streams}{gedit input streams flow diagram}{fig:InputStreams}
 
 \addfigure[scale=0.5]{./images/output-streams}{gedit output streams flow diagram}{fig:OutputStreams}
 
-In this chapter we are going to focus on the input streams, as we want to escape the invalid characters and show them to the user. Here it will be explained what are the input streams used for.
+In this chapter, we focus upon the input streams, since we want to escape the invalid characters and show them to the user. Here,
+what input streams are and what they are used for will be explained.
+
 
 \subsection*{GFileInputStream}
 
@@ -18,7 +20,7 @@ This is the stream that takes care of reading a buffer from a specific file asyn
 
 \subsection*{GConverterInputStream}
 
-A GConverterInputStream is a GFilterInputStream which allows to set one type of GConverter object. In this case we have two different ones. The first one allows to open compressed files. For example a gzip file is opened with gedit, this data is read by GFileInputStream and passed to this FilterStream which deal with the decompression using the GZlibDecompress object.
+A GConverterInputStream is a GFilterInputStream, which provides a way to set one type of GConverter object. In this case we have two different ones. The first, provides a way to open compressed files. For example,  a gzip file is opened with gedit, this data is read by GFileInputStream and passed to this FilterStream,  which deals with the decompression using the GZlibDecompress object.
 
 Once the file is decompressed, in case the file is a compressed file, it is passed to another GConverterInputStream. This FilterStream deals with the encodings. GTK+ only manages UTF-8 encoding text so it needs to make the conversion to it before adding anything to the text buffer.
 
@@ -28,7 +30,7 @@ This is not an input stream, but an output stream. The reason for this is that i
 
 \subsection{Redesigning}
 
-Until here, it is pretty much understandable that the deal with invalid chars should go in the GeditDocumentOutputStream, although one big problem in this idealistic design is that a conversion to UTF-8 can produce invalid characters that need to be dealt in the GeditDocumentOutputStream, as it is the one that has the information about the insertions in the buffer and is the one that checks for invalid characters. The solution for this, is to break this design and remove the GConverterInputStream using a GConverter object to converter the text to UTF-8 and reimplement this in GeditDocumentOutputStream directly. The resulting diagram is shown in the figure \ref{fig:InputStreams2}
+Until here, it is pretty much understandable that the deal with invalid chars should go in the GeditDocumentOutputStream, although one big problem in this idealistic design is that a conversion to UTF-8 can produce invalid characters that need to be dealt with in the GeditDocumentOutputStream, as it is the one that has the information about the insertions in the buffer and is the one that checks for invalid characters. The solution for this, is to break this design and remove the GConverterInputStream using a GConverter object to converter the text to UTF-8 and reimplement this in GeditDocumentOutputStream directly. The resulting diagram is shown in the figure \ref{fig:InputStreams2}
 
 \addfigure[scale=0.5]{./images/input-streams2}{gedit input streams flow diagram redesign}{fig:InputStreams2}
 
@@ -48,7 +50,7 @@ The implementation was made in several steps:
 
 \section{Tests}
 
-To test this implementation, it was used a set of unit tests. This is a very low level implementation and one of the most important parts of gedit, as we have to ensure that the data will not get lost and will be valid.
+To test this implementation, a set of unit tests were used. This is a very low level implementation and one of the most important parts of gedit, as we have to ensure that the data will not get lost and will be valid.
 
 \begin{lstlisting}[style=GObject]
 static void

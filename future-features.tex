@@ -1,8 +1,8 @@
 % mainfile:main.tex
-
+% revised by dnolivieri
 \chapter{Future features}
 
-Even if gedit has a lot of features, it can be improved more and add new features. The wiki (see \ref{sec:Wiki}) provides a section called RoadMap\footnote{\url{https://live.gnome.org/Gedit/RoadMap}} where it can be found the main important features that want to be added for each future version. Some of them are enumerated below:
+Even if gedit has many features, it can still be improved  and new features can be added. The wiki (see \ref{sec:Wiki}) provides a section called RoadMap\footnote{\url{https://live.gnome.org/Gedit/RoadMap}}, where the principal features desired for each future version can be found.  Some of these improvements are enumerated below:
 
 \section{Port python plugin to Python 3}
 
@@ -10,23 +10,23 @@ Python 3 is the future, so it would be a good idea to try to use it in the futur
 
 \section{GApplication}
 
-gedit uses a custom single instance implementation, would be good to use GApplication, as it is the recommended way for creating single instance applications in GObject based applications. Although the reason stopping gedit from using it, is that GApplication does not support pipes over the bus, to be able to make things like cat blah.c $|$ gedit.
+gedit uses a custom single instance implementation, which would be good to use in GApplication, since it is the recommended way for creating single instance applications in GObject based applications. Although the reason preventing gedit from using it, is that GApplication does not support pipes over the bus, which would enable syntax such as cat blah.c $|$ gedit.
 
 \newpage
 \section{GtkGrid}
 
-GtkGrid is a new container which arranges its child widgets in rows and columns. This widget will deprecate other containers like GtkBox or GtkTable so it would be interesting to start the migration as soon as possible. The problem is that GtkBox is very deep in the implementation of gedit and it would need a lot of time and work to be ported to GtkGrid.
+GtkGrid is a new container that arranges its child widgets in rows and columns. This widget will deprecate other containers like GtkBox or GtkTable, so it would be interesting to start the migration as soon as possible. The problem is that GtkBox is an integral part of the  implementation of gedit and it would require significant time and work to be ported to GtkGrid.
 
 \section{Code Folding}
 
-Code folding is a feature of some text editors, source code editors and IDEs that allows the user to selectively hide and display sections of a currently edited file as a part of routine edit operations. This allows the user to manage large amounts of text while viewing only those subsections of the text that are specifically relevant at any given time.\cite{website:code-folding}
+Code folding is a feature of some text editors, source code editors, and IDEs that allows the user to selectively hide and display sections of a currently edited file as a part of routine edit operations. This allows the user to manage large amounts of text while viewing only those subsections of the text that are specifically relevant at any given time.\cite{website:code-folding}
 
-This is one of the most requested features, the problem is that it is very tricky to implement correctly. Currently it is under development but it needs more testing and work.
+This is one of the most requested features, the problem is that it is very complicated to implement correctly. Currently it is under development but it needs more testing and work.
 
 \section{Smart indentation}
 
-The smart indentation is a feature to indent source code automatically depending on the context. Right now gedit only mimics the indentation from the previous inserted line without any analysis for the current programming language.
+The smart indentation is a feature to indent source code automatically depending on the context. At present, gedit only mimics the indentation from the previous inserted line without any analysis for the current programming language.
 
 \section{Windows and Mac OSX support}
 
-With the port to GTK+ 3, the binaries for win32 and OSX have become obsoletes. In order to get them back it is needed to fix bugs in the libraries like GTK+ or pygobject and recreate the development environment for these systems.
+With the port to GTK+ 3, the binaries for win32 and OSX have become obsolete. In order recuperate these binaries, bugs fixes are needed in the libraries like GTK+ or pygobject and the development environment for these systems must be recreated.

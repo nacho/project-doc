@@ -1,4 +1,5 @@
 % mainfile:main.tex
+% revised by dnolivieri.
 
 \chapter[Port API to GFile]{Port API to GFile}\label{chap:GFile}
 
@@ -6,19 +7,19 @@
 
 \section{Analysis and Design}
 
-GFile is a high level abstraction for manipulating files on a virtual file system. GFiles are lightweight, immutable objects that do no I/O upon creation. It is necessary to understand that GFile objects do not represent files, merely an identifier for a file. All file content I/O is implemented as streaming operations.
+GFile is a high level abstraction for manipulating files on a virtual file system. GFiles are lightweight, immutable objects that do no I/O upon creation. It is necessary to understand that GFile objects do not represent files, merely identifiers for a file. All file content I/O is implemented as streaming operations.
 
-One way to think of a GFile is as an \emph{abstraction of a pathname}. For normal files the system pathname is what is stored internally, but as GFiles are extensible it could also be something else that corresponds to a pathname in a userspace implementation of a filesystem.\cite{website:gio} Until now, gedit was not using any abstraction for this. It was using simple strings representing uris\footnote{See: \url{http://en.wikipedia.org/wiki/Uniform_Resource_Identifier}} for public API and making an internal parsing and conversion to GFiles.
+One way to think of a GFile is as an \emph{abstraction of a pathname}. For normal files, the system pathname is what is stored internally, but since GFiles are extensible,  it could also be something else that corresponds to a pathname in a userspace implementation of a filesystem\cite{website:gio}.  Until now, gedit was not using any abstraction for this, but using simple strings representing uris\footnote{See: \url{http://en.wikipedia.org/wiki/Uniform_Resource_Identifier}} for public API and making an internal parsing and conversion to GFiles.
 
-The fact of breaking the public API\footnote{With breaking the public, it means that the deprecated API and the API that could be improved with the new technologies, will be removed or modified to provide better one for the user and for easier maintainership.} allowed to use GFiles for everything, internally and publicly, giving the incentive that most of the public API supported in gedit for managing uris was already supported in GFile, making possible to remove it.
+The fact of breaking the public API\footnote{With breaking the public, it means that the deprecated API and the API that could be improved with the new technologies, will be removed or modified to provide better one for the user and for easier maintainership.} permitted the use of GFiles for everything, internally and publicly, giving the incentive that most of the public API supported in gedit for managing uris was already supported in GFile, making possible to remove it.
 
 \newpage
 \section{Implementation}
 
-The codification has been splitted in two parts:
+The coding has been splitted in two parts:
 \begin{itemize}
   \item \textbf{Core:} Change in the public and internal API to remove the use of uris and use GFiles instead.
-  \item \textbf{Plugins:} Adapt all the uses of the old methods to use the new ones.
+  \item \textbf{Plugins:} Adapt all the uses of the old methods for use in the new ones.
 \end{itemize}
 
 Below it is shown an example of one of the API changes:
@@ -58,9 +59,9 @@ gedit_commands_load_location (GeditWindow         *window,
 \newpage
 \subsection{Bug}
 
-Once the analysis and design of the problem have been made, it is important to inform the rest of the developers about it, make the ticket for a better discussion and provide a patch for it.
+Once the analysis and design of the problem have been made, it is important to inform the rest of the developers about it, make the ticket for a better discussion, and provide a patch for it.
 
-In the next link it can be checked the patches provided and the revisions by the other developers:
+In the next link, the patches provided and the revisions by the other developers can be checked 
 
 \noindent\url{https://bugzilla.gnome.org/show_bug.cgi?id=616790}
 

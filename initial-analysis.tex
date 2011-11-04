@@ -1,29 +1,30 @@
 % mainfile:main.tex
+% revised by dnolivieri
 
 \chapter{Initial analysis}\label{chap:InitialAnalysis}
 
 % FIXME: draft, see FIXME
 
-When someone starts to contribute to a big project such as \emph{gedit}, it is very important to make an initial analysis of the current state of the project. Due to the lack of documentation in projects like gedit, to do this, is usually easier to ask for some tips to the current developers so they can give you some orientations about where you can start. The main tip a developer will tell you is: start reading code and if you have any problem understanding anything, please ask about it.
+When someone starts to contribute to a big project such as \emph{gedit}, it is very important to make an initial analysis of the current state of the project. Due to the lack of documentation in projects like gedit, to do this, is usually easier to ask for some tips to the current developers so they can give you some orientations about where you can start. The main suggestions a developer can give is: start reading code and if you have any problem understanding it, ask about it.
 
 \section{Reverse engineering}\label{ReverseEngineering}
 
 Reverse engineering is the process of discovering the technological principles of a human (or non-human) made device, object or system through analysis of its structure, function and operation.\cite{website:reverse-engineer}
 
-Due to the lack of a global \emph{class diagram} showing the current structure of gedit, it was decided to use the reverse engineer, read the source code to get the class diagram with the main classes in order to have a better overview of the project.
+Due to the lack of a global \emph{class diagram} describing the current structure of gedit, it was decided to use the reverse engineering, by reading the source code and produce a class diagram with the main classes in order to have a better overview of the project.
 
-In the picture \ref{fig:ClassDiagram230} it is shown the mentioned class diagram. Of course it only shows the main classes, dropping all the dialogs and self containing widgets, that are not really necessary to get a sight of the whole project.
+In the Figure \ref{fig:ClassDiagram230} the class diagram is shown. Of course,  only the main classes are shown, thereby excluding smaller utility classes that are not necessary for getting a broad understanding of the code structure. 
 
 \newpage
 \addfigure[width=0.92\textwidth]{./images/class-diagram-2-30}{Class diagram gedit 2.30}{fig:ClassDiagram230}
 
 \subsection{Explanation of the classes}
 
-Having the class diagram is a good idea, but without some explanation, it is a bit pointless.
+Having the class diagram is a good idea, but some explanation is necessary in order to provide useful information.
 
 \subsubsection{Colors}
 
-The colors show the different libraries and classes where the gedit ones are inheriting from.
+The colors show the different libraries and classes that gedit inherits.
 \begin{itemize}
   \item \textbf{Black}: gedit classes
   \item \textbf{Blue}: GtkSourceView classes
@@ -65,7 +66,7 @@ The colors show the different libraries and classes where the gedit ones are inh
 \newpage
 \section{Coding Style}\label{sec:CodingStyle}
 
-\emph{gedit} is a very ambitious free software project, having a lot of code to maintain. In a project where several people are contributing patches, it is important to be rigorous with the coding style.
+\emph{gedit} is a very ambitious free software project, which has a lot of code to maintain. In a project where several people are contributing patches, it is important to be rigorous with the coding style.
 
 The \GNOME project provides programming guidelines\footnote{\url{http://rtm-cs.sinp.msu.ru/~fedor/doc/gtk+gnome/programming-guidelines/good-code.html}}. gedit follows this conventions with one minor exception shown below:
 \begin{lstlisting}[style=GObject]

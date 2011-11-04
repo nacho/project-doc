@@ -1,5 +1,5 @@
 % mainfile:main.tex
-
+% revised by dnolivieri
 \chapter{Making a release}\label{chap:Release}
 
 The first thing that you have to know when you are making a release, is whether the module is using pre-release version incrementing (i.e. bumping the version number just before release) or post-release version incrementing (which is preferred for libraries). gedit uses a pre-release version incrementing. This can be usually checked in the \emph{configure.in} or \emph{configure.ac} files. After this has been checked the next steps have to be followed:
@@ -22,7 +22,8 @@ The first thing that you have to know when you are making a release, is whether 
 
 \section*{New entry in the NEWS file}
 
-\noindent It should be read the ChangeLog and come up with a bullet point for each significant change and credit the person who did the work. Below it can be found an example and the command to show the ChangeLog:
+\noindent The ChangeLog should be read a bullet point for each significant change together with credit to the person 
+who did the work should be formulated. Below, an example is provided together with the command to show the ChangeLog:
 
 \noindent\graybox{git log}
 
@@ -48,7 +49,7 @@ New and updated translations
 
 \section*{Recompile everything}
 
-For this several commands have to executed:
+For this task, several commands have to executed:
 
 \noindent\graybox{./autogen.sh --enable-gtk-doc}
 
@@ -85,7 +86,7 @@ If some change has been done in the repository before this step and the commit c
 
 \noindent\graybox{git tag -a 2.90.6}
 
-See that the name of the tag will be the version of the release.
+Note that the name of the tag will be the version of the release.
 
 \section*{Push the tag}
 
@@ -106,4 +107,4 @@ See that the name of the tag will be the version of the release.
 
 \noindent\graybox{ftpadmin install gedit-2.90.6.tar.xz}
 
-Once it is installed you should get confirmation that it was correctly installed.
+Once installed, a confirmation should be received inedicating that it was correctly installed.

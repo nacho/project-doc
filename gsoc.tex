@@ -1,10 +1,10 @@
 % mainfile:main.tex
-
+% revised by dnolivieri
 \chapter{Google summer of code}
 
 \emph{Google Summer of Code} is a global program that offers student developers stipends to write code for various open source software projects.\cite{website:soc}
 
-Some of the features and bug fixes made in this project have been part of the \emph{Google summer of code 2010}. Here, an approximation will be shown to what is needed for applying for this Google \emph{internship} and what it has to be done in order to make it.
+Some of the features and bug fixes made in this project have grown out my participation in the \emph{Google summer of code 2010}. Here, a brief description of the steps for applying for this Google \emph{internship} is presented together with as short description of what I have accomplished within this program.
 
 \addfigure[width=0.5\textwidth]{./images/gsoc}{GSoC 2010 Logo}{fig:GSoCLogo}
 
@@ -13,26 +13,27 @@ Some of the features and bug fixes made in this project have been part of the \e
 
 There are several ways to propose a project for the Google summer of code. The main ones are:
 \begin{itemize}
-  \item Looking for a free software application that you really like, and propose something that you want to improve.
-  \item Talk with the application maintainers and ask them for interesting projects that they would like to mentor. This is probably the most used way and the best way if you want to get your project \emph{accepted}.
+  \item Look for a free software application that you find appealing, and propose an improvement.
+  \item Talk with the application maintainers and ask them for interesting projects that they would like to mentor. This is probably the most standard and best methods if you want to get your project \emph{accepted}.
 \end{itemize}
 
-Usually the accepted organizations by Google, they provide a wiki where they put some proposals for students, as an example, the one from \GNOME for 2010. See: \url{https://live.gnome.org/SummerOfCode2010}.
+
+The code projects are selected from the the Goolge accepted organizations.   A wiki is provided that posts some proposals for students.  As an example, the set of projects proposed by \GNOME for 2010 can be seen here: \url{https://live.gnome.org/SummerOfCode2010}.
 
 \section{Creating the application form}\label{ApplicationForm}
 
-In the application form, it has to be described what you want to do, a schedule explaining what it will be done every week and something about you. Below it is shown the \emph{application form} I have used for my Google summer of code.
-
+The proposed project description should be supplied in the application form together with a detailed 
+schedule of the tasks to be performed on a weekly basis.   The \emph{application form}  used for this project 
+is given below. 
 \subsection*{gedit improvements}
 
 \subsubsection*{gedit split view}
 
-Right now gedit does not have the ability to provide several views for the same document. I would like to change the internal design of gedit to provide this. The idea is that a document can be splitted horizontally or vertically depending on what the user prefers. For doing this some menu items will be provided.
-Due to the current design of GtkTextView this is not an easy task as we need to load the document again every time we split it, and keep it sync.
+At present, gedit does not have the ability to provide several views for the same document. I would like to change the internal design of gedit in order to provide this feature. The idea is that a document can be splitted horizontally or vertically depending on what the user prefers. For doing this some menu items will be provided.  Due to the current design of GtkTextView,  this is not an easy task as we need to load the document again every time we split it, and keep it sync.
 
 \paragraph{Why is this important?}
 
-It is important because it can allow you to see several parts of the same document at the same time, which is necessary when you are editing long files.
+This is an important features since it can allow users to see several parts of the same document at the same time, which is necessary when you are editing long files.
 
 \subsubsection*{gedit tab groups}
 

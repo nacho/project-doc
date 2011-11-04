@@ -1,31 +1,32 @@
 % mainfile:main.tex
+% revised by dnolivieri
 
 \chapter{GSettings port}
 
-In the section \ref{sec:GSettings}, it was explained that GSettings is part of glib and provides a convenient API for storing and retrieving application settings.
+In section \ref{sec:GSettings}, it was explained that GSettings is part of glib and provides a convenient API for storing and retrieving application settings.
 
 Until now, gedit was using GConf for storing its settings. GConf has been \emph{deprecated} for this cycle of \GNOME, meaning that all \GNOME applications have to be ported to GSettings if they want to still be part of the core applications for the \GNOME OS.
 
-An early adoption of this library was decided to be done in order to push the development and have it ready for \GNOME 3.0. This meant a lot of API changes, having a development branch for the port, several design mistakes and a lot of extra work. The good thing is that it helped to have a good API, a good library design and to solve several problems in GSettings.
+An early adoption of this library was decided to be done in order to push the development and have it ready for \GNOME 3.0. This meant a lot of API changes, having a development branch for the port, several design mistakes and a lot of extra work.   The good thing is that it helped to have a good API, a good library design, and helped to solve several problems in GSettings.
 
 \section{Analysis and Design}
 
 \subsection{Previous design}
 
-The way gedit had implemented the settings system, was probably one of the oldest parts of the gedit code base. It was implemented in pure C, without the Object Oriented paradigm. The reason it was not changed before, was that even if you are using an iterative design, the code was working perfectly, it was `easy' to maintain and it did not have important bugs.
+The way gedit had implemented the settings system  was probably one of the oldest parts of the gedit code base. It was implemented in pure C, without the Object Oriented paradigm. The reason it was not changed before was that even if you are using an iterative design, the code was working perfectly, it was `easy' to maintain and it did not have important bugs.
 
 \newpage
 \subsubsection*{gedit-prefs-manager-app}
 
 This file had two main methods: \textit{gedit\_prefs\_manager\_app\_init} and \textit{gedit\_prefs\_manager\_app \_shutdown}. This methods where called in the initialization of the program and in the finalization respectively.
 
-The \emph{init} method was taking care of initializing the system in order to listen to changes in the settings. This was possible to some signals provided by GConf. Once some change was done in some of the settings, the prefs-manager-app was getting the changed signal and changing the respective setting to the UI of the application.
+The \emph{init} method took care of initializing the system in order to listen to changes in the settings. This was possible to some signals provided by GConf. Once some change were done in some of the settings, the prefs-manager-app obtained the changed signal and changed the respective setting to the UI of the application.
 
-The \emph{shudown} method was taking care of finalizing all the resources taken by the init method, to not leak memory at the end of the program and avoid crashes due to those resources.
+The \emph{shudown} method took care of finalizing all the resources taken by the init method, in order to not leak memory at the end of the program and avoid crashes due to those resources.
 
 \subsubsection*{gedit-prefs-manager}
 
-This file was providing a set of methods, three per setting: get/set/can\_set. Also a default value was provided for each setting in case this setting was not set yet. (This was one of the deficiencies of GConf, it will be explained later).
+This file provided  a set of methods, three per setting: get/set/can\_set. Also a default value was provided for each setting in case this setting was not set yet. (This was one of the deficiencies of GConf, it will be explained later).
 
 In order to achieve these methods, a set of macros working as templates were provided, in the way that calling a macro with a name was creating the respective implementation of the method, leading to only create apart from the macro call, the semi-public prototype for this method. An example of this is shown below:
 
@@ -60,7 +61,7 @@ gboolean gedit_prefs_manager_insert_spaces_can_set (void);
 
 \subsection{New design, Part 1}
 
-First of all it must be understood how GSettings was suppose to work in order to make any decisions in the design. GSettings was based mainly on schemas. An schema is a document that specifies all the settings for an application, with the type of the setting, the default value and some description for it. An schema file would look like this:
+First of all,  it must be understood how GSettings was suppose to work in order to make any decisions in the design. GSettings was based mainly on schemas. A schema is a document that specifies all the settings for an application, with the type of the setting, the default value and some description for it. A schema file would look like this:
 
 \begin{lstlisting}[style=GObject]
 schema org.gnome.gedit:
@@ -74,14 +75,14 @@ schema org.gnome.gedit:
 
 \end{lstlisting}
 
-As we can see an schema is defined with a specific namespace. For \GNOME applications there was a convention to start it by \emph{org.gnome}. Apart from the namespace we had as well:
+As we can see a schema is defined with a specific namespace. For \GNOME applications there was a convention to start it by \emph{org.gnome}. Apart from the namespace we had as well:
 \begin{itemize}
   \item \textbf{path}: The path the schema points to.
   \item \textbf{child}: It was a way to sort and manage easily the settings.
   \item \textbf{key}: The specific key for the setting. Only dashes were allowed for names to separate words.
 \end{itemize}
 
-In order to access the settings one had to access the main schema and then iterate over the children. For example if we wanted to get the value of use-default-font we needed to do something like this:
+In order to access the settings,  one had to access the main schema and then iterate over the children. For example, if we wanted to get the value of use-default-font we needed to do something like this:
 
 \begin{lstlisting}[style=GObject]
 settings = g_settings_new ("org.gnome.gedit");
@@ -92,12 +93,12 @@ g_settings_get (editor_settings, "use-default-font", "b",
                 &default_font);
 \end{lstlisting}
 
-This leaded to the first design. As it can be visualized in the figure \ref{fig:GSettingsFirst}, a new object \emph{GeditSettings} will inherit from a GSettings object and the application will manage the life of this object.
+This leaded to the first design. As can be visualized in the figure \ref{fig:GSettingsFirst}, a new object \emph{GeditSettings} will inherit from a GSettings object and the application will manage the life of this object.
 
 \addfigure[scale=0.75]{./images/gsettings1}{GSettings first design}{fig:GSettingsFirst}
 
-On construction GeditSettings will point to the root of the schema by setting the \emph{schema} property on construction time to `org.gnome.gedit'.
-In order to make it easier for the user, new API had to be added to manage GeditSettings as shown below. This API will take care of getting the specific child object.
+On construction,  GeditSettings will point to the root of the schema by setting the \emph{schema} property on construction time to `org.gnome.gedit'.
+In order to make it easier for the user, a new API had to be added to manage GeditSettings as shown below. This API will take care of getting the specific child object.
 
 \begin{lstlisting}[style=GObject]
 GSettings *
@@ -135,14 +136,14 @@ gedit_app_get_settings (GeditApp    *app,
 }
 \end{lstlisting}
 
-In relation to the implementation of GeditSettings, this object will make something similar to what it was doing gedit\_prefs\_manager\_app, listen to the changes in the settings database and set the relative settings to the UI of the application. For this, it will be listened the `changed' signal for the GSettings object. An advantage that provides GSettings over GConf is that it allows to listen to the changes for a specific setting instead of the whole directory of settings (child in terms of gsettings), making it easier to implement and set the ui changes.
+In relation to the implementation of GeditSettings, this object will make something similar to what it was doing gedit\_prefs\_manager\_app, listen to the changes in the settings database and set the relative settings to the UI of the application. For this, it will listen to the `changed' signal for the GSettings object. An advantage that provides GSettings over GConf is that it allows the application to listen to the changes for a specific setting instead of the whole directory of settings (child in terms of gsettings), making it easier to implement and set the ui changes.
 
 At this point of the development, gedit was the only big application ported to GSettings. GSettings was getting quite ready, so it was decided to make a hackfest taking gedit as an example to see where it could be improved API wise to make it easier for application developers. The information about this hackfest can be found in the next url: \url{https://live.gnome.org/Hackfests/GSettings2010}
 
 \newpage
 \subsection{New design, Part 2}
 
-After the hackfest, some changes were made in GSettings that allowed to simplify our current implementation. First of all the main important change was to not need anymore to iterate over children. In the figure \ref{fig:GSettingsSecond} it is shown how this affects our previous design.
+After the hackfest, some changes were made in GSettings that allowed to simplify our current implementation. First, the main important change was to not needed anymore to iterate over children. In the figure \ref{fig:GSettingsSecond} it is shown how this affects our previous design.
 
 \addfigure[scale=0.75]{./images/gsettings2}{GSettings second design}{fig:GSettingsSecond}
 
@@ -169,7 +170,7 @@ g_settings_get (editor_settings, "use-default-font", "b",
 default_font = g_settings_get_boolean (settings, "user-default-font");
 \end{lstlisting}
 
-The last important change made after this hackfest, was the change in the way an schema file is defined. The main reason for this, is that the previous format was not an standard. It was pointless to try to get a new format and a new standard for files when internally this format was converted to \emph{XML} and this language is already an standard and known by a lot of programmers already. So at the end it was decided to use XML directly. In the example below it is shown the same schema it was shown before but in XML:
+The last important change made after this hackfest, was the change in the way an schema file is defined. The main reason for this, is that the previous format was not an standard. It was pointless to try to get a new format and a new standard for files when internally this format was converted to \emph{XML} and this language is already an standard and known by a lot of programmers already. Thus, in the end it was decided to use XML directly. In the example below,  the same schema as berfore is shown it was shown, yet in XML:
 
 \begin{lstlisting}[style=xml]
 <schemalist>
@@ -198,7 +199,9 @@ The last important change made after this hackfest, was the change in the way an
 
 \section{Implementation}
 
-To implement this, it was followed directly the design and the patches can be found below in the bugs section. Also as it was quite a big change, it was developed in a different branch until it was ready to be merged. The branch can be found in: \url{http://git.gnome.org/browse/gedit/log/?h=gsettings}.
+The  implemention followed directly the approach described above.  The patches 
+can be found below in the bugs section. Also, since it was quite a big change, it was developed in a different 
+branch until it was ready to be merged. The branch can be found in: \url{http://git.gnome.org/browse/gedit/log/?h=gsettings}.
 
 \subsection{Bugs}
 

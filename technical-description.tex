@@ -1,27 +1,45 @@
 % mainfile:main.tex
-
+% revised by dnolivieri
 \chapter{Technical description}
 
 % FIXME: draft
 
 \section{Methodology}\label{sec:Methodology}
 
-When someone wants to work in a project that it is already managed by a team, you have to get used to the working way of the team. This is also true for a project like gedit, where all the maintainers work in a voluntary way. It was a bit complicated to find out a methodology that could fit the requisites of the method used by the team. This one was the \emph{Iterative and incremental development}. The reason that we have some dates set up by \GNOME, that we work incrementally with small changes, refactoring and redesigning when necessary, made this methodology a good one for the way of working.
+When joining an existing project, already managed by a team, it is necessary to become accustomed to the work dynamics of that 
+team. This is particularly true of open source project, such as gedit, where all the maintainers (developers) work 
+volantarily.  Discovering a software design methodology that fit the estabilished requirements of the team, 
+was complicated.  As such, the one that best mapped the group development was  \emph{Iterative and incremental development}. 
+This is because the project has dates, set by \GNOME, that we worked incrementally to achieve, through 
+small changes, refactoring and redesigning when necessary.  
 
 \addfigure{./images/iterative-development}{Iterative and incremental development diagram}{fig:IterativeDevelopment}
 
 %TODO review this paragraph
 
-In the figure \ref{fig:IterativeDevelopment} we can see the different processes of an iterative and incremental development. \GNOME schedules six months for each development cycle. This would work as the initial planning. Then for each feature we would have a planning, get the requisites if they are not set already, usually using brainstorming\footnote{Brainstorming is a group creativity technique by which a group tries to find a solution for a specific problem by gathering a list of ideas spontaneously contributed by its members.} with the rest of the team or taken into account from a specific bug (see \ref{sec:Bugs}), design, testing and evaluation. Each feature will be pushed to the public repository so other people can test it and give the opinion. If it is needed it will be made a new release (see the appendix \ref{chap:Release}), for this \GNOME has a calendar in which days each application must make a new release so the distributions (i.e Ubuntu or fedora) know when to create new packages for it.
+In Figure \ref{fig:IterativeDevelopment}, the different processes of an iterative and incremental 
+development are shown.  \GNOME schedules six months for each development cycle. This estabalishes the initial planning. 
+Subsequently, for each feature, the team establishes a more detailed planning, acquires requirements if not already set, 
+and undergoes a brainstorming session \footnote{Brainstorming is a group creativity technique, by which a group tries to find a 
+solution for a specific problem by gathering a list of ideas spontaneously contributed by its members.} with the 
+rest of the team or taken into account from a specific bug (see \ref{sec:Bugs}), design, testing and evaluation. 
+Each feature will be placed (pushed) on the public repository,  so that other people can test it and give their opinions. 
+If needed, a new release could be made(see the appendix \ref{chap:Release}).  For this, \GNOME has a specific calendar indicating 
+which days each application must make a new release, so that linux distributions (i.e Ubuntu or fedora) 
+know ahead of time when to create new packages for it.
 
-The main problem of the iterative development is that it lacks of tools to represent the design and the analysis. Some times this is needed and because of this some features from UML will be used too.
+The main problem with the iterative development methodology is that it lacks software engineering tools 
+to represent the design and analysis.  Such tools are often needed, so some features from UML have been used as well.
 
 \section{Programming languages}\label{sec:ProgrammingLanguages}
 
-Below there is a list of programming languages and tools mainly used in this project:
+Below there is a list of programming languages and tools that have been used in this project:
 \begin{itemize}
-  \item \emph{C}: C is the recommended programming language by the platform. Using GObject we can provide to it Object Oriented features. This is the programming language used in the core of gedit and it will be the main one to be used in this project.
-  \item \emph{Python}: The fact that we are using such a low level programming language for the core, pushed the developers to provide other easier to use one for plugin writers. It makes the plugins easier to maintain and makes it very fast to code.
-  \item \emph{Autotools}: The fact of using autotools for the project building, means that an extensive knowledge of Makefiles and configure scripts is needed.
+  \item \emph{C}: C is the recommended programming language by the platform. Using GObject we can provide to it Object 
+Oriented features. This is the programming language used in the core of gedit and it will be the main one to be used in this project.
+  \item \emph{Python}: The fact that we are using such a low level programming language for the core, pushed the 
+developers to provide other easier to use one for plugin writers. It makes the plugins easier to maintain and makes it very fast to code.
+  \item \emph{Autotools}: The fact of using autotools for the project building, means that an extensive knowledge of 
+Makefiles and configure scripts is needed.
   \item \emph{Xml}: For some user interfaces, like dialogs this markup language is needed.
 \end{itemize}

@@ -6,21 +6,25 @@
 
 \addfigure[scale=0.75]{./images/gedit-old-find}{Old search dialog}{fig:OldFind}
 
-As we can see in the figure \ref{fig:OldFind}, gedit's search dialog has not evolved over the past years. This way for presenting to the user a dialog for searching has a really big problem, it obscures the text you are searching for. In the past few years a few applications like Firefox or Chrome have come with some ideas, which are the ones used right now by most software applications for searching in the documents.
+As can be seen in Figure \ref{fig:OldFind}, gedit's search dialog has not evolved over the past years. This way of presenting 
+a search dialog to the user poses a signicant problem: it obscures the text you are searching for. In the past few years, a few popular applications 
+such as Firefox or Chrome have invented several ideas, which are the methods presently employed by most software applications 
+for searching within the documents.
 
 \newpage
 \subsection{Firefox vs Chrome}
 
-In the figure \ref{fig:FirefoxSearch}, it is shown the method Firefox uses for prompting the search to the user. This method has a few problems.
+In figure \ref{fig:FirefoxSearch}, the method used by Firefox is shown that presents a search prompt to the user. This method has a few problems.
 \begin{itemize}
-  \item Some studies have demonstrated that presenting visual elements to the user in the bottom of a screen are less discoverable than elements in the top-left of the screen.
+  \item Some studies have demonstrated that presenting visual elements to the user in the bottom of a screen are less discoverable 
+   than elements in the top-left of the screen.
   \item It resizes the web browser viewer to present the search widget. This also has an advantage, it will not obscure any part of the document.
   \item It takes a big part of horizontal space.
 \end{itemize}
 
 \addfigure[scale=0.5]{./images/firefox-search}{Firefox search}{fig:FirefoxSearch}
 
-As shown in the figure \ref{fig:ChromeSearch}, Chrome comes with an idea based on the Firefox search, but trying to fix some of the problems introduced by the previous one. Although this ones is not perfect either.
+As shown in Figure \ref{fig:ChromeSearch}, Chrome utilizes an idea based upon the Firefox search, yet tries to fix some of the problems. Nonetheless, this solution is still not perfect.
 \begin{itemize}
   \item It shows the pop up in the top-right, which is not the top-left as the studies demonstrated. Although, this is still better than in the bottom of the screen.
   \item It obscures part of the document.
@@ -28,17 +32,20 @@ As shown in the figure \ref{fig:ChromeSearch}, Chrome comes with an idea based o
 
 \addfigure[scale=0.5]{./images/chrome-search}{Chrome search}{fig:ChromeSearch}
 
-In the analysis of the currently used search systems, we can see that there is no perfect system to manage a search by the user. In gedit, after some discussion, we decided that the best option for us would be a Chrome like search widget, as at the end it is not like people are writing that much in a text editor horizontally but doing it vertically. This means that poping out a widget on the top-right of the screen would not be that bad for the user. Apart from this problem, it was the less problematic search way for our understanding.
+In the analysis of the currently used search systems, we can see that there is no perfect system to manage a search by the user. In gedit, after some discussion, we decided that the best option for gedit would be one similar to Chrome' search widget approach.  The principal reason is that we believe people write more vertically than horizontally.  Thus, poping out a widget on the top-right of the screen should not pose a significant problme to the user. Also, this solution seemed to be the lesst problematic search method based upon our understanding.
 
 \subsection{Current design}
 
-Below it is pointed out in the figure \ref{fig:OldClassDiagram}, how it looks the current design before introducing anything new, in order to see how things will evolve.
+Figure \ref{fig:OldClassDiagram} shows the appearance  of the current design before introducing anything new, in order to see how 
+things will evolve.
+
+***** Not sure what you mean **** clean this up..
 
 \addfigure[width=\textwidth]{./images/search-system-old}{Old class diagram}{fig:OldClassDiagram}
 
 \subsection{New design}
 
-In the figure \ref{fig:SearchClassDiagram} is spotted the new design in order to implement the new search pop up. The main problem here is that we do not have a container which will allows us to place a widget in a fixed position having a main widget below it. The only widget that allows fixed positions in GTK+ is \emph{GtkFixed}, the problem of this widget is that it does not allow a main widget design. Here is where we need to get the requisites for this widget:
+In Figure \ref{fig:SearchClassDiagram}, the new design is shown in order to implement the new search pop up. The main problem is that we do not have a container which will allows us to place a widget in a fixed position having a main widget below it. The only widget that allows for fixed positions in GTK+ is \emph{GtkFixed}.   The problem with this widget is that it does not allow a main widget design. Here is where we need to get the requisites for this widget:
 
 \subsubsection{GeditOverlay}
 
@@ -84,7 +91,7 @@ GTK+ GtkFrame does not provide any way to draw a rounded frame. This widget is m
 
 GeditViewFrame is a delegate widget in order to remove complexity from GeditTab. This widget will take care of creating the Overlay, the View and the Document and add them correctly.
 
-Apart from that it will also take care of managing the search widget, setting when it must do a specific animation and provide API to invoke it from the GeditWindow's menu.
+Apart from that, it will also take care of managing the search widget, setting when it must do a specific animation and provide API to invoke it from the GeditWindow's menu.
 
 The API provided by this widget is:
 
@@ -109,7 +116,7 @@ The API provided by this widget is:
 
 \subsubsection{GeditSearchWidget}
 
-This widget is a simple box container, it adds the entry and the buttons to go to the next occurrence or to the previous one. It will listen to the changes on the entry text and search in the document as appropriate. It will also launch a dropdown menu to configure the type of search that it wants to be set.
+This widget is a simple box container, since it adds the entry and the buttons to go to the next occurrence or to the previous one. It will listen to the changes on the entry text and search in the document as appropriate. It will also launch a dropdown menu to configure the type of search that it wants to be set.
 
 \newpage
 \addfigure[scale=0.45]{./images/search-system}{Search class diagram}{fig:SearchClassDiagram}
@@ -117,7 +124,7 @@ This widget is a simple box container, it adds the entry and the buttons to go t
 \newpage
 \subsection{Theatrics}\label{sec:Theatrics}
 
-With the design in the figure \ref{fig:SearchClassDiagram}, we have almost everything ready. The main remaining problem here, is that we do not have a way to animate the pop up. GTK+ does not provide any way for doing such animations, the only way is to create it by using a timeout and make the animation in each iteration. In the figure \ref{fig:Theatrics}, we can see the design for a custom framework to help to achieve this.
+With the design shown in Figure \ref{fig:SearchClassDiagram}, the class is almost complete. The principal problem that remains is that we do not have a way to animate the pop up. GTK+ does not provide any way for doing such animations and the only way is to create it by using a timeout and make the animation in each iteration. In Figure \ref{fig:Theatrics}, the design for a custom framework to help to achieve this is shown.
 
 \addfigure[scale=0.40]{./images/theatrics}{Theatrics}{fig:Theatrics}
 
