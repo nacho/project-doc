@@ -19,7 +19,7 @@ is using any of those public fields.
 
 gedit used several of this public fields, since there was no way to access those data from a getter of a setter method. 
 The gedit team provided several patches to GTK+ in order to get methods to access those fields for GtkTextView main classes 
-in orert to be able to get this work done as fast as possible.
+in order to be able to get this work done as fast as possible.
 
 \subsection{Removal of GSEALs}
 
@@ -27,7 +27,7 @@ The GSEAL work was done as a provisional work for gtk+ 2.24.  In this way,  appl
 would be removed for the 3.0 version.
 
 What was done in this case was to move these sealed fields to a private struct only accessible by the widget itself. 
-This was a time intensive job. In the case of gedit, we helped also with the GtkTextView classes.
+This was a time intensive job. In my case, I helped with the GtkTextView classes.
 
 \subsection{Direct use of cairo}
 
@@ -46,7 +46,7 @@ The main problem here, was that GTK+ used a theme system that was difficult to m
 most standard technologies at present for performing this type of task. It is used everywhere on the web and is known by most designers. 
 
 With respect to the gedit implementation, this posed a problem since several custom widgets had been designed to give a 
-richer look.  One example was the custum implementation of the button widget in the tab had been written to make the buttom appear 
+richer look.  One example was the custum implementation of the button widget in the tab had been written to make the button appear 
 smaller than the standard button.
 
 gedit followed this development closely and changed the pertinent widgets with the added API in order to control the 
@@ -76,6 +76,31 @@ main view white with the text color black.
 
 This fulfilled our GtkSourceView requirement to be able to have custom user themes.
 
+The patch I provided to GtkTextView was quite trivial in this case as it can be seen in the snippet below, adding the .view class to the default theme of GtkTextView.
+
+\begin{lstlisting}[style=plain]
+
+index 6f72071..02c3fff 100644
+--- a/gtk/gtkcssprovider.c
++++ b/gtk/gtkcssprovider.c
+@@ -3638,7 +3638,12 @@ gtk_css_provider_get_default (void)
+         "  color: shade (@bg_color, 0.7);\n"
+         "}\n"
+         "\n"
+-        "GtkTreeView, GtkIconView, GtkTextView {\n"
++        "GtkTreeView, GtkIconView {\n"
++        "  background-color: @base_color;\n"
++        "  color: @text_color;\n"
++        "}\n"
++        "\n"
++        ".view {\n"
+         "  background-color: @base_color;\n"
+         "  color: @text_color;\n"
+         "}\n"
+
+\end{lstlisting}
+
+\newpage
 \section{Case insensitive search}
 
 Given that features in 3.0 could break the API, it was decided to move the case insensitive search from GtkSourceView 
