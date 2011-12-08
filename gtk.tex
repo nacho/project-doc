@@ -46,7 +46,7 @@ The main problem here, was that GTK+ used a theme system that was difficult to m
 most standard technologies at present for performing this type of task. It is used everywhere on the web and is known by most designers. 
 
 With respect to the gedit implementation, this posed a problem since several custom widgets had been designed to give a 
-richer look.  One example was the custum implementation of the button widget in the tab had been written to make the button appear 
+richer look.  One example was the custom implementation of the button widget in the tab had been written to make the button appear 
 smaller than the standard button.
 
 gedit followed this development closely and changed the pertinent widgets with the added API in order to control the 
@@ -100,7 +100,111 @@ index 6f72071..02c3fff 100644
 
 \end{lstlisting}
 
-\newpage
+The main problem in this work was to port GtkSourceView to use the new css system. The reason this was a problem is that gtksourceview provides a theming system using xml. The main job here was to translate the xml fields to correctly readable css and set it to the widget. In this works on question popped out:
+
+\subsection*{Why not use css directly and drop xml?}
+
+The main reason for continuing using xml is that xml provides a way to get extra metadata information from the document. For examplee the version, the author etc. Also there was the problem that there are some fields in the theme that are not managed by GtkTextView itself so we would not be able to get them easily to be able to make the drawing in GtkSourceView as it is now. For example there is a color for the current selected line that it is drawn by GtkSourceView and not by GtkTextView.
+
+The other reason for this was to keep support for the current format as there are several users that provide custom scheme colors and they would have to port it to the new format.
+
+\subsection{CSS generation from XML}
+
+In this code below it is shown the specific code added to create the CSS template to be applied to the CSS provider of GTK+
+
+\begin{lstlisting}[style=plain]
+static void
+get_css_color_style (GtkSourceStyle *style,
+                     gchar         **bg,
+                     gchar         **text)
+{
+	GdkRGBA color;
+
+	if (get_color (style, FALSE, &color))
+	{
+		gchar *bg_color;
+		bg_color = gdk_rgba_to_string (&color);
+		*bg = g_strdup_printf ("%s: %s;\n", "background-color", bg_color);
+		g_free (bg_color);
+	}
+	else
+	{
+		*bg = NULL;
+	}
+
+	if (get_color (style, TRUE, &color))
+	{
+		gchar *text_color;
+		text_color = gdk_rgba_to_string (&color);
+		*text = g_strdup_printf ("%s: %s;\n", "color", text_color);
+		g_free (text_color);
+	}
+	else
+	{
+		*text = NULL;
+	}
+}
+
+static void
+append_css_style (GString        *string,
+                  GtkSourceStyle *style,
+                  const gchar    *state)
+{
+	gchar *bg, *text;
+	const gchar css_style[] =
+		".view%s {\n"
+		"	%s"
+		"	%s"
+		"}\n";
+
+	get_css_color_style (style, &bg, &text);
+
+	if (bg || text)
+	{
+		g_string_append_printf (string, css_style, state,
+		                        bg != NULL ? bg : "",
+		                        text != NULL ? text : "");
+
+		g_free (bg);
+		g_free (text);
+	}
+}
+
+static void
+generate_css_style (GtkSourceStyleScheme *scheme)
+{
+	GString *final_style;
+	GtkSourceStyle *style, *style2;
+
+	final_style = g_string_new ("");
+
+	style = gtk_source_style_scheme_get_style (scheme, STYLE_TEXT);
+	append_css_style (final_style, style, "");
+
+	style = gtk_source_style_scheme_get_style (scheme, STYLE_SELECTED);
+	append_css_style (final_style, style, ":selected:focused");
+
+	style2 = gtk_source_style_scheme_get_style (scheme, STYLE_SELECTED_UNFOCUSED);
+	if (style2 == NULL)
+		style2 = style;
+	append_css_style (final_style, style2, ":selected");
+
+	if (*final_style->str != '\0')
+	{
+		GError *error = NULL;
+
+		if (!gtk_css_provider_load_from_data (scheme->priv->css, final_style->str,
+		                                      final_style->len, &error))
+		{
+			g_warning ("%s", error->message);
+			g_error_free (error);
+		}
+	}
+
+	g_string_free (final_style, TRUE);
+}
+\end{lstlisting}
+
 \section{Case insensitive search}
 
 Given that features in 3.0 could break the API, it was decided to move the case insensitive search from GtkSourceView 
