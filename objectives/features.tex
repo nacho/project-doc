@@ -2,26 +2,70 @@
 
 \section{New features}\label{sec:NewFeatures}
 
+Besides the major library changes provided by this project, that are hidden from the 
+user, there are several more visible changes undertaken in this project, that have been 
+realized.  Each of the major feature changes is described below.
+
+
 \subsection{Remove old API}\label{sec:RemoveOldAPI}
 
-\emph{gedit} has been trying to provide stable API for several years, this means that if some API is deprecated it will be marked as so, but kept in the source code so plugin writers do not have to update to the new APIs if they do not want. The fact that we are breaking the API/ABI for the new major release it will allow to remove the deprecated API and do not support the old plugins.
+For several years, developers of \emph{gedit} have opted for maintaining a stable unchanging 
+API interface for plugin- developers. The implication of this cautious design choice in the 
+evolution of \emph{gedit} has been a continual growth in deprecated and duplicated code 
+in order to lessen the burden of plugin developers need to update to the new API features. 
+Thus, if some part of the API was deprecated, it would be marked as such, yet maintained 
+in the source tree, still available to third party plugins, without the need for update action.
+A result of such a policy is .....
+
+The objectives of this project for providing a major release of \emph{gedit}, removes 
+all references to the old API.  Thus, several older plugins will cease to be supported 
+unless updated.
+
 
 \subsection{New highlighting language files}\label{sec:HighFiles}
 
-To fix, review and add new language files to highlight syntax for new programming languages. It is very usual that users request to get highlighting for new programming files, so if they provide the patches, they will be reviewed and fixed to be added.
+A new feature, provided by software written for this project, is the use of 
+highlighting language files.   Since it is common to receive requests from 
+users for highlighting for new programming files, (....why?? )
+
+Thus, this project has added the use of this feature, to fix, review and 
+add new language files to highlight syntax for new programming languages.
+
 
 \subsection{Tab Groups}\label{sec:TabGroups}
 
-It allows gedit to have documents side by side. In this way the documents can be compared more easily and edit them faster.
+An important editor feature, that is clearly desirable in a full feature application 
+such as \emph{gedit}, is to be able to edit multiple documents side-by-side. 
+Such a feature is useful for comparison, and is common in applications such as emacs. 
+Thus, this feature has been added as a design objective for this project.
+
 
 \subsection{Manage invalid characters}\label{sec:InvalidChars}
 
-GTK+ is UTF-8\footnote{UTF-8 is a multibyte character encoding for Unicode.} oriented. There are several characters\footnote{An invalid byte sequence is a sequence of bytes that can not be together in an UTF-8 encoded system.} in UTF-8 that cannot be introduced in GTK+ widgets. In \emph{gedit} the documents that contain invalid characters are treated as binary files and not opened, this is sometimes not good when you have a wrongly encoded document and you want to fix it. This feature will allow to open this kind of documents.
+
+
+GTK+ is UTF-8\footnote{UTF-8 is a multibyte character encoding for Unicode.} oriented. There 
+are several characters\footnote{An invalid byte sequence is a sequence of bytes that can not be 
+together in an UTF-8 encoded system.} in UTF-8 that cannot be introduced in GTK+ widgets. 
+In \emph{gedit} the documents that contain invalid characters are treated as binary files and not 
+opened, this is sometimes not good when you have a wrongly encoded document and you want to fix it. 
+This feature will allow to open this kind of documents.
 
 \subsection{Use new Drag and Drop system}\label{sec:DND}
 
-\emph{gedit} is currently using a custom implementation to make drag and drop of opened tabs. Now that GTK+ supports all the functionalities needed by gedit, this can be dropped and use the new GTK+ API, which allows better integration with the desktop and a lot of internal code cleanup.
+The present stable version of \emph{gedit} uses a custom implementation to make 
+drag and drop of opened tabs.  Given that the new GTK+ supports all the functionalities 
+needed by gedit, the custom drag/drop code is no longer required and should take advantage
+of the more robust GTK+ API.  Moreover, the GTK+ API allows for better integration 
+with the desktop and provides for a cleaner implementation of the \emph{gedit} source code.
+As such, this is a major feature contribution provided by this project. 
 
 \subsection{New search system}\label{sec:SearchSystem}
 
-Currently gedit uses a really old way to search on files. In the latest years the way of searching in files has changed, from the idea of embedding the search entry in the bottom of the window, like Firefox to the idea of Chrome for sliding out the search entry. gedit uses a dialog for searching, this has the problem of hiding the text while you are searching. There must be an analysis to add a new way for searching more like the systems nowadays.
+The present method that \emph{gedit} searches files is obsolete and does not take advantage of 
+the latest algorithms nor graphical user interface philosophies, such as embedding the search 
+entry in the bottom of the window (as Firefox) or sliding out the search entry (as with Chrome). 
+Instead, the \emph{gedit} has used a dialog for searching, with all its associated problems. 
+
+An important contribution of this project has been to change the manner of searching text 
+within documents.

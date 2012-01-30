@@ -4,22 +4,47 @@
 
 \subsection{GTK+ 3}\label{sec:GTK3}
 
-Migrate from GTK+ 2 to GTK+ 3. This will mean to get rid of deprecated code that is used from GTK+ 2, update gedit to use the new APIs and the most important thing, evolve following the development of GTK+ 3, meaning that if there is any error in GTK+, it should be filed a bug against it and if possible provide a patch to fix it (See \ref{sec:Patches} for an explanation on how to do this correctly). This will also mean that to have the application building, it will be needed to have the application up to date, which will mean a lot of testing against the latest libraries and rebuilding them. For an explanation of what GTK+ is, see the section \ref{sec:GTK}.
+A significant change in the gedit application, provided by this project, has been the migration from GTK+ 2 to GTK+ 3 
+(for a more detailed description of GTK+, please refer to section \ref{sec:GTK}).
+This task required the elimination of all deprecated software code with dependence upon GKT+2, updating of gedit to the 
+new APIs, and most importantly, follow the evolution of GTK+ 3, which has been a moving target.    Thus, if an error was 
+detected in GTK+, then it was necessary to submit a bug report for it and possibly provide a patch to fix it (Please 
+refer to \ref{sec:Patches} for an explanation on how to do this correctly).   A direct result of using the a library 
+that \textit{itself} is under a fierce development phase, is that continual testing was needed during all stages of 
+development and that at no point could library functionality be taken for granted.  
+
 
 \subsection[GSettings]{GSettings\cite{website:gio}}\label{sec:GSettings}
 
-Port to GSettings, to use it instead of GConf. GSettings is part of glib (see \ref{sec:GLib}) and provides a convenient API for storing and retrieving application settings. Some of the reasons for this switch are:
+Amongst the specific tasks associated with the porting of gedit to GTK+ 3, it was necessary 
+to to use GSettings, instead of the previously used GConf.  GSettings is part of glib (see \ref{sec:GLib}) 
+and provides a convenient API for storing and retrieving application settings.   This 
+change is motivated by the following reasons: 
 \begin{itemize}
   \item GConf has been deprecated.
-  \item Provides better API to be used by GObject-based applications.
-  \item It is used over D-Bus\footnote{D-Bus is a message bus system, a simple way for applications to talk to one another.}.
+  \item GSettings provides better API to be used by GObject-based applications.
+  \item It is used with D-Bus\footnote{D-Bus is a message bus system, a simple way for applications to talk to one another.}.
   \item The storage system is implemented by different backends, in relation to the operative system or the choose of the user.
 \end{itemize}
 
 \subsection{libpeas}\label{sec:libpeas}
 
-Remove custom plugin system and use libpeas instead. See the section \ref{sec:peas} for a better explanation of what libpeas is.
+Another specific task that has been accomplished in this project is related to a removal of the 
+custom plugin system in favor of the \texttt{libpeas} library.  A more detailed description of the 
+libpeas library can be found in section \ref{sec:peas}, as well as a motivation for its substitution
+over the previous custom library. 
 
 \subsection{GObject-introspection}\label{sec:GObjectIntrospection}
 
-It will allow to remove the static bindings and generate dynamic ones by making annotations in the public API of \emph{gedit} or other GObject based applications and libraries. See \ref{sec:g-i} for a better explanation of what GObject-introspection is.
+
+Finally, another major change provided by the work of this project associated with libraries 
+is the use of GObject introspection, which allows the language to determine the type of an 
+object at runtime, thereby providing a type of polymorphism.  The changes performed in this 
+project were to remove the previous static bindings in favor of the ability to 
+generate dynamic bindings.   This has the advantage that ....
+(making annotations 
+in the public API of \emph{gedit} or other 
+GObject based applications and libraries.)
+
+A further discussion of GObject-introspection is provided in section \ref{sec:g-i}.
+
