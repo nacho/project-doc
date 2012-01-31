@@ -2,44 +2,152 @@
 % revised by dnolivieri
 \chapter{Technical description}
 
-% FIXME: draft
+
+Despite the apparent simplicity of the \emph{gedit} application for the end user, it 
+is actually a highly complex software system, having its special idiosyncratic 
+architectural solutions.   Before describing the actual work of this project, a brief 
+description of the \emph{gedit} architecture shall be discussed, so as to better appreciate 
+the work involved in the upgrade.  
+
+
+\section{Gedit Architecture}
+
+The \emph{gedit} application is written in the \emph{C} language and built around the 
+GObject paradigm, invented by \GNOME, and thereby endowing the language with object-oriented constructs. 
+Figure \ref{fig:geditArch} shows a simple architectural overview of the \emph{gedit} internals. 
+
+% FIXME
+%\begin{figure}
+%\epsfig{geditArch}
+%\caption{The \emph{gedit} architecture.}
+%\label{fig:geditArch}
+%\end{figure}
+
+
+**** This section should answer the following questions: 
+
+   - what are the essential elements of the gedit architecture?
+   - how does the language influence the architecture (if at all)?
+   - introduce/identify (as if foreshadowing) the elements of the architecture that 
+     you have you needed to use directly ?   Here you are trying to prepare the 
+     reader for what you will describe as your direct contribution....
+
+
+
+
+\section{Programming languages used in Project}
+\label{sec:ProgrammingLanguages}
+
+Before describing the exact technical contribution of the project, it is useful to briefly mention 
+the programming languages and tools that were needed.  
+
+\paragraph{C} 
+
+The \emph{C} programming language is used in the core of \emph{gedit}.   As such, it is 
+the recommended laguage of choice for the platform.  By using GObjects, several 
+object oriented features are exposed to the developer.  Apart from the technical advantages, 
+these features greatly aide the organization as well as readablility of the code.
+All upgrades that were carried out were written in the \emph{C} language with explicit
+use of the GObjects paradigm. 
+
+\paragraph{Python}
+
+Python is a powerful object oriented interpreted language that provides powerful 
+C- level bindings, and is not only useful as a stand-alone language but can be used 
+as a plugin- development language, for its ease of use.   By wrapping the core 
+C API, plugin development in python is fast, easy to develop and maintain, and 
+can avoids the heavy learning curve associated with the low-level C programming 
+associated with \emph{gedit}.
+
+
+**** mention briefly how you used python... for example if you used it 
+  in the development of plugins, or if you actually developed some 
+  of the plugin interface.???
+
+
+
+
+\paragraph{Tools and Formats}
+
+
+An important part of the development for an open-source project such as \emph{gedit} is 
+the use of complex build tools.   For this, Autotools is used.   
+Together with the Makefile utilities, the Autotools suite are used for creating complex
+compile dependencies and can be used for making code portable across several different 
+types of platforms.  
+
+As with many modern software applications, XML markup language is used for 
+rapid portability as well as for data persistency.  ....
+
+
+
+***   Mention other ways which you used this ... 
+
+
+
+
+
+
+
+
+
+
 
 \section{Methodology}\label{sec:Methodology}
 
-When joining an existing project, already managed by a team, it is necessary to become accustomed to the work dynamics of that 
-team. This is particularly true of open source project, such as gedit, where all the maintainers (developers) work 
-volantarily.  Discovering a software design methodology that fit the estabilished requirements of the team, 
-was complicated.  As such, the one that best mapped the group development was  \emph{Iterative and incremental development}. 
-This is because the project has dates, set by \GNOME, that we worked incrementally to achieve, through 
-small changes, refactoring and redesigning when necessary.  
+The methodology followed by this project has been largely dictated by that compatible 
+with open Source software development.    As such, the one that best mapped the group 
+development was  \emph{Iterative and incremental development}. 
+The typical workflow of a  \GNOME project includes incrementally small changes 
+as well as refactoring and redesigning when necessary.  
+
+
+
+When joining an existing project, already managed by a team, it is necessary to become accustomed 
+to the work dynamics of that team. This is particularly true of open source project, such as gedit, 
+where all the maintainers (developers) work voluntarily.  Discovering a software design methodology 
+that fit the established requirements of the team, was complicated.  
+
+
+
 
 \addfigure{./images/iterative-development}{Iterative and incremental development diagram}{fig:IterativeDevelopment}
 
 %TODO review this paragraph
 
 In Figure \ref{fig:IterativeDevelopment}, the different processes of an iterative and incremental 
-development are shown.  \GNOME schedules six months for each development cycle. This estabalishes the initial planning. 
+development are shown.  \GNOME schedules six months for each development cycle. This establishes the initial planning. 
 Subsequently, for each feature, the team establishes a more detailed planning, acquires requirements if not already set, 
 and undergoes a brainstorming session \footnote{Brainstorming is a group creativity technique, by which a group tries to find a 
 solution for a specific problem by gathering a list of ideas spontaneously contributed by its members.} with the 
 rest of the team or taken into account from a specific bug (see \ref{sec:Bugs}), design, testing and evaluation. 
 Each feature will be placed (pushed) on the public repository,  so that other people can test it and give their opinions. 
 If needed, a new release could be made(see the appendix \ref{chap:Release}).  For this, \GNOME has a specific calendar indicating 
-which days each application must make a new release, so that linux distributions (i.e Ubuntu or fedora) 
+which days each application must make a new release, so that Linux distributions (i.e Ubuntu or fedora) 
 know ahead of time when to create new packages for it.
 
 The main problem with the iterative development methodology is that it lacks software engineering tools 
 to represent the design and analysis.  Such tools are often needed, so some features from UML have been used as well.
 
-\section{Programming languages}\label{sec:ProgrammingLanguages}
 
-Below there is a list of programming languages and tools that have been used in this project:
-\begin{itemize}
-  \item \emph{C}: C is the recommended programming language by the platform. Using GObject we can provide to it Object 
-Oriented features. This is the programming language used in the core of gedit and it will be the main one to be used in this project.
-  \item \emph{Python}: The fact that we are using such a low level programming language for the core, pushed the 
-developers to provide other easier to use one for plugin writers. It makes the plugins easier to maintain and makes it very fast to code.
-  \item \emph{Autotools}: The fact of using autotools for the project building, means that an extensive knowledge of 
-Makefiles and configure scripts is needed.
-  \item \emph{Xml}: For some user interfaces, like dialogs this markup language is needed.
-\end{itemize}
+
+
+
+***************\section{Details of the Project}
+
+
+Nacho:  Here you have to put the details of the code that you developed....
+
+
+I suggest that you take the objective section one by one and write out 
+a technical description for each of the goals... making connection with the 
+section on architecture....
+
+
+***************************
+
+
+
+
+
+
