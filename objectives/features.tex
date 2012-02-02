@@ -15,7 +15,8 @@ evolution of \emph{gedit} has been a continual growth in deprecated and duplicat
 in order to lessen the burden of plugin developers need to update to the new API features. 
 Thus, if some part of the API was deprecated, it would be marked as such, yet maintained 
 in the source tree, still available to third party plugins, without the need for update action.
-A result of such a policy is .....
+A result of such a policy is a more clean code base and the mandatory use of new APIs and 
+technologies for the third party plugins.
 
 The objectives of this project for providing a major release of \emph{gedit}, removes 
 all references to the old API.  Thus, several older plugins will cease to be supported 
@@ -24,9 +25,11 @@ unless updated.
 
 \subsection{New highlighting language files}\label{sec:HighFiles}
 
-A new feature, provided by software written for this project, is the use of 
+A new feature, provided by software written for this project, is the creation of 
 highlighting language files.   Since it is common to receive requests from 
-users for highlighting for new programming files, (....why?? )
+users for highlighting for new programming files, due to the fact that programming 
+languages evolve and also new ones are created. In a general purpose text editor 
+as \emph{gedit} is needed to provide to users with such new features.
 
 Thus, this project has added the use of this feature, to fix, review and 
 add new language files to highlight syntax for new programming languages.
@@ -49,6 +52,7 @@ In \emph{gedit} the documents that contain invalid characters are treated as bin
 opened, this is sometimes not good when you have a wrongly encoded document and you want to fix it. 
 This feature will allow to open this kind of documents.
 
+
 \subsection{Use new Drag and Drop system}\label{sec:DND}
 
 The present stable version of \emph{gedit} uses a custom implementation to make 
@@ -56,7 +60,8 @@ drag and drop of opened tabs.  Given that the new GTK+ supports all the function
 needed by gedit, the custom drag/drop code is no longer required and should take advantage
 of the more robust GTK+ API.  Moreover, the GTK+ API allows for better integration 
 with the desktop and provides for a cleaner implementation of the \emph{gedit} source code.
-As such, this is a major feature contribution provided by this project. 
+As such, this is a major feature contribution provided by this project.
+
 
 \subsection{New search system}\label{sec:SearchSystem}
 
