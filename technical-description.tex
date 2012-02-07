@@ -39,7 +39,7 @@ the programming languages and tools that were needed.
 \paragraph{C} 
 
 The \emph{C} programming language is used in the core of \emph{gedit}.   As such, it is 
-the recommended laguage of choice for the platform.  By using GObjects, several 
+the recommended language of choice for the platform.  By using GObjects, several 
 object oriented features are exposed to the developer.  Apart from the technical advantages, 
 these features greatly aide the organization as well as readablility of the code.
 All upgrades that were carried out were written in the \emph{C} language with explicit
@@ -49,17 +49,18 @@ use of the GObjects paradigm.
 
 Python is a powerful object oriented interpreted language that provides powerful 
 C- level bindings, and is not only useful as a stand-alone language but can be used 
-as a plugin- development language, for its ease of use.   By wrapping the core 
+as a plugin - development language, for its ease of use.   By wrapping the core 
 C API, plugin development in python is fast, easy to develop and maintain, and 
 can avoids the heavy learning curve associated with the low-level C programming 
 associated with \emph{gedit}.
 
-
-**** mention briefly how you used python... for example if you used it 
-  in the development of plugins, or if you actually developed some 
-  of the plugin interface.???
-
-
+Python has been used in this project mainly to develop and update the powerful 
+plugins provided by \emph{gedit}. It has been also used to provide the specific 
+unit tests and overrides into pygobject in order to get new functionalities needed by 
+\emph{gedit} plugins. The overrides are methods or classes that from a direct 
+bind from C to Python do not result as convenient as they should and by adding 
+overrides the powerful of Python can be used in advantage by for example converting
+some specific classes in iterated classes.
 
 
 \paragraph{Tools and Formats}
@@ -108,7 +109,7 @@ solution for a specific problem by gathering a list of ideas spontaneously contr
 rest of the team or taken into account from a specific bug (see \ref{sec:Bugs}), design, testing and evaluation. 
 Each feature will be placed (pushed) on the public repository,  so that other people can test it and give their opinions. 
 If needed, a new release could be made(see the appendix \ref{chap:Release}).  For this, \GNOME has a specific calendar indicating 
-which days each application must make a new release, so that Linux distributions (i.e Ubuntu or fedora) 
+which days each application must make a new release, so that Linux distributions (i.e Ubuntu or Fedora) 
 know ahead of time when to create new packages for it.
 
 The main problem with the iterative development methodology is that it lacks software engineering tools 
