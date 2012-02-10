@@ -7,7 +7,7 @@ Despite the apparent simplicity of the \emph{gedit} application for the end user
 is actually a highly complex software system, having its special idiosyncratic 
 architectural solutions.   Before describing the actual work of this project, a brief 
 description of the \emph{gedit} architecture shall be discussed, so as to better appreciate 
-the work involved in the upgrade.  
+the work involved in the upgrade.
 
 
 \section{Gedit Architecture}
@@ -27,7 +27,29 @@ Figure \ref{fig:geditArch} shows a simple architectural overview of the \emph{ge
      you have you needed to use directly ?   Here you are trying to prepare the 
      reader for what you will describe as your direct contribution....
 
+\paragraph{GConf}
 
+The facto standard for GObject applications to store its settings in a database 
+providing applications with a signal system to detect whether a specific setting 
+has been modified externally, allowing to the application to adapt itself to the 
+change. This helped \GNOME applications to be simple in relation to the user interface, 
+not providing too many options, but giving the possibility to change advanced options 
+externally from the GConf database with its utility \emph{gconf-editor}.
+GConf has become deprecated and one major change for the Project is to remove 
+this dependency on the architecture, as right now all the settings are intrinsic 
+in all parts of \emph{gedit}.
+
+\paragraph{GLib}
+
+\paragraph{Cairo}
+
+\paragraph{GTK+}
+
+\paragraph{GtkSourceView}
+
+\paragraph{gedit}
+
+\paragraph{Plugins}
 
 
 \section{Programming languages used in Project}
