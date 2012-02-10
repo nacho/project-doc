@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="600"
+   height="400"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.1 r9760"
+   sodipodi:docname="old-plugins-architecture.svg"
+   inkscape:export-filename="/home/nacho/docu/images/old-plugins-architecture.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="292.90406"
+     inkscape:cy="181.2327"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer2"
+     showgrid="false"
+     inkscape:window-width="1440"
+     inkscape:window-height="842"
+     inkscape:window-x="0"
+     inkscape:window-y="26"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-652.36218)"
+     style="display:inline">
+    <rect
+       style="fill:#ff5555"
+       id="rect3751"
+       width="602.14282"
+       height="122.14286"
+       x="-8.7193084e-06"
+       y="651.64789" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="228.57141"
+       y="725.2193"
+       id="text3753"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3755"
+         x="228.57141"
+         y="725.2193">Plugins</tspan></text>
+    <rect
+       style="fill:#eeaaff;display:inline"
+       id="rect3699"
+       width="602.85718"
+       height="127.85714"
+       x="-0.35716033"
+       y="772.7193" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-size:18.77661133px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="418.26566"
+       y="375.18005"
+       id="text3092-9-26"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3094-1-4"
+         x="418.26566"
+         y="375.18005" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
+       x="93.058044"
+       y="194.6066"
+       id="text3753-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3755-2"
+         x="93.058044"
+         y="194.6066">Static Python bindings</tspan></text>
+    <rect
+       style="fill:#aa0000"
+       id="rect3096"
+       width="121.42857"
+       height="155"
+       x="-0.71428573"
+       y="247.14285" />
+    <text
+       xml:space="preserve"
+       style="font-size:25.97664642px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="28.77375"
+       y="331.4884"
+       id="text3124"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3126"
+         x="28.77375"
+         y="331.4884">gedit</tspan></text>
+    <rect
+       y="247.14285"
+       x="121.28571"
+       height="155"
+       width="116.42857"
+       id="rect3144"
+       style="fill:#e5ff80" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3146"
+       y="-150.2253"
+       x="289.74969"
+       style="font-size:23.09832382px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       transform="matrix(0,0.86462917,-1.1565652,0,0,0)"><tspan
+         y="-150.2253"
+         x="289.74969"
+         id="tspan3148"
+         sodipodi:role="line">gtksourceview</tspan></text>
+    <rect
+       style="fill:#ff80b2"
+       id="rect3150"
+       width="117.14286"
+       height="155"
+       x="237.28571"
+       y="247.14285" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3152"
+       y="331.4884"
+       x="268.77374"
+       style="font-size:25.97664642px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="331.4884"
+         x="268.77374"
+         id="tspan3154"
+         sodipodi:role="line">GLib</tspan></text>
+    <rect
+       y="247.14285"
+       x="354.85715"
+       height="155"
+       width="117.85715"
+       id="rect3156"
+       style="fill:#afe9c6" />
+    <text
+       xml:space="preserve"
+       style="font-size:25.97664642px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="376.77374"
+       y="331.4884"
+       id="text3158"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3160"
+         x="376.77374"
+         y="331.4884">GTK+</tspan></text>
+    <rect
+       style="fill:#b3ff80"
+       id="rect3162"
+       width="130"
+       height="155"
+       x="472.85712"
+       y="247.14285" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text3164"
+       y="331.4884"
+       x="500.77374"
+       style="font-size:25.97664642px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="331.4884"
+         x="500.77374"
+         id="tspan3166"
+         sodipodi:role="line">cairo</tspan></text>
+  </g>
+</svg>
