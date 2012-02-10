@@ -18,15 +18,6 @@ Figure \ref{fig:geditArch} shows a simple architectural overview of the \emph{ge
 
 \addfigure[width=0.60\textwidth]{./images/old-architecture}{gedit architecture}{fig:geditArch}
 
-
-**** This section should answer the following questions: 
-
-   - what are the essential elements of the gedit architecture?
-   - how does the language influence the architecture (if at all)?
-   - introduce/identify (as if foreshadowing) the elements of the architecture that 
-     you have you needed to use directly ?   Here you are trying to prepare the 
-     reader for what you will describe as your direct contribution....
-
 \paragraph{GConf}
 
 The facto standard for GObject applications to store its settings in a database 
@@ -41,15 +32,53 @@ in all parts of \emph{gedit}.
 
 \paragraph{GLib}
 
+GLib provides data structure handling for C, portability wrappers, and interfaces 
+for such runtime functionality as an event loop, threads, dynamic loading, and an object 
+system. It is the main reason gedit is written in \emph{C} as it has been the 
+promoted language by the platform and ten years ago the only supported language 
+by \GNOME. See section \ref{sec:GLib} for more information about this library.
+
 \paragraph{Cairo}
+
+Cairo is a 2D graphics library designed to produce consistent output on all output 
+media while taking advantage of display hardware acceleration when available. It 
+has a direct used by the GTK+ library and applications like gedit using GTK+.
 
 \paragraph{GTK+}
 
+Multi-platform toolkit used in \emph{gedit} which allows to create graphical interfaces.
+The architecture is totally tied up to this library, as gedit makes direct use of its 
+API in the core. The fact that we depend directly on its API it means that gedit 
+needs a lot of work in order to work with the new features and changes provided 
+on this library and in some cases modify and fix the library to make it work correctly 
+for gedit. See section \ref{sec:GTK} for more information about GTK+.
+
 \paragraph{GtkSourceView}
+
+GtkSourceView is a library maintained by the \emph{gedit team} which extends the main 
+multiline text editing widget. It features syntax highlighting, completion framework, 
+line marks... In general what a source editor needs. Gedit makes use of this library 
+and it is tied to it architecturally and in the design. Part of the project gets some 
+focus on this library.
 
 \paragraph{gedit}
 
+This is the core. Where the project take more focus and where most of the modification 
+are made. Parts of the core are explained in the Project in farther sections of this 
+document.
+
 \paragraph{Plugins}
+
+\emph{gedit} emphasizes simplicity but it can be also extended in a powerful way 
+by plugins. Figure \ref{fig:pluginsArch} shows in a really simplistic how plugins 
+are tied up in an architectural way.
+
+\addfigure[width=0.60\textwidth]{./images/old-plugins-architecture}{gedit plugins architecture}{fig:pluginsArch}
+
+We can see that they make direct use of static python bindings, being really tied up 
+to them. With the GObject-introspection work this layer it is removed, making use of a 
+slightly different API provided by the dynamic bindings. This project shows how it has 
+been done and the amount of work required.
 
 
 \section{Programming languages used in Project}
@@ -58,7 +87,7 @@ in all parts of \emph{gedit}.
 Before describing the exact technical contribution of the project, it is useful to briefly mention 
 the programming languages and tools that were needed.  
 
-\paragraph{C} 
+\paragraph{C}
 
 The \emph{C} programming language is used in the core of \emph{gedit}.   As such, it is 
 the recommended language of choice for the platform.  By using GObjects, several 
