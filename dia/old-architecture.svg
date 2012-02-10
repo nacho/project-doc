@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="old-architectural.svg"
+   sodipodi:docname="old-architecture.svg"
    inkscape:export-filename="/home/nacho/docu/dia/old-architecture.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
@@ -28,10 +28,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="350.46644"
-     inkscape:cy="193.114"
+     inkscape:cx="351.89501"
+     inkscape:cy="175.25686"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:window-width="1440"
      inkscape:window-height="842"
@@ -46,7 +46,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -65,16 +65,16 @@
        style="fill:#d40000" />
     <rect
        id="rect2985"
-       width="242.85716"
+       width="357.14288"
        height="233.57143"
-       x="113.57143"
+       x="-0.71428788"
        y="818.79077"
        style="fill:#c6e9af" />
     <rect
        id="rect2991"
        width="114.28572"
-       height="233.57143"
-       x="-0.71428567"
+       height="175"
+       x="57.85714"
        y="818.79077"
        style="fill:#80b3ff"
        inkscape:export-xdpi="90"
@@ -144,14 +144,14 @@
     <text
        xml:space="preserve"
        style="font-size:33.41161346px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="3.9413817"
-       y="299.99442"
+       x="62.51281"
+       y="266.42297"
        id="text3303"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3305"
-         x="3.9413817"
-         y="299.99442">GConf</tspan></text>
+         x="62.51281"
+         y="266.42297">GConf</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:33.41161346px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;display:inline;font-family:Sans"
