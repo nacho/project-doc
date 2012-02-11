@@ -169,16 +169,30 @@ so some features from UML have been used as well.
 
 \section{Details of the Project}
 
+In this project several objectives have been tried to achieve, and now that we have 
+an overview of the current architecture of \emph{gedit}, we can get a more detailed 
+vision of the developed code for each of the objectives. Refer to the chapter 
+\ref{chap:Objectives} for more information.
 
-Nacho:  Here you have to put the details of the code that you developed....
+\paragraph{Remove Old API}
 
+As seen in the architecture figure \ref{fig:geditArch}, gedit plugins depend 
+on the stability of the gedit API. Removing public API in a project that it is 
+exposing it externally may deal to broken plugins that will may not run in future 
+versions of \emph{gedit}. This task apart from removing all the deprecated API 
+meant to update the plugins shipped by gedit and \emph{maintained} by the gedit team.
 
-I suggest that you take the objective section one by one and write out 
-a technical description for each of the goals... making connection with the 
-section on architecture....
+\paragraph{New highlighting language files}
 
+The fact that gedit is a text editor also used to visualized source code, that
+GtkSourceView is intrinsic in gedit's architecture and that GtkSourceView is 
+maintained by gedit's team, it means that it is necessary to update it and 
+create new highlighting language files to make the edition for the user easier 
+and also to attract new users that may want to develop a specific feature in 
+that specific programming language.
 
-***************************
-
-
+GtkSourceView provides an easy way to create new highlighting language files 
+using the XML format to define them. The main problem here is that in order to 
+create or to update a language file it needs a lot of \emph{research} and good 
+\emph{understanding} of the language file that you want to create or update.
 
