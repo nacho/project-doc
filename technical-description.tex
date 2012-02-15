@@ -218,4 +218,16 @@ are not correct. This task is quite hard as it is a work at a very low level
 and it touches very difficult parts of the core of gedit. For more information 
 how this was implemented in this project refer to the chapter \ref{chap:InvalidChars}.
 
+\paragraph{New drag and drop system}
+
+\emph{gedit} is a very old application and has been evolving with GTK+ and GTK+
+with it. The custom drag and drop system used by gedit till now it was implemented 
+in Epiphany\footnote{Epiphany is the default web browser of the \GNOME desktop} 
+and then taken by gedit years ago. GTK+ sometime ago implemented its own drag 
+and drop system but it lacked some of the features needed by gedit. After requesting 
+this features and get them inside GTK+ it has been decided to drop the custom 
+drag and drop system and use the one in GTK+ which apart from being more robust, 
+it also provides a better integration with the desktop. See chapter \ref{chap:DND}
+for more information on how this was developed in this project.
+
 
