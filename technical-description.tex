@@ -207,4 +207,15 @@ That is the main reason it was implemented as a proxy between the single tab gro
 to the gedit's main window. Without the need to expose any external API to deal
 with it. For more information about this topic please refer to chapter \ref{chap:TabGroups}.
 
+\paragraph{Manage invalid characters}
+
+One of the main problems of depending on GTK+ is that it does not support to 
+visualize invalid UTF-8 characters in the multiline text editing widget that provides
+by default. As it is one of the most requested features, to visualize even the 
+text files which contain not valid characters, gedit has to deal with and show 
+them to the user in some characteristic way so the user can detect which ones 
+are not correct. This task is quite hard as it is a work at a very low level 
+and it touches very difficult parts of the core of gedit. For more information 
+how this was implemented in this project refer to the chapter \ref{chap:InvalidChars}.
+
 
