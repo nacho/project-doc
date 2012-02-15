@@ -196,3 +196,15 @@ using the XML format to define them. The main problem here is that in order to
 create or to update a language file it needs a lot of \emph{research} and good 
 \emph{understanding} of the language file that you want to create or update.
 
+\paragraph{Tab Groups}
+
+Tab groups is a new feature implemented on this Project which allows users to
+visualize several documents side by side without the need of having several
+gedit windows. This has been implemented in the gedit core and the main problem
+here was to implement it a way so there would not be any need to change the plugins
+in order to allow this feature.
+That is the main reason it was implemented as a proxy between the single tab groups
+to the gedit's main window. Without the need to expose any external API to deal
+with it. For more information about this topic please refer to chapter \ref{chap:TabGroups}.
+
+
