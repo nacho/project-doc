@@ -250,6 +250,15 @@ all the widgets used for the user interface. If GTK+ evolves, gedit as part of
 the \GNOME desktop must evolve with it and help it to be better. This project 
 shows some parts where it was helped to the GTK+ library and some of the main 
 changes on it which made so complicated at some point to depend on GTK+ 3 and be 
-up to date making gedit build.
+up to date making gedit build. See chapter \ref{chap:GTK3} for more information.
 
+\paragraph{GSettings}
 
+In the architecture section in this chapter, it can be seen that GConf is one 
+of the intrinsic parts of gedit's architecture. With the introduction of GSettings 
+in this cycle, GConf has become deprecated, which means changing one of the parts 
+in the core and in the plugins used everywhere. Removing a part of the architecture 
+and changing it with another it is always a hard task. It needs to know pretty well 
+what you are changing as it could deal to break parts of the system that you are not 
+counting with. See chapter \ref{chap:GSettings} for more information on how this 
+task has been made.
