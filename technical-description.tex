@@ -274,4 +274,13 @@ several languages and more features like extension points. Which make applicatio
 deal with plugins in an easier way. See chapter \ref{chap:libpeas} for more information 
 about the development done in this project in relation to plugins and libpeas.
 
+\paragraph{GObject introspection}
 
+As explained in the architecture part of the plugins in this chapter (see figure 
+\ref{fig:pluginsArch}), gedit has a hard dependency on the static python bindings. 
+With the new dynamic bindings provided by the GObject introspection library these 
+have become deprecated taking off a lot maintainership work for application developers 
+as maintaining static bindings is a lot of work. With the dynamic bindings things 
+got better in this sense, but it also meant a lot of work in the sense of porting 
+all the plugins to the new syntax and getting the system ready to use with GObject 
+introspection.
