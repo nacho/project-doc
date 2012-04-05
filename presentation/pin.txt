@@ -35,7 +35,17 @@ Extensible by plugins
 
 -- [fill] [background6.png]
 
--- [fill] [background7.png]
+-- [fill] [background7.png] [transition=swing]
+
+-- [fill] [background8.png] [transition=spin-bg]
+
+-- [fill] [background9.png] [transition=spin]
+
+-- [fill] [background10.png] [transition=action]
+
+-- [fill] [background11.png]
+
+-- [fill] [background12.png]
 
 -- [fill] [background5.png] [transition=page-curl-both]
 

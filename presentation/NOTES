@@ -1,0 +1,72 @@
+INTRO:
+  Greeting, yourself, why you are there -> First slide
+  3 points: Introduction, objectives, community, future development
+
+BODY:
+  Introduction, what is gedit?
+  Objectives of the project
+    * Port to new libraries
+    * New features
+
+  Port to new libraries:
+    * GSettings
+      - It deprecates GConf
+      - Very early adoption
+        * other dev branch
+        * used in hackfest
+      - Provides better integrated API
+    * GTK+ 3
+      - API changing under your feet
+      - Fix it and help to clean it up (GtkTextView)
+      - Direct use of cairo
+      - CSS
+        * Custom widgets style broken
+      - Move custom API to GTK+
+    * GObject introspection
+      - What is it?
+      - Really new technology.
+    * libpeas <-> GObject introspection
+      - Initial creation of libpeas.
+      - Adding of extension points.
+      - Moving to GObject introspection
+      - A lot of work to port all the plugins.
+      - Really few time to test all the features.
+  
+  New features:
+    * API changes
+      - Remove deprecated API from code base.
+      - Changes in the API
+    * New highlighting languages files
+      - Review and improve
+    * Tab Groups
+      - What are they?
+      - Why are they needed?
+      - Do not reinvent the wheel.
+    * Invalid characters
+      - What is an invalid character?
+      - Why is so important?
+      - How do we show it to the user?
+    * Use new drag and drop system
+      - Better integration
+      - Remove custom code
+    * New search system
+      - How does it look?
+      - How was designed? (Class diagram comparation)
+      - How does it work?
+
+  Community:
+    * What kind of community is this?
+    * Why the community was important in this project?
+    * How it has been dealt with the community?
+
+  Future development:
+    * GtkApplication
+    * Code folding
+    * Windows and OSX
+    * etc
+
+CONCLUSION:
+  Sum up
+  thanks
+
+QUESTIONS?
