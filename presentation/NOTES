@@ -3,12 +3,14 @@ INTRO:
   3 points: Introduction, objectives, community, future development
 
 BODY:
-  Introduction, what is gedit?
+  Introduction, what is gedit? what is gtksourceview?
   Objectives of the project
     * Port to new libraries
     * New features
 
   Port to new libraries:
+    * Architecture explanation
+
     * GSettings
       - It deprecates GConf
       - Very early adoption

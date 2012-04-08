@@ -2,71 +2,402 @@
 
 [background.png]
 [font=Sans 45px]
-[duration=5.000000]
 [text-color=black]
 [shading-opacity=0.000000]
+[duration=5.000000]
 
--- [fill] [intro.png] [duration=4.448699]
+-- [intro.png] [fill] [duration=30.380976]
 
--- [fill] [center] [background1.png] [duration=4.448699]
+#yourself
+#why you are there
 
-✽ Introduction
-  • What is gedit?
-  • New libraries
-  • New features
+-- [background1.png] [fill] [duration=9.158583]
 
--- [../images/gedit.png] [text-color=white] [shading-opacity=0.500000] [transition=text-slide-up] [duration=1.214729]
+ • Introduction
+ • Objectives
+ • Future development
+ • Community
+
+-- [background12.png] [fill] [transition=sheet] [duration=1.771408]
+
+<b>Introduction</b>
+
+-- [background10.png] [fill] [duration=1.730715]
+
+What is gedit?
+
+-- [../images/gedit.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=7.773645]
+
+-- [../images/gedit.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=7.773645]
 
 Official text editor of GNOME
 
--- [../images/gedit.png] [text-color=white] [shading-opacity=0.500000] [transition=text-slide-up] [duration=1.214729]
+-- [../images/gedit.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=7.786457]
 
 Aims the simplicity and ease of use
 
--- [../images/gedit.png] [text-color=white] [shading-opacity=0.500000] [transition=text-slide-up] [duration=1.214729]
+-- [../images/gedit.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=7.757554]
 
 Powerful general purpose text editor
 
--- [../images/gedit.png] [text-color=white] [shading-opacity=0.500000] [transition=text-slide-up] [duration=1.214729]
+-- [../images/gedit.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=10.805571]
 
 Extensible by plugins
 
--- [fill] [background2.png]
+-- [background10.png] [fill] [duration=1.737051]
 
--- [fill] [background6.png]
+What is GtkSourceView?
 
--- [fill] [background7.png] [transition=swing]
+-- [gtksourceview-demo.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=3.068715]
 
--- [fill] [background8.png] [transition=spin-bg]
+-- [gtksourceview-demo.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=3.068715]
 
--- [fill] [background9.png] [transition=spin]
+It is a library
 
--- [fill] [background10.png] [transition=action]
+-- [gtksourceview-demo.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=3.092099]
 
--- [fill] [background11.png]
+Extends the GtkTextView widget from GTK+
 
--- [fill] [background12.png]
+-- [gtksourceview-demo.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=3.058701]
 
--- [fill] [background5.png] [transition=page-curl-both]
+Implements features like:
+
+-- [gtksourceview-demo.png] [text-color=white] [shading-opacity=0.600000] [duration=7.612260]
+
+Syntax highlighting
+
+-- [gtksourceview-demo.png] [text-color=white] [shading-opacity=0.600000] [duration=7.612436]
+
+Autocompletion framework
+
+-- [gtksourceview-demo.png] [text-color=white] [shading-opacity=0.600000] [duration=7.612560]
+
+#also others like line bookmarking
+#line numbers
+#highlight the current line
+Drawing of spaces
+
+-- [background12.png] [fill] [transition=sheet] [duration=1.717660]
+
+<b>Objectives</b>
+
+-- [background10.png] [fill] [duration=3.256653]
+
+ • Port to new libraries
+ • New features
+
+-- [background4.png] [fill] [transition=text-slide-up] [duration=3.242894]
+
+Port to new libraries
+
+-- [../images/old-architecture.png] [text-color=white] [shading-opacity=0.400000] [duration=15.879982]
+
+
+-- [background4.png] [fill] [transition=text-slide-up] [duration=4.705047]
+
+<b>GSettings</b>
+
+-- [background4.png] [fill] [duration=6.217708]
+
+Framework for easily store per application settings
+
+-- [background4.png] [fill] [duration=6.217615]
+
+Deprecates GConf
+
+-- [background4.png] [fill] [duration=7.713281]
+
+Provides a better integrated API
+
+-- [background4.png] [fill] [duration=10.704798]
+
+Very early adoption from gedit
+
+-- [background4.png] [fill] [transition=text-slide-left] [duration=4.704928]
+
+Developed in a separate branch
+
+-- [background4.png] [fill] [transition=text-slide-down] [duration=4.705275]
+
+Lots of API changes
+
+-- [background4.png] [fill] [transition=text-slide-down] [duration=4.705241]
+
+Very difficult to test:
+  • Not integrated yet with GLIB
+  • Not easy setup
+  • It could break your system
+
+-- [background4.png] [fill] [transition=text-slide-up] [duration=6.200910]
+
+Helped to improve GSettings itself
+
+-- [background4.png] [fill] [transition=text-slide-up] [duration=6.183992]
+
+Provided all the API needed for gedit use cases
+
+-- [background4.png] [fill] [transition=text-slide-up] [duration=6.217691]
+
+It was used as the test case in the GSettings Hackfest
+
+-- [background4.png] [fill] [transition=text-slide-up] [duration=4.705047]
+
+<b>GTK+ 3</b>
+
+-- [background4.png] [fill] [duration=7.713281]
+
+API changing under you feet every day
+
+-- [background4.png] [fill] [duration=7.713281]
+
+Removal of direct accessors
+
+-- [background4.png] [fill] [duration=7.713281]
+
+The need of update from deprecated API
+
+-- [background4.png] [fill] [duration=7.713281]
+
+Help cleaning up GtkTextView
+  • Nobody really cares about all the use cases apart from gedit
+
+-- [background4.png] [fill] [duration=7.713281]
+
+New drawing system
+  • Removed drawing abstraction
+  • Port custom widgets
+  • Hard times porting GtkSourceView
+
+-- [background4.png] [fill] [duration=7.713281]
+
+New style system based on CSS
+  • Fix GtkTextView
+  • Port GtkSourceView
+    ◦ Generate CSS from XML format
+
+-- [background4.png] [fill] [transition=text-slide-up] [duration=4.705047]
+
+<b>GObject-Introspection</b>
+
+-- [../images/old-plugins-architecture.png] [text-color=white] [shading-opacity=0.400000] [duration=15.879982]
+
+-- [background4.png] [fill] [duration=7.713281]
+
+Two level applications - C and <b>your favorite runtime</b>
+
+-- [background4.png] [fill] [duration=7.713281]
+
+Making the platform even more <b>binding-friendly</b>
+
+-- [background4.png] [fill] [duration=7.713281]
+
+How to make use of it?
+  • Create the gir and typelib
+  • Annotate the code
+
+-- [background4.png] [fill] [duration=7.713281]
+
+/**
+ * gedit_window_get_views:
+ * @window: a #GeditWindow
+ *
+ * Gets a list with all the views in the window. This list must be freed.
+ *
+ * Returns: (element-type Gedit.View) (transfer container): a newly allocated
+ * list with all the views in the window
+ */
+
+-- [background4.png] [fill] [transition=text-slide-up] [duration=4.705047]
+
+<b>libpeas</b>
+
+-- [background4.png] [fill] [duration=7.713281]
+
+GObject based plugins engine
+
+-- [background4.png] [fill] [duration=7.713281]
+
+Initial code base taken from gedit
+
+-- [background4.png] [fill] [duration=7.713281]
+
+Use of GObject introspection for plugin loading
+
+-- [background4.png] [fill] [duration=7.713281]
+
+Redesign to provide extension points
+
+-- [background4.png] [fill] [duration=7.713281]
+
+gedit use as the main test case
+
+-- [background4.png] [fill] [duration=7.713281]
+
+Three extension points in gedit
+  • Application
+  • Window
+  • View
+
+-- [background2.png] [fill] [transition=text-slide-up] [duration=3.242894]
+
+New features
+
+-- [background2.png] [fill] [duration=7.545334]
+
+<b>API changes</b>
+
+-- [background2.png] [fill] [duration=7.545334]
+
+Remove deprecated API
+
+-- [background2.png] [fill] [duration=7.545334]
+
+Make use of new abstractions directly in the public API
+
+-- [background2.png] [fill] [duration=7.545334]
+
+<b>New highlighting language files</b>
+
+-- [background2.png] [fill] [duration=7.545334]
+
+<b>Tab groups</b>
+
+-- [../images/user-tag-groups.png] [text-color=white] [shading-opacity=0.600000] [duration=15.879982]
+
+-- [../images/user-tag-groups.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+Groups documents so it is easy to switch between them
+
+-- [../images/user-tag-groups.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+Meant to compare documents side by side
+
+-- [../images/user-tag-groups.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+Allows to reorganize tabs between them
+
+-- [../images/tab-groups-diagram.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+-- [../images/tab-groups-diagram.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+Easy design change
+
+-- [../images/tab-groups-diagram.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+Transparent for plugin writers
+
+-- [../images/tab-groups-diagram.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+Works like a proxy
+
+-- [../images/tab-groups-diagram.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-down] [duration=15.879982]
+
+Difficult implementation messing up with too many signals
+
+-- [background2.png] [fill] [duration=7.545334]
+
+<b>Invalid characters</b>
+
+-- [background2.png] [fill] [duration=7.545334]
+
+GTK+ is UTF-8 oriented
+
+-- [background2.png] [fill] [duration=7.545334]
+
+An invalid byte sequence is a sequence of bytes that
+can not be together in an UTF-8 encoded system.
+
+-- [background2.png] [fill] [duration=7.545334]
+
+gedit did not open invalid documents
+
+-- [background2.png] [fill] [duration=7.545334]
+
+Touches a very <i>delicate</i> part of the core
+
+-- [background2.png] [fill] [duration=7.545334]
+
+<b>Unit tests</b> were an important part of this work
+
+-- [../images/gedit-encoding-error.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+-- [background2.png] [fill] [duration=7.545334]
+
+<b>New drag and drop system</b>
+
+-- [background2.png] [fill] [duration=7.545334]
+
+Better integration with the rest of the Desktop
+
+-- [background2.png] [fill] [duration=7.545334]
+
+Less custom code to maintain
+
+-- [background2.png] [fill] [duration=7.545334]
+
+<b>New search system</b>
+
+-- [../images/gedit-old-find.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+-- [../images/gedit-old-find.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+It has not evolved during the last 10 years
+
+-- [../images/gedit-old-find.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+Do not reinvent the wheel, check what other programs are doing
+
+-- [../images/search1.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+-- [../images/search2.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+-- [../images/search3.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+-- [../images/search4.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+-- [../images/search-system-old.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+-- [search-system.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
+
+-- [background3.png] [fill] [transition=page-curl-both] [duration=7.425450]
+
+Future development
+
+-- [background3.png] [fill] [duration=7.425450]
+
+Windows and OSX
+
+-- [background3.png] [fill] [duration=7.425450]
+
+Real time syntax check for language programmings
+
+-- [background3.png] [fill] [duration=7.425450]
+
+Smart indentation
+
+-- [background5.png] [fill] [transition=page-curl-both] [duration=7.425450]
 
 Community
 
--- [fill] [time-machine.jpg]
+-- [background5.png] [fill] [duration=7.425450]
 
--- [fill] [time-machine.jpg] [text-color=white] [shading-opacity=0.800000]
+IRC as the main tool for communication
 
-✽ Update to use new library features
-✽ Code folding
-✽ Smart indentation
+-- [background5.png] [fill] [duration=7.425450]
 
--- [fill] [background4.png] [transition=slide-left]
+Revision tools like bugzilla
 
-✽ gedit text editor
-✽ Problems about being on the edge
-✽ The new tab groups feature
-✽ The new search system
-✽ Contributing
+-- [background5.png] [fill] [duration=7.425450]
 
--- [fill] [background.png] [font=Sans 100px] [transition=spin-text]
+Get used to the way of work
 
+-- [background5.png] [fill] [duration=7.425450]
+
+Picky about the coding style
+
+-- [background9.png] [fill] [transition=page-curl-both] [duration=7.425450]
+
+Sum up
+
+-- [background8.png] [fill] [font=Sans 100px] [transition=spin-text]
 Questions?
