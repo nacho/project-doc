@@ -8,15 +8,11 @@
 
 -- [intro.png] [fill] [duration=30.380976]
 
-#yourself
-#why you are there
-
 -- [background1.png] [fill] [duration=9.158583]
 
  • Introduction
  • Objectives
  • Future development
- • Community
 
 -- [background12.png] [fill] [transition=sheet] [duration=1.771408]
 
@@ -34,7 +30,7 @@ Official text editor of GNOME
 
 -- [../images/gedit.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=7.786457]
 
-Aims the simplicity and ease of use
+Aims the simplicity and easy of use
 
 -- [../images/gedit.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=7.757554]
 
@@ -72,9 +68,6 @@ Autocompletion framework
 
 -- [gtksourceview-demo.png] [text-color=white] [shading-opacity=0.600000] [duration=7.612560]
 
-#also others like line bookmarking
-#line numbers
-#highlight the current line
 Drawing of spaces
 
 -- [background12.png] [fill] [transition=sheet] [duration=1.717660]
@@ -229,7 +222,7 @@ Redesign to provide extension points
 
 -- [background4.png] [fill] [duration=7.713281]
 
-gedit use as the main test case
+gedit used as the main test case
 
 -- [background4.png] [fill] [duration=7.713281]
 
@@ -241,22 +234,6 @@ Three extension points in gedit
 -- [background2.png] [fill] [transition=text-slide-up] [duration=3.242894]
 
 New features
-
--- [background2.png] [fill] [duration=7.545334]
-
-<b>API changes</b>
-
--- [background2.png] [fill] [duration=7.545334]
-
-Remove deprecated API
-
--- [background2.png] [fill] [duration=7.545334]
-
-Make use of new abstractions directly in the public API
-
--- [background2.png] [fill] [duration=7.545334]
-
-<b>New highlighting language files</b>
 
 -- [background2.png] [fill] [duration=7.545334]
 
@@ -278,21 +255,6 @@ Allows to reorganize tabs between them
 
 -- [../images/tab-groups-diagram.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
 
--- [../images/tab-groups-diagram.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
-Easy design change
-
--- [../images/tab-groups-diagram.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
-Transparent for plugin writers
-
--- [../images/tab-groups-diagram.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
-Works like a proxy
-
--- [../images/tab-groups-diagram.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-down] [duration=15.879982]
-
-Difficult implementation messing up with too many signals
 
 -- [background2.png] [fill] [duration=7.545334]
 
@@ -327,7 +289,7 @@ Touches a very <i>delicate</i> part of the core
 
 -- [background2.png] [fill] [duration=7.545334]
 
-Better integration with the rest of the Desktop
+Better integration with the rest of the desktop
 
 -- [background2.png] [fill] [duration=7.545334]
 
@@ -369,31 +331,11 @@ Windows and OSX
 
 -- [background3.png] [fill] [duration=7.425450]
 
-Real time syntax check for language programmings
+Real time syntax check for programming languages
 
 -- [background3.png] [fill] [duration=7.425450]
 
 Smart indentation
-
--- [background5.png] [fill] [transition=page-curl-both] [duration=7.425450]
-
-Community
-
--- [background5.png] [fill] [duration=7.425450]
-
-IRC as the main tool for communication
-
--- [background5.png] [fill] [duration=7.425450]
-
-Revision tools like bugzilla
-
--- [background5.png] [fill] [duration=7.425450]
-
-Get used to the way of work
-
--- [background5.png] [fill] [duration=7.425450]
-
-Picky about the coding style
 
 -- [background9.png] [fill] [transition=page-curl-both] [duration=7.425450]
 
