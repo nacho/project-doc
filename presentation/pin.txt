@@ -24,8 +24,6 @@ What is gedit?
 
 -- [../images/gedit.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=7.773645]
 
--- [../images/gedit.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=7.773645]
-
 Official text editor of GNOME
 
 -- [../images/gedit.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=7.786457]
@@ -43,8 +41,6 @@ Extensible by plugins
 -- [background10.png] [fill] [duration=1.737051]
 
 What is GtkSourceView?
-
--- [gtksourceview-demo.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=3.068715]
 
 -- [gtksourceview-demo.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=3.068715]
 
@@ -139,15 +135,11 @@ It was used as the test case in the GSettings Hackfest
 
 -- [background4.png] [fill] [duration=7.713281]
 
-API changing under you feet every day
+API changing under your feet every day
 
 -- [background4.png] [fill] [duration=7.713281]
 
 Removal of direct accessors
-
--- [background4.png] [fill] [duration=7.713281]
-
-The need of update from deprecated API
 
 -- [background4.png] [fill] [duration=7.713281]
 
@@ -222,14 +214,14 @@ Redesign to provide extension points
 
 -- [background4.png] [fill] [duration=7.713281]
 
-gedit used as the main test case
-
--- [background4.png] [fill] [duration=7.713281]
-
 Three extension points in gedit
   • Application
   • Window
   • View
+
+-- [background4.png] [fill] [duration=7.713281]
+
+gedit used as the main test case
 
 -- [background2.png] [fill] [transition=text-slide-up] [duration=3.242894]
 
@@ -238,23 +230,6 @@ New features
 -- [background2.png] [fill] [duration=7.545334]
 
 <b>Tab groups</b>
-
--- [../images/user-tag-groups.png] [text-color=white] [shading-opacity=0.600000] [duration=15.879982]
-
--- [../images/user-tag-groups.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
-Groups documents so it is easy to switch between them
-
--- [../images/user-tag-groups.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
-Meant to compare documents side by side
-
--- [../images/user-tag-groups.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
-Allows to reorganize tabs between them
-
--- [../images/tab-groups-diagram.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
 
 -- [background2.png] [fill] [duration=7.545334]
 
@@ -281,45 +256,15 @@ Touches a very <i>delicate</i> part of the core
 
 <b>Unit tests</b> were an important part of this work
 
--- [../images/gedit-encoding-error.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
 -- [background2.png] [fill] [duration=7.545334]
 
 <b>New drag and drop system</b>
 
 -- [background2.png] [fill] [duration=7.545334]
 
-Better integration with the rest of the desktop
-
--- [background2.png] [fill] [duration=7.545334]
-
-Less custom code to maintain
-
--- [background2.png] [fill] [duration=7.545334]
-
 <b>New search system</b>
 
 -- [../images/gedit-old-find.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
--- [../images/gedit-old-find.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
-It has not evolved during the last 10 years
-
--- [../images/gedit-old-find.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
-Do not reinvent the wheel, check what other programs are doing
-
--- [../images/search1.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
--- [../images/search2.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
--- [../images/search3.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
--- [../images/search4.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
--- [../images/search-system-old.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
-
--- [search-system.png] [text-color=white] [shading-opacity=0.600000] [transition=text-slide-up] [duration=15.879982]
 
 -- [background3.png] [fill] [transition=page-curl-both] [duration=7.425450]
 
@@ -339,7 +284,7 @@ Smart indentation
 
 -- [background9.png] [fill] [transition=page-curl-both] [duration=7.425450]
 
-Sum up
+Summary
 
 -- [background8.png] [fill] [font=Sans 100px] [transition=spin-text]
 Questions?
