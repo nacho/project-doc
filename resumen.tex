@@ -1,0 +1,113 @@
+% mainfile:main.tex
+
+\chapter{Resumen en Español}
+
+\section{Introducción}
+
+Desde el inicio del proyecto \GNOME, \emph{gedit} ha sido siempre el editor
+de textos por defecto de \GNOME. Mientras que el escritorio ha ido evolucionando
+y madurando, \emph{gedit} no ha avanzado al mismo nivel. Por eso, este proyecto
+pretende remediar esta situación añadiendo nuevas características y actualizando
+la aplicación para utilizar las nuevas librerías propuestas para el desarrollo
+de la nueva versión de \GNOME.
+
+\section{Objetivos}
+
+El objetivo de este proyecto es el incrementar la funcionalidad de \emph{gedit},
+añadiendo nuevas características y portando estos cambios a las nuevas librerías
+marcadas como un requisito para formar parte de \GNOME 3.0.
+
+\subsection{Nuevas librerías}
+
+\subsubsection{GTK+ 3}
+
+Un cambio importante en la aplicación, proporcionado por este proyecto, ha sido
+la migración de GTK+ 2 a GTK+ 3. Esta tarea requirió la eliminación de todo el
+código fuente obsoleto y actualizar gedit a las nuevas APIs, pero lo más importante
+has sido el seguir la evolución de GTK+ 3 que ha sido un objetivo muy cambiante.
+
+\subsubsection{GSettings}
+
+Además de tener que portar gedit a GTK+ 3, ha sido necesario también tener que
+portarlo a GSettings, en lugar de la tecnología usada anteriormente GConf.
+GSettings es parte de GLib y proporciona un API conveniente para almacenar y
+obtener la configuración de una aplicación.
+
+\subsubsection{libpeas}
+
+Otra tarea específica que se ha realizado en este proyecto está relacionada
+con la eliminación del sistema de complementos personalizado en favor de la librería
+\texttt{libpeas}. Una descripción más detallada de esta librería se puede
+encontrar en la sección \ref{sec:peas}, así como la motivación por lo cual
+se sustituyó el sistema personalizado anterior.
+
+\subsubsection{GObject-introspection}
+
+Finalmente, otro cambio importante que se ha realizado en este proyecto y
+asociado con librerías es el uso de GObject-introspection, el cual obtiene
+meta-datos de la API pública de las librerías y nos proporciona una forma
+sencilla de crear bindings dinámicos para ellas. De la manera que escribes
+una clase en C y sin trabajo adicional puedes usar esa misma clase desde Python.
+
+\subsection{Nuevas características}
+
+Además de los cambios tan grandes proporcionados en este proyecto, que principalmente
+están escondido de cara al usuario, hay unos cuntos cambios más visibles que se
+han realizado en este proyecto.
+
+\subsubsection{Eliminación del API obsoleto}
+
+Durante varios años los desarrolladores de \emph{gedit} han optado por mantener
+un API sin cambios para los desarrolladores de complementos. Esto ha implicado
+el tener APIs obsoletas y código duplicado en el núcleo de gedit para evitar
+que los desarrolladores de complementos sufrieran tener que hacer cambios en
+sus trabajos. La idea en este proyecto, es eliminar toda esta API obsoleta
+actualizando los complementos necesarios que todavía estaban usando la API antigua
+en lugar de la nueva y de esta manera tener un núcleo de la aplicación más
+limpio.
+
+\subsubsection{Nuevos archivos de resaltado de sintaxis}
+
+Una nueva característica proporciona en este proyecto ha sido la creación de
+archivos de resaltado de sintaxis. Ya que es algo normal recibir solicitudes
+de usuarios para resaltar nuevos lenguajes de programación, ya que los lenguajes
+de programación evolucionan o nuevos son creados. En un editor de textos para
+uso general es necesario proporcionar a los usuarios este tipo de características.
+
+\subsubsection{Grupos de solapas}
+
+Una característica importante para un editor, que claramente es algo necesario
+para una aplicación como gedit, es el poder editar varios documentos lado a lado.
+Una característica como esta es útil para comparar y es común en aplicaciones
+como emacs. Por ello esta característica se ha añadido como un objetivo de diseño
+para este proyecto.
+
+\subsubsection{Gestión de caracteres inválidos}
+
+GTK+ está basado en UTF-8. En UTF-8 hay unas secuencias de bytes que no pueden
+estar continuas y que no se pueden introducir en los widgets the GTK+. En \emph{gedit}
+los documentos que contenían caracteres inválidos eran tratados como archivos
+binarios y no se abrían, esto algunas veces no era bueno cuando por ejemplo, se
+tenía un documento que estaba codificado incorrectamente y se quería arreglar.
+Esta nueva característica permite abrir este tipo de documentos.
+
+\subsubsection{Uso del nuevo sistema de arrastrar y soltar}
+
+En la presente versión estable de \emph{gedit} se usa una implementación para
+arrastrar y soltar solapas personalizada. Dado que la nueva versión de GTK+
+soporta todas las funcionalidades necesarias por gedit, la implementación
+personalizada ya no se necesita y se debería de tomar ventaja del API del API
+robusto de GTK+. Además, el API de GTK+ permite una mejor integración con
+el escritorio y proporciona una implementación más limpia del código de \emph{gedit}.
+
+\subsubsection{Nuevo sistema de búsqueda}
+
+El sistema de búsqueda en archivos actual de gedit está obsoleto y no toma
+ventaja de los últimos algoritmos o filosofías para interfaces de usuario
+gráficas, como por ejemplo empotrar el diálogo de búsqueda en la ventana
+al estilo Firefox o con una animación de entrada y salida al estilo Chrome.
+En su lugar, \emph{gedit} usa un diálogo para las búsquedas con todos los problemas
+asociados.
+
+Una importante contribución de este proyecto ha sido cambiar la manera con la
+cual se busca en los documentos abiertos con \emph{gedit}.

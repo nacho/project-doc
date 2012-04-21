@@ -1,8 +1,9 @@
 % mainfile:main.tex
 \synctex=1
 
-\documentclass[a4paper,11pt,twoside]{book}
+\documentclass[a4paper,11pt,twoside, spanish]{book}
 
+\usepackage[utf8]{inputenc}
 \usepackage[pdftex]{graphicx}
 \usepackage{fancyhdr} % for the headers
 \usepackage[Lenny]{fncychap}
@@ -239,6 +240,7 @@
 \newpage\thispagestyle{empty}
 \cleardoublepage
 \include{gpl}
+\include{resumen}
 
 \nocite{*}
 \bibliography{biblio}
