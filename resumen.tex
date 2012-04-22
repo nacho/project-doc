@@ -111,3 +111,101 @@ asociados.
 
 Una importante contribución de este proyecto ha sido cambiar la manera con la
 cual se busca en los documentos abiertos con \emph{gedit}.
+
+\section{Descripción técnica}
+
+\subsection{Lenguajes de programación usados en el proyecto}
+
+\paragraph{C}
+
+El lenguaje de programación \emph{C} se usa en el núcleo de \emph{gedit}.
+Además, es el lenguaje recomendado por la plataforma. Por medio de GObjects,
+se exponen varias características de la orientación a objetos.
+
+\paragraph{Python}
+
+Python es un lenguaje de orientación a objetos interpretado que proporciona
+bindings para C con lo cual no solo se puede usar solo sino también para
+crear complementos por su facilidad de uso.
+
+Python ha sido usado en este proyecto principalmente para desarrollar y actualizar
+los complementos proporcionados en \emph{gedit}. Ha sido usado también para
+proporcionar pruebas unitarias y overrides en pygobject, para poder obtener
+nuevas funcionalidades necesarios por los complementos de \emph{gedit}.
+
+\subsection{Herramientas y formatos}
+
+Una parte importante del desarrollo para un proyecto de software libre como
+\emph{gedit} es usar herramientas de construcción muy complejas. Para esto,
+se usó Autotools. Junto con las utilidades Makefile, la suite Autotools
+es usada para crear dependencias de compilación muy complejas y puede ser
+usado para crear código multiplataforma.
+
+Como muchas otras aplicaciones modernas, el lenguaje de marcado XML es usado
+para tener rápida portabilidad así como persistencia de datos. En gedit, XML
+ha sido usado para definir algunas partes de la interfaz de usuario.
+
+\newpage
+\section{Metodología}
+
+La metodología seguida en este proyecto has sido principalmente dictada 
+por el desarrollo de software libre. Por esto, la que mejor encajaba en el
+grupo de desarrollo fue \emph{Desarrollo Iterativo e Incremental}.
+El flujo de trabajo típico de un proyecto de \GNOME incluye pequeños cambios
+incrementales así como refactorizaciones y rediseños cuando es necesario.
+
+\section{Planificación}
+
+Para la planificación del proyecto se empleó el programa Planner, una
+herramienta para el escritorio de \GNOME similar a Microsoft Project y
+que permitió hacer los diagramas de Gantt necesarios para este proyecto.
+
+\section{Proceso de desarrollo}
+
+Por cada característica, entendiendo por característica, un error en el
+programa o una nueva funcionalidad a ser añadida se realizó lo siguiente:
+
+\begin{itemize}
+  \item Análisis
+    \begin{itemize}
+      \item Estudio del problema.
+      \item Discusión con el resto de los desarrolladores.
+      \item Crear diagramas usando ingeniería inversa si ha sido necesario.
+      \item Análisis de los casos de uso a no ser que no fuese necesario para una tarea específica si la funcionalidad ya estaba hecha.
+    \end{itemize}
+  \item Diseño
+    \begin{itemize}
+      \item Estudio de las tecnologías a ser usadas por la nueva funcionalidad.
+      \item Estudio del diseño actual.
+      \item Generar prototipos iniciales.
+      \item Tormentas de ideas con el resto de desarrolladores para comprobar cual puede ser el mejor diseño.
+    \end{itemize}
+  \item Codificación
+    \begin{itemize}
+      \item Implementación usando C con GObject o Python, dependiendo del complemento o de si es una funcionalidad en el núcleo.
+      \item Reportar un bug para revisar el parche.
+    \end{itemize}
+  \item Pruebas
+    \begin{itemize}
+      \item Probar las nuevas funcionalidades.
+    \end{itemize}
+  \item Despliegue
+    \begin{itemize}
+      \item Enviar los parches al repositorio de \GNOME.
+    \end{itemize}
+\end{itemize}
+
+\section{Planificación}
+
+La planificación real del proyecto no se correspondió con la planificación
+inicial en el anteproyecto, la razón de esto ha sido por lo siguiente:
+
+\begin{itemize}
+  \item La fecha de lanzamiento de \GNOME fue retrasada.
+  \item La realización del Erasmus por parte del autor produjo también un retraso.
+\end{itemize}
+
+En el capítulo \ref{chap:planning} se pueden comprobar los diferentes diagramas
+de Gantt relacionados con la planificación inicial y el final del proyecto.
+
+
